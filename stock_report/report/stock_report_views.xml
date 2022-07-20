@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <report
+            string="Receipt (IN)"
+            id="action_report_receipt_in"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock_report.report_receipt_in"
+            file="stock_report.report_receipt_in"
+            print_report_name="'Phieu nhap kho - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+        <report
+            string="Delivery (OUT)"
+            id="action_report_delivery_out"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock_report.report_delivery_out"
+            file="stock_report.report_delivery_out"
+            print_report_name="'Phieu xuat kho - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+        <report
+            string="Picking List Request"
+            id="action_report_picking_request"
+            model="stock.picking"
+            report_type="qweb-pdf"
+            name="stock_report.report_picking_list_request"
+            file="stock_report.report_picking_list_request"
+            print_report_name="'Pick list request - %s - %s' % (object.partner_id.name or '', object.name)"
+        />
+    </data>
+</odoo>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_inventory_accountant_manager"
+                  name="Inventory Accountant Manager"
+                  sequence="1"
+                  groups="tasys_permission.accountant_manager"/>
+
+        <menuitem
+            action="stock.stock_picking_type_action"
+            id="stock_picking_type_accountant_manager_menu"
+            parent="menu_inventory_accountant_manager" sequence="1"
+            name="Overview"/>
+
+        <!--Inventory/Operation-->
+        <menuitem id="menu_operations_accountant_manager"
+                  name="Operations"
+                  parent="menu_inventory_accountant_manager"
+                  sequence="5"/>
+        <!--Inventory/Operation/Transfers-->
+        <menuitem id="transfers_accountant_manager_menuitem"
+                  name="Transfers"
+                  parent="menu_operations_accountant_manager"
+                  sequence="1"
+                  action="stock.action_picking_tree_all"/>
+        <!--Inventory/Operation/Inventory Adjustments-->
+        <menuitem id="inventory_adjustments_accountant_manager_menuitem"
+                  name="Inventory Adjustments"
+                  parent="menu_operations_accountant_manager"
+                  sequence="5"
+                  action="stock.action_inventory_form"/>
+        <!--Inventory/Operation/Scrap-->
+        <menuitem id="scrap_accountant_manager_menuitem"
+                  name="Scrap"
+                  parent="menu_operations_accountant_manager"
+                  sequence="15"
+                  action="stock.action_stock_scrap"/>
+
+
+
+        <!--Inventory/Reporting-->
+        <menuitem id="menu_inventory_reporting_accountant_manager"
+                  name="Reporting"
+                  parent="menu_inventory_accountant_manager"
+                  sequence="15"/>
+        <!--Inventory/Reporting/Inventory Report-->
+        <menuitem id="inventory_report_accountant_manager_menuitem"
+                  name="Inventory Report"
+                  parent="menu_inventory_reporting_accountant_manager"
+                  sequence="1"
+                  action="stock.dashboard_open_quants"/>
+        <!--Inventory/Reporting/Inventory Valuation-->
+        <menuitem id="menu_inventory_reporting_inventory_valuation_accountant_manager"
+                  name="Inventory Valuation"
+                  parent="menu_inventory_reporting_accountant_manager"
+                  sequence="71"
+                  groups="tasys_permission.accountant_manager"
+                  action="stock_account.stock_valuation_layer_action"/>
+        <!--Inventory/Reporting/Báo cáo giá trị XNT-->
+        <menuitem id="menu_inventory_reporting_baocaoxnt_accountant_manager"
+                  name="Báo cáo giá trị XNT"
+                  parent="menu_inventory_reporting_accountant_manager"
+                  sequence="71"
+                  groups="tasys_permission.accountant_manager"
+                  action="dashboard_inventory.action_inventory_value_management_tung_dashboard"/>
+
+    </data>
+</odoo>

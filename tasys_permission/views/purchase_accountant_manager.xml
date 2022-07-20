@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_purchase_accountant_manager"
+                  name="Purchase Accountant Manager"
+                  sequence="1"
+                  groups="tasys_permission.accountant_manager"/>
+
+
+        <!-- Purchase/Orders-->
+        <menuitem id="menu_purchase_orders_accountant_manager"
+                  name="Orders"
+                  parent="menu_purchase_accountant_manager"
+                  sequence="1"/>
+        <!-- Purchase/Orders/Request for Quotations-->
+        <menuitem id="request_for_quotations_accountant_manager_menuitem"
+                  name="Request for Quotations"
+                  parent="menu_purchase_orders_accountant_manager"
+                  sequence="1"
+                  action="purchase.purchase_rfq"/>
+        <!-- Purchase/Orders/Purchase Orders-->
+        <menuitem id="purchase_orders_accountant_manager_menuitem"
+                  name="Purchase Orders"
+                  parent="menu_purchase_orders_accountant_manager"
+                  sequence="1"
+                  action="purchase.purchase_form_action"/>
+
+        <record id="action_purchase_order_report" model="ir.actions.act_window">
+            <field name="name">Purchase Analysis</field>
+            <field name="res_model">purchase.report</field>
+            <field name="view_mode">dashboard,pivot</field>
+            <field name="view_id"></field>  <!-- force empty -->
+            <field name="help">Purchase Analysis allows you to easily check and analyse your company purchase history and performance. From this menu you can track your negotiation performance, the delivery performance of your vendors, etc.</field>
+        </record>
+
+
+        <menuitem id="purchase_report_accountant_manager"
+                  name="Reporting"
+                  parent="menu_purchase_accountant_manager"
+                  sequence="99"
+                  action="action_purchase_order_report"/>
+    </data>
+</odoo>

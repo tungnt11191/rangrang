@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Inventory-->
+        <menuitem
+                name="Inventory WH"
+                id="menu_inventory_wh"
+                sequence="80"
+                groups="tasys_permission.wh_user"
+                web_icon="tasys_permission,static/description/inventory_icon.png"/>
+         <!--       Inventory - Overview -->
+        <menuitem
+                id="menu_inventory_overview_wh"
+                name="Overview"
+                sequence="1"
+                parent ="menu_inventory_wh"
+                action="stock.stock_picking_type_action"
+                groups="tasys_permission.wh_user"/>
+
+            <!--       Inventory - Operations -->
+        <menuitem
+                id="menu_inventory_operations_wh"
+                name="Operations"
+                sequence="15"
+                parent ="menu_inventory_wh"
+                groups="tasys_permission.wh_user"/>
+
+        <!-- Inventory - Operation - Inventory Adjustment-->
+        <menuitem
+                id="menu_inventory_operations_adjustment_wh"
+                name="Inventory Adjustment"
+                sequence="5"
+                parent ="menu_inventory_operations_wh"
+                action="stock.action_inventory_form"
+                groups="tasys_permission.wh_user"/>
+
+            <!-- Inventory - Operations - Scrap-->
+<!--        <menuitem-->
+<!--                id="menu_inventory_operations_scrap_wh"-->
+<!--                name="Scrap"-->
+<!--                sequence="15"-->
+<!--                parent ="menu_inventory_operations_wh"-->
+<!--                action="stock.action_stock_scrap"-->
+<!--                groups="tasys_permission.wh_user"/>-->
+
+             <!-- Inventory - Operations - Transfer-->
+        <menuitem
+                id="menu_inventory_operations_transfer_wh"
+                name="Transfer"
+                sequence="10"
+                parent ="menu_inventory_operations_wh"
+                action="stock.action_picking_tree_all"
+                groups="tasys_permission.wh_user"/>
+
+        <!--     Inventory - SO hoàn trả -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_so_hoan_tra_wh"-->
+<!--                name="SO hoàn trả (Operations)"-->
+<!--                sequence="20"-->
+<!--                parent ="menu_inventory_wh"-->
+<!--                action="stock.stock_picking_action_picking_type"-->
+<!--                groups="tasys_permission.wh_user"/>-->
+<!--                   Inventory - Reporting -->
+        <menuitem
+                id="menu_inventory_reporting_wh"
+                name="Reporting"
+                sequence="99"
+                parent ="menu_inventory_wh"
+                action="stock.dashboard_open_quants"
+                groups="tasys_permission.wh_user"/>
+              <!--       Inventory - Reporting - Report-->
+        <menuitem
+                id="menu_inventory_reporting_report_wh"
+                name="Inventory Report"
+                sequence="10"
+                parent ="menu_inventory_reporting_wh"
+                action="stock.dashboard_open_quants"
+                groups="tasys_permission.wh_user"/>
+         <!--       Inventory - Reporting - Valuation-->
+        <menuitem
+                id="menu_inventory_reporting_valuation_wh"
+                name="Inventory Valuation"
+                sequence="12"
+                parent ="menu_inventory_reporting_wh"
+                action="stock_account.stock_valuation_layer_action"
+                groups="tasys_permission.wh_user"/>
+        <!--        Inventory -  Quality Control (B2B +B2C) -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_quality_control_wh"-->
+<!--                name="Quality Control (B2B +B2C)"-->
+<!--                sequence="25"-->
+<!--                parent ="menu_inventory_wh"-->
+<!--                action="stock.stock_picking_type_action"-->
+<!--                groups="tasys_permission.wh_user"/>-->
+
+<!--         Inventory - Product-->
+        <menuitem
+                id="menu_sale_products_wh"
+                name="Products"
+                sequence="10"
+                parent="menu_inventory_wh"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.wh_user"/>
+            <!--         Inventory - Product - Product-->
+        <menuitem
+                id="menu_sale_products_products_wh"
+                name="Products"
+                sequence="10"
+                parent="menu_sale_products_wh"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.wh_user"/>
+
+
+
+    </data>
+
+</odoo>

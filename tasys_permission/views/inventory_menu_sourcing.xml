@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Inventory-->
+        <menuitem
+                name="Inventory Sourcing"
+                id="menu_inventory_sourcing"
+                sequence="60"
+                groups="tasys_permission.sourcing"
+                web_icon="tasys_permission,static/description/inventory_icon.png"/>
+         <!--       Inventory - Overview -->
+        <menuitem
+                id="menu_inventory_overview_sourcing"
+                name="Overview"
+                sequence="1"
+                parent ="menu_inventory_sourcing"
+                action="stock.stock_picking_type_action"
+                groups="tasys_permission.sourcing"/>
+
+            <!--       Inventory - Operations -->
+        <menuitem
+                id="menu_inventory_operations_sourcing"
+                name="Operations"
+                sequence="15"
+                parent ="menu_inventory_sourcing"
+                groups="tasys_permission.sourcing"/>
+
+        <!-- Inventory - Operations - Inventory Adjustment-->
+        <menuitem
+                id="menu_inventory_operations_adjustment_sourcing"
+                name="Inventory Adjustment"
+                sequence="5"
+                parent ="menu_inventory_operations_sourcing"
+                action="stock.action_inventory_form"
+                groups="tasys_permission.sourcing"/>
+
+            <!-- Inventory - Operations - Scrap-->
+        <menuitem
+                id="menu_inventory_operations_scrap_sourcing"
+                name="Scrap"
+                sequence="15"
+                parent ="menu_inventory_operations_sourcing"
+                action="stock.action_stock_scrap"
+                groups="tasys_permission.sourcing"/>
+             <!-- Inventory - Operations - Transfer-->
+        <menuitem
+                id="menu_inventory_operations_transfer_sourcing"
+                name="Transfer"
+                sequence="10"
+                parent ="menu_inventory_operations_sourcing"
+                action="stock.action_picking_tree_all"
+                groups="tasys_permission.sourcing"/>
+
+           <!--       Inventory - Reporting -->
+        <menuitem
+                id="menu_inventory_reporting_sourcing"
+                name="Reporting"
+                sequence="99"
+                parent ="menu_inventory_sourcing"
+                groups="tasys_permission.sourcing"/>
+             <!--       Inventory - Reporting - Báo cáo-->
+        <menuitem
+                id="menu_inventory_reporting_report_xnk_sourcing"
+                name="Báo cáo giá trị XNT"
+                sequence="20"
+                parent ="menu_inventory_reporting_sourcing"
+                action="dashboard_inventory.action_inventory_value_management_tung_dashboard"
+                groups="tasys_permission.sourcing"/>
+
+             <!--       Inventory - Reporting - Valuation-->
+        <menuitem
+                id="menu_inventory_reporting_valuation_sourcing"
+                name="Inventory Valuation"
+                sequence="12"
+                parent ="menu_inventory_reporting_sourcing"
+                action="stock_account.stock_valuation_layer_action"
+                groups="tasys_permission.sourcing"/>
+            <!--       Inventory - Reporting - Report-->
+        <menuitem
+                id="menu_inventory_reporting_report_sourcing"
+                name="Inventory Report"
+                sequence="10"
+                parent ="menu_inventory_reporting_sourcing"
+                action="stock.dashboard_open_quants"
+                groups="tasys_permission.sourcing"/>
+
+        <!--     Inventory - SO hoàn trả -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_so_hoan_tra_sourcing"-->
+<!--                name="SO hoàn trả (Operations)"-->
+<!--                sequence="20"-->
+<!--                parent ="menu_inventory_sourcing"-->
+<!--                action="sale.action_orders_to_invoice"-->
+<!--                groups="tasys_permission.sourcing"/>-->
+        <!--        Inventory -  Quality Control (B2B +B2C) -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_quality_control_sourcing"-->
+<!--                name="Quality Control (B2B +B2C)"-->
+<!--                sequence="25"-->
+<!--                parent ="menu_inventory_sourcing"-->
+<!--                action="stock.stock_picking_type_action"-->
+<!--                groups="tasys_permission.sourcing"/>-->
+
+            <!--    Inventory - Product-->
+        <menuitem
+                id="menu_sale_products_sourcing"
+                name="Products"
+                sequence="10"
+                parent="menu_inventory_sourcing"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.sourcing"/>
+<!--         Inventory - Product - Product-->
+        <menuitem
+                id="menu_sale_products_products_sourcing"
+                name="Products"
+                sequence="10"
+                parent="menu_sale_products_sourcing"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.sourcing"/>
+
+
+    </data>
+
+</odoo>

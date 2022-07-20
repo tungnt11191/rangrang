@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tasys_permission_account_move_attribute_permission_form" model="ir.ui.view">
+         <field name="name">tasys.permission.account.move.attribute.permission.form.inherit</field>
+         <field name="model">account.move</field>
+         <field name="inherit_id" ref="account.view_move_form" />
+         <field name="arch" type="xml">
+              <xpath expr="//button[@name='action_post'][1]" position="attributes">
+                    <attribute name="groups">tasys_permission.cs_executive,tasys_permission.cs_manager</attribute>
+              </xpath>
+              <xpath expr="//button[@name='action_post'][2]" position="attributes">
+                    <attribute name="groups">tasys_permission.cs_executive,tasys_permission.cs_manager</attribute>
+              </xpath>
+             <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="groups">tasys_permission.cs_executive,tasys_permission.cs_manager</attribute>
+             </xpath>
+         </field>
+    </record>
+</odoo>

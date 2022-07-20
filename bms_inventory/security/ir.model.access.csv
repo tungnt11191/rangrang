@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+,,,,,,,
+access_bms_inventory_valuation,access_bms_inventory_valuation,model_bms_inventory_valuation,,1,1,1,1
+access_bms_inventory_valuation_line,access_bms_inventory_valuation_line,model_bms_inventory_valuation_line,,1,1,1,1
+access_bms_inventory_valuation_wizard,access_bms_inventory_valuation_wizard,model_bms_inventory_valuation_wizard,,1,1,1,1
+access_bms_inventory_excel_extended,access_bms_inventory_excel_extended,model_bms_inventory_excel_extended,,1,1,1,1
+access_bms_inventory_cron_check,access_bms_inventory_cron_check,model_bms_inventory_cron_check,,1,1,1,1

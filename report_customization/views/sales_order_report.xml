@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="fency_report_saleorder_document_customization" inherit_id="bi_professional_reports_templates.fency_report_saleorder_document">
+<!--            <xpath expr="//div[@class='header']" position="replace"/>-->
+              <xpath expr="/t[1]/t[3]/div[1]/div[2]/div[1]" position="replace"/>
+              <xpath expr="/t/t[3]/div/div[1]" position="after">
+                <div class="row">
+                  <div class="col h2">
+                    <span>New Title</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]/div/span" position="replace">
+                <span>Đơn bán hàng</span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]/div/span" position="replace">
+                <span>
+                  <b>Đơn bán hàng</b>
+                </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]/div/span/b" position="replace">
+                <b>
+                  <font style="font-size: 36px;">Đơn bán hàng</font>
+                </b>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]/div/span/b/font" position="replace">
+                <font style="font-size: 32px;">
+                  <font style="font-size: 32px;">Đơn bán hàng</font>
+                </font>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[2]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[3]/div/span" position="replace">
+                <span>SO#: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[3]/div/span" position="after">
+                <span t-field="o.name"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[3]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[4]/div/span" position="replace">
+                <span>Ngày: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[4]/div/span" position="after">
+                <span t-field="o.date_order" t-options-widget="date" t-options-format="dd/MM/yyyy"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[4]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-widget">"date"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[4]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-format">"dd/MM/yyyy"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[4]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-format">"dd/MM/yyyy"</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[3]/div" position="attributes">
+                <attribute name="class" separator=" " add="text-right"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[4]/div" position="attributes">
+                <attribute name="class" separator=" " add="text-right"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[4]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[1]/span" position="replace">
+                <span>Người bán</span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[1]/span" position="replace">
+                <span>
+                  <b>Người bán</b>
+                </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[1]/span" position="replace">
+                <span>
+                  <b>
+                    <font style="font-size: 18px;">Người bán</font>
+                  </b>
+                </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[2]/span" position="replace">
+                <span>Người mua</span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[2]/span" position="replace">
+                <span>
+                  <b>Người mua</b>
+                </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[2]/span/b" position="replace">
+                <b>
+                  <font style="font-size: 18px;">Người mua</font>
+                </b>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[1]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]/div[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]/div[1]" position="replace"/>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]/div[1]" position="replace"/>
+              <xpath expr="/t[1]/t[3]/div[1]/div[5]/div[1]" position="attributes">
+                <attribute name="class">col-6 text-center border</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[5]/div[2]" position="attributes">
+                <attribute name="class">col-6 text-center border</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[5]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[6]/div[1]/span" position="before">
+                <span t-field="company.partner_id"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-widget">"contact"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone', 'mobile']</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone']</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[6]/div[2]/span" position="before">
+                <span t-field="o.partner_id"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[2]/span[1]" position="attributes">
+                <attribute name="t-options-widget">"contact"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[2]/span[1]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone', 'mobile']</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[2]/span[1]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone']</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[6]/div[1]/span[2]" position="replace">
+                <span>Người liên hệ: </span><span t-field="o.activity_user_id"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[6]/div[2]/span[2]" position="replace">
+                <span>Người liên hệ: </span><span t-field="o.partner_id"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[2]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[6]/div[1]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[6]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[7]/div[1]/span" position="replace">
+                <span>Nơi giao hàng: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[7]/div[2]/span" position="replace">
+                <span>Ngày giao hàng: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[7]/div[1]/span" position="after">
+                <span t-field="o.x_delivery_place"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[7]/div[2]/span" position="after">
+                <span t-field="o.commitment_date"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[7]/div[2]/span[2]" position="attributes">
+                <attribute name="t-options-widget">"date"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[7]/div[2]/span[2]" position="attributes">
+                <attribute name="t-options-format">"dd/MM/yyyy"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[7]/div[2]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[7]/div[1]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[7]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[2]/span" position="replace">
+                <span>
+                  <p>Phương thức giao nhận: <br/><br/></p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[2]/span/p/br[1]" position="after">
+                <span t-field="o.expected_date"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[2]/span/p/br[1]" position="after">
+                <span>New Text Block</span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[2]/span/p/span[1]" position="replace">
+                <span>Phương thức thanh toán: </span><span t-field="o.payment_term_id"/><br/><span>ETA: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[2]/span/p/br[1]" position="before">
+                <span t-field="o.x_method_of_delivery"/>
+              </xpath>
+<!--              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[2]/span[1]/p[1]/span[3]" position="attributes">-->
+<!--                <attribute name="t-options-widget">"date"</attribute>-->
+<!--              </xpath>-->
+<!--              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[2]/span[1]/p[1]/span[3]" position="attributes">-->
+<!--                <attribute name="t-options-format">"dd/mm/yyyy"</attribute>-->
+<!--                <attribute name="t-options-widget">"date"</attribute>-->
+<!--              </xpath>-->
+              <xpath expr="/t/t[3]/div/div[8]/div[1]/span" position="replace">
+                <span>Địa chỉ đích:
+            </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]/div[1]/span" position="after">
+                <span t-field="o.partner_shipping_id"/>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-widget">"contact"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone', 'mobile']</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address', 'phone']</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[1]/span[2]" position="attributes">
+                <attribute name="t-options-fields">['name', 'address']</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[1]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[3]/div[1]/div[8]/div[2]" position="attributes">
+                <attribute name="class">col-6 border</attribute>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[9]/div/span" position="replace">
+                <span></span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[8]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[9]/div/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/br[3]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[13]/div/span[1]" position="replace">
+                <span>Bằng chữ: </span>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[13]/div" position="attributes">
+                <attribute name="class" separator=" " add="small"/>
+              </xpath>
+              <xpath expr="/t/t[3]/div/div[13]/div" position="attributes">
+                <attribute name="class" separator=" " add="o_bold"/>
+              </xpath>
+              <xpath expr="//div[@class='page']/div[13]" position="replace" />
+        </template>
+      <template id="external_layout_standard_custom" inherit_id="web.external_layout_standard">
+        <xpath expr="//div[@t-attf-class='header o_company_#{company.id}_layout']" position="replace"/>
+      </template>
+    </data>
+</odoo>

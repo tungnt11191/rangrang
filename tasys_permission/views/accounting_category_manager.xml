@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_category_manager"
+                  name="Accounting Category Manager"
+                  sequence="15"
+                  groups="tasys_permission.category_manager"
+                web_icon="tasys_permission,static/description/accounting_icon.png"
+
+        />
+        <!--Accounting/Reporting-->
+        <menuitem id="menu_accounting_reporting_category_manager"
+                  name="Reporting"
+                  parent="menu_accounting_category_manager"
+                  sequence="21"
+                  groups="tasys_permission.category_manager"/>
+        <!--Accounting/Reporting/Partner Ledger-->
+        <menuitem id="menu_accounting_reporting_partner_ledger_category_manager"
+                  name="Partner Ledger"
+                  parent="menu_accounting_reporting_category_manager"
+                  sequence="31"
+                  groups="tasys_permission.category_manager"
+                  action="account_reports.action_account_report_partner_ledger"/>
+        <!--Accounting/Customers-->
+        <menuitem id="menu_accounting_customers_category_manager"
+                  name="Customers"
+                  parent="menu_accounting_category_manager"
+                  sequence="21"
+                  groups="tasys_permission.category_manager"/>
+         <!--Accounting/Customers/payments-->
+        <menuitem id="menu_accounting_customers_payments_category_manager"
+                  name="Payments"
+                  parent="menu_accounting_customers_category_manager"
+                  sequence="21"
+                  groups="tasys_permission.category_manager"
+                  action="account.action_account_payments"/>
+         <!--Accounting/Customers/Invoice-->
+        <menuitem id="menu_accounting_customers_invoices_category_manager"
+                  name="Invoices"
+                  parent="menu_accounting_customers_category_manager"
+                  sequence="21"
+                  groups="tasys_permission.category_manager"
+                  action="account.action_move_out_invoice_type"/>
+
+
+    </data>
+</odoo>

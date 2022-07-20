@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_inventory_category_executive"
+                  name="Inventory Category Executive"
+                  sequence="21"
+                  groups="tasys_permission.category_executive"/>
+        <!--Inventory/Operation-->
+        <menuitem id="menu_inventory_operations_category_executive"
+                  name="Operations"
+                  parent="menu_inventory_category_executive"
+                  sequence="31"
+                  groups="tasys_permission.category_executive"/>
+        <!--Inventory/Operation/Inventory Adjustments-->
+        <menuitem id="menu_inventory_operations_inventory_adjustments_category_executive"
+                  name="Inventory Adjustments"
+                  parent="menu_inventory_operations_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="stock.action_inventory_form"/>
+        <!--Inventory/Operation/Scrap-->
+        <menuitem id="menu_inventory_operations_scrap_category_executive"
+                  name="Scrap"
+                  parent="menu_inventory_operations_category_executive"
+                  sequence="51"
+                  groups="tasys_permission.category_executive"
+                  action="stock.action_stock_scrap"/>
+        <!--Inventory/Operation/Transfers-->
+        <menuitem id="menu_inventory_operations_transfers_category_executive"
+                  name="Transfers"
+                  parent="menu_inventory_operations_category_executive"
+                  sequence="61"
+                  groups="tasys_permission.category_executive"
+                  action="stock.action_picking_tree_all"/>
+        <!--Inventory/Reporting-->
+        <menuitem id="menu_inventory_reporting_category_executive"
+                  name="Reporting"
+                  parent="menu_inventory_category_executive"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"/>
+        <!--Inventory/Reporting/Inventory Report-->
+        <menuitem id="menu_inventory_reporting_inventory_report_category_executive"
+                  name="Inventory Report"
+                  parent="menu_inventory_reporting_category_executive"
+                  sequence="81"
+                  groups="tasys_permission.category_executive"
+                  action="stock.dashboard_open_quants"/>
+        <!--Inventory/Reporting/Inventory Valuation-->
+        <menuitem id="menu_inventory_reporting_inventory_valuation_category_executive"
+                  name="Inventory Valuation"
+                  parent="menu_inventory_reporting_category_executive"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"
+                  action="stock_account.stock_valuation_layer_action"/>
+        <!--Inventory/Reporting/Báo cáo giá trị XNT-->
+        <menuitem id="menu_inventory_reporting_baocaoxnt_category_executive"
+                  name="Báo cáo giá trị XNT"
+                  parent="menu_inventory_reporting_category_executive"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"
+                  action="dashboard_inventory.action_inventory_value_management_tung_dashboard"/>
+        <!--Inventory/Overview-->
+        <menuitem id="menu_inventory_overview_category_executive"
+                  name="Overview"
+                  parent="menu_inventory_category_executive"
+                  sequence="53"
+                  groups="tasys_permission.category_executive"
+                  action="stock.stock_picking_type_action"/>
+
+
+    </data>
+</odoo>

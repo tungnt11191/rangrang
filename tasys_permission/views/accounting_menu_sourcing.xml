@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_sourcing"
+                  name="Accounting Sourcing"
+                  sequence="5"
+                  groups="tasys_permission.sourcing"
+                web_icon="tasys_permission,static/description/accounting_icon.png"/>
+
+<!--        Accounting/Customers-->
+        <menuitem id="menu_accounting_customers_sourcing"
+                  name="Customers"
+                  parent="menu_accounting_sourcing"
+                  sequence="10"
+                  groups="tasys_permission.sourcing"/>
+         <!--Accounting/Customers/payment-->
+        <menuitem id="menu_accounting_customers_payment_sourcing"
+                  name="Payment"
+                  parent="menu_accounting_customers_sourcing"
+                  sequence="10"
+                  groups="tasys_permission.sourcing"
+                  action="account.action_account_payments"/>
+        <!--Accounting/Customers/invoices-->
+        <menuitem id="menu_accounting_customers_invoices_sourcing"
+                  name="Invoices"
+                  parent="menu_accounting_customers_sourcing"
+                  sequence="15"
+                  groups="tasys_permission.sourcing"
+                  action="account.action_move_out_invoice_type"/>
+        <!--Accounting - Reporting -->
+        <menuitem id="menu_accounting_reporting_sourcing"
+                  name="Reporting"
+                  parent="menu_accounting_sourcing"
+                  sequence="21"
+                  groups="tasys_permission.sourcing"/>
+
+        <!--Accounting - Reporting - Partner Ledger -->
+<!--        <menuitem id="menu_accounting_reporting_ledger_sourcing"-->
+<!--                  name="Partner Ledger"-->
+<!--                  parent="menu_accounting_reporting_sourcing"-->
+<!--                  sequence="21"-->
+<!--                  groups="tasys_permission.sourcing"-->
+<!--                  action="account_reports.action_account_report_partner_ledger"/>-->
+
+    </data>
+</odoo>

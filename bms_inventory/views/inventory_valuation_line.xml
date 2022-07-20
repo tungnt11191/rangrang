@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bms_inventory_valuation_line_action" model="ir.actions.act_window">
+            <field name="name">Sản phẩm xuất nhập trong ngày</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bms.inventory.valuation.line</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="bms_inventory_valuation_line_tree" model="ir.ui.view">
+            <field name="name">Sản phẩm xuất nhập trong ngày</field>
+            <field name="model">bms.inventory.valuation.line</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="date"/>
+                    <field name="product_id"/>
+                    <field name="quantity"/>
+                    <field name="price"/>
+                    <field name="quantity_in"/>
+                    <field name="price_in"/>
+                    <field name="quantity_out"/>
+                    <field name="price_out"/>
+                    <field name="quantity_end"/>
+                    <field name="price_end"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bms_inventory_valuation_line_form" model="ir.ui.view">
+            <field name="name">Sản phẩm xuất nhập trong ngày</field>
+            <field name="model">bms.inventory.valuation.line</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="product_id"/>
+                                <field name="date"/>
+                                <field name="inventory_valuation_id"/>
+                                <field name="quantity"/>
+                                <field name="price"/>
+                            </group>
+                            <group>
+                                <field name="quantity_in"/>
+                                <field name="quantity_out"/>
+                                <field name="price_in"/>
+                                <field name="price_out"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

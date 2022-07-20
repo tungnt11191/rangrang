@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tas_cost_driver_working_hour" model="tas.cost.driver">
+      <field name="name">Working hour</field>
+      <field name="code">working_hour</field>
+    </record>
+    <record id="tas_cost_driver_nvl" model="tas.cost.driver">
+      <field name="name">Nguyên vật liệu</field>
+      <field name="code">nvl</field>
+    </record>
+</odoo>

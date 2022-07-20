@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <template id="assets_backend" name="restful_assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/restful/static/lib/datatables.min.css"/>
+        <link rel="stylesheet" href="/restful/static/lib/fixedHeader.dataTables.min.css"/>
+        <link rel="stylesheet" href="/restful/static/lib/buttons.dataTables.min.css"/>
+        <script type="text/javascript" src="/restful/static/lib/datatables.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/dataTables.fixedHeader.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/dataTables.responsive.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/dataTables.buttons.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/buttons.flash.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/jszip.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/pdfmake.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/vfs_fonts.js"/>
+        <script type="text/javascript" src="/restful/static/lib/buttons.html5.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/buttons.print.min.js"/>
+        <script type="text/javascript" src="/restful/static/lib/tas_revenue_report.js"/>
+        <script type="text/javascript" src="/restful/static/lib/tas_doanh_so_report.js"/>
+      </xpath>
+    </template>
+
+    <record id="action_tas_revenue_report" model="ir.actions.client">
+      <field name="name">Cash Collection Report</field>
+      <field name="tag">resful.dashboard</field>
+    </record>
+
+    <menuitem id="menu_tas_cash_control" name="Cash Collection Report" parent="account.menu_finance_entries_management" sequence="5" action="action_tas_revenue_report"/>
+
+    <record id="action_tas_doanh_so_report" model="ir.actions.client">
+      <field name="name">Báo cáo doanh số</field>
+      <field name="tag">resful.doanhso</field>
+    </record>
+
+    <menuitem id="menu_tas_doanh_so_nhan_vien"
+      name="Báo Cáo Doanh Số Tháng"
+      parent="account.menu_finance_entries_management"
+      sequence="6" action="action_tas_doanh_so_report"/>
+
+  </data>
+</odoo>

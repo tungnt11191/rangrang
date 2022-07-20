@@ -1,0 +1,67 @@
+<openerp>
+  <data>
+<!--    <record id="action_project_management_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Báo cáo SL xuất nhập tồn</field>-->
+<!--      <field name="tag">dashboard_inventory.dashboard</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_tas_multi_location_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Báo cáo SL XNT đa kho</field>-->
+<!--      <field name="tag">dashboard_inventory.multi_location_dashboard</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_in_management_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Báo cáo nhập kho</field>-->
+<!--      <field name="tag">dashboard_inventory.in_dashboard</field>-->
+<!--      &lt;!&ndash; <field name="target">main</field> &ndash;&gt;-->
+<!--      <field name="target">current</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_overview_int_management_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Chi tiết xuất nhập kho</field>-->
+<!--      <field name="tag">dashboard_inventory.overview_int_dashboard</field>-->
+<!--      <field name="target">current</field>-->
+<!--    </record>-->
+
+     <record id="action_overview_xnt_management_dashboard_tung" model="ir.actions.client">
+      <field name="name">Chi tiết xuất nhập kho</field>
+      <field name="tag">dashboard_inventory.overview_xnt_dashboard_tung</field>
+      <field name="target">current</field>
+    </record>
+
+<!--    <record id="action_int_management_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">BC Chi tiết xuất nhập kho</field>-->
+<!--      <field name="tag">dashboard_inventory.int_dashboard</field>-->
+<!--      <field name="target">current</field>-->
+<!--    </record>-->
+
+<!--    <record id="action_inventory_value_management_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Báo cáo giá trị XNT</field>-->
+<!--      <field name="tag">dashboard_inventory.value_dashboard</field>-->
+<!--    </record>-->
+
+  <record id="action_inventory_value_management_tung_dashboard" model="ir.actions.client">
+    <field name="name">Báo cáo giá trị XNT Tung</field>
+    <field name="tag">dashboard_inventory.value_dashboard_tung</field>
+  </record>
+
+<!--    <record id="action_bao_cao_hao_hut_tung_dashboard" model="ir.actions.client">-->
+<!--      <field name="name">Báo cáo hao hụt Tung</field>-->
+<!--      <field name="tag">dashboard_inventory.bao_cao_hao_hut_tung</field>-->
+<!--    </record>-->
+<!--    <menuitem id="menu_project_management_dashboard" parent="stock.menu_warehouse_report" sequence="-1" action="action_project_management_dashboard" groups="stock.group_stock_user"/>-->
+
+<!--    <menuitem id="menu_tas_multi_location_dashboard" parent="stock.menu_warehouse_report" sequence="1" action="action_tas_multi_location_dashboard" groups="stock.group_stock_user"/>-->
+
+<!--    <menuitem id="menu_inventory_xnt_management_dashboard" parent="stock.menu_warehouse_report" sequence="2" action="action_inventory_value_management_dashboard" groups="dashboard_inventory.group_xnt_employee,dashboard_inventory.group_xnt_manager"/>-->
+
+    <menuitem id="menu_inventory_valuation_management_dashboard" parent="stock.menu_warehouse_report" sequence="2" action="action_inventory_value_management_tung_dashboard" groups="dashboard_inventory.group_xnt_employee,dashboard_inventory.group_xnt_manager"/>
+
+<!--    <menuitem id="menu_bao_cao_hao_hut_tung_dashboard" parent="stock.menu_warehouse_report" sequence="2" action="action_bao_cao_hao_hut_tung_dashboard" groups="dashboard_inventory.group_xnt_employee,dashboard_inventory.group_xnt_manager"/>-->
+
+<!--    <menuitem id="menu_inventory_int_xnt_management_dashboard" parent="stock.menu_warehouse_report" sequence="3" action="action_int_management_dashboard" groups="stock.group_stock_user"/>-->
+
+<!--    <menuitem id="menu_in_management_dashboard" parent="stock.menu_warehouse_report" sequence="4" action="action_in_management_dashboard" groups="stock.group_stock_user"/>-->
+  </data>
+
+</openerp>

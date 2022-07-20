@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        Purchase -->
+        <menuitem
+                name="Purchase WH"
+                id="menu_purchase_wh"
+                sequence="13"
+                groups="tasys_permission.wh_user"
+                web_icon="tasys_permission,static/description/purchase_icon.png"/>
+
+<!--        Purchase WH - Product-->
+        <menuitem
+                id="menu_purchase_reporting_wh"
+                name="Reporting"
+                sequence="10"
+                parent ="menu_purchase_wh"
+                action="purchase_enterprise.purchase_report_action_dashboard"
+                groups="tasys_permission.wh_user"/>
+        <!--        Purchase WH - Order -->
+        <menuitem
+                id="menu_purchase_orders_wh"
+                name="Orders"
+                sequence="10"
+                parent ="menu_purchase_wh"
+                action="purchase_enterprise.purchase_report_action_dashboard"
+                groups="tasys_permission.wh_user"/>
+        <!-- Purchase/Orders/Purchase Orders-->
+        <menuitem id="menu_purchase_orders_purchase_orders_wh"
+                  name="Purchase Orders"
+                  parent="menu_purchase_orders_wh"
+                  sequence="51"
+                  groups="tasys_permission.wh_user"
+                  action="purchase.purchase_form_action"/>
+        <!--        Purchase WH - Order - Requests for Quotation-->
+        <menuitem
+                id="menu_purchase_orders_request_quotation_wh"
+                name="Requests for Quotation"
+                sequence="10"
+                parent ="menu_purchase_orders_wh"
+                action="purchase.purchase_rfq"
+                groups="tasys_permission.wh_user"/>
+    </data>
+</odoo>

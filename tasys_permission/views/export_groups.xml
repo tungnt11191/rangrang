@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="export_inventory_hide" inherit_id="web.assets_backend">
+        <!-- <xpath expr="//script[@src='/web/static/src/js/widgets/data_export.js']" position="replace">
+            <script type="text/javascript" src="/web/static/src/js/widgets/data_export.js" groups="base.group_user,tasys_permission.category_excutive,tasys_permission.cs_manager,stock.group_stock_user,stock.group_stock_manager,tasys_permission.sourcing,account.group_account_readonly,account.group_account_invoice"></script>
+        </xpath> -->
+
+
+        <!-- <xpath expr="//script[@src='/web/static/src/js/widgets/data_export.js']" position="attributes">
+            <attribute name="groups">base.group_user,tasys_permission.category_excutive,tasys_permission.cs_manager,stock.group_stock_user,stock.group_stock_manager,tasys_permission.sourcing,account.group_account_readonly,account.group_account_invoice</attribute>
+        </xpath> -->
+    </template>
+</odoo>

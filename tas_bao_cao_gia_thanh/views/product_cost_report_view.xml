@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="view_tas_product_cost_report_form" model="ir.ui.view">
+      <field name="name">Báo cáo giá thành</field>
+      <field name="model">tas.product.cost.report</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="date_from"/>
+                <field name="date_end"/>
+              </group>
+              <group>
+                <field name="budget_id" />
+              </group>
+            </group>
+            <notebook>
+              <page string="Chi tiết">
+                <field name="line_ids" widget="one2many_list" mode="tree">
+                  <tree editable="bottom">
+                    <field name="bom_id"/>
+                    <field name="mrp_production_id"/>
+                    <field name="total_amount"/>
+                    <field name="complete_amount"/>
+                    <field name="wip_amount"/>
+                    <field name="scrap_amount"/>
+                    <field name="cost_of_structure" string="Chi phí nguyên vật liệu"/>
+<!--                    <field name="cost_of_operation"/>-->
+                    <field name="total_cost_of_process" />
+                    <field name="actual_cost_per_unit"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_tas_product_cost_report_tree" model="ir.ui.view">
+      <field name="name">Báo cáo giá thành</field>
+      <field name="model">tas.product.cost.report</field>
+      <field name="arch" type="xml">
+        <tree string="Báo cáo giá thành" default_order="id desc">
+          <field name="date_from"/>
+          <field name="date_end"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_tas_product_cost_report" model="ir.actions.act_window">
+      <field name="name">Báo cáo giá thành</field>
+      <field name="res_model">tas.product.cost.report</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="o_view_nocontent_smiling_face">
+          Create new Report
+        </p>
+      </field>
+    </record>
+
+
+    <record id="view_tas_product_cost_report_line_form" model="ir.ui.view">
+      <field name="name">Báo cáo giá thành MO</field>
+      <field name="model">tas.product.cost.report.line</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <group>
+                <field name="mrp_production_id"/>
+                <field name="bom_id"/>
+                <field name="total_amount" />
+                <field name="complete_amount"/>
+                <field name="wip_amount"/>
+                <field name="scrap_amount"/>
+              </group>
+              <group>
+                <field name="actual_cost_per_unit" />
+                <field name="cost_of_structure" string="Chi phí nguyên vật liệu"/>
+<!--                <field name="cost_of_operation" />-->
+              </group>
+            </group>
+            <notebook>
+              <page string="Activity type">
+                <field name="activity_ids" widget="one2many_list" mode="tree">
+                  <tree editable="bottom">
+                    <field name="activity_type"/>
+                    <field name="cost_of_activity" sum="Total" string="Tổng giá thành"/>
+<!--                    <field name="cost_per_activity" />-->
+                    <field name="cost_per_unit" sum="Total"  string="Giá thành đơn vị"/>
+                  </tree>
+                </field>
+              </page>
+            </notebook>
+          </sheet>
+        </form>
+      </field>
+    </record>
+    <menuitem id="tas_product_cost_report_menu" action="action_tas_product_cost_report" name="Báo cáo giá thành"  parent="account.menu_finance_entries_management" sequence="1" groups="account.group_account_manager"/>
+  </data>
+</odoo>

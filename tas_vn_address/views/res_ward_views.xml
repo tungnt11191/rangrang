@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+        Ward
+        -->
+        <record id="view_ward_tree" model="ir.ui.view">
+            <field name="name">res.ward.tree</field>
+            <field name="model">res.ward</field>
+            <field name="arch" type="xml">
+                <tree string="Ward" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="district_id" options="{'no_create': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_ward_form" model="ir.ui.view">
+            <field name="name">res.ward.form</field>
+            <field name="model">res.ward</field>
+            <field name="arch" type="xml">
+                <form string="Ward">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="district_id" options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_ward" model="ir.actions.act_window">
+            <field name="name">Ward</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.ward</field>
+            <field name="view_id" ref="view_ward_tree"/>
+            <field name="help">Display and manage the list of all ward that can be assigned to your partner records. You can create or delete countries to make sure the ones you are working on will be maintained.</field>
+        </record>
+
+        <menuitem id="menu_ward_group"
+                  action="action_ward"
+                  name="Ward" parent="contacts.menu_localisation"
+                  sequence="3"/>
+    </data>
+</odoo>

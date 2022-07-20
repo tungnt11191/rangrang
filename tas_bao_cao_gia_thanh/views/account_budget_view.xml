@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="crossovered_budget_line_cost_driver_view_form" model="ir.ui.view">
+        <field name="name">tas.crossovered.budget.line.cost.driver.form.inherit</field>
+        <field name="model">crossovered.budget</field>
+        <field name="inherit_id" ref="account_budget.crossovered_budget_view_form"/>
+        <field name="arch" type="xml">
+             <xpath expr="//page[@name='budget_lines']/field[@name='crossovered_budget_line']/tree//field[@name='analytic_account_id']" position="after">
+                 <field name="cost_driver_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

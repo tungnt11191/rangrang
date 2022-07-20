@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Sales WH-->
+        <menuitem
+                name="Sale WH"
+                id="menu_sale_wh"
+                sequence="20"
+                groups="tasys_permission.wh_user"
+                web_icon="tasys_permission,static/description/sale_icon.png"/>
+
+<!--        Sales WH - Product-->
+        <menuitem
+                id="menu_sale_product_wh"
+                name="Products"
+                sequence="10"
+                parent ="menu_sale_wh"
+                action="sale.product_template_action"
+                groups="tasys_permission.wh_user"/>
+        <!--        SWH - Orders-->
+        <menuitem
+                id="menu_sale_orders_wh"
+                name="Orders"
+                sequence="25"
+                parent ="menu_sale_wh"
+                action="sale.action_orders"
+                groups="tasys_permission.wh_user"/>
+        <!--        SWH - Orders - Orders-->
+        <menuitem
+                id="menu_sale_orders_orders_wh"
+                name="Orders"
+                sequence="10"
+                parent ="menu_sale_orders_wh"
+                action="sale.action_orders"
+                groups="tasys_permission.wh_user"/>
+        <!--        SWH - Orders - Customers-->
+        <menuitem
+                id="menu_sale_orders_customers_wh"
+                name="Customers"
+                sequence="15"
+                parent ="menu_sale_orders_wh"
+                action="account.res_partner_action_customer"
+                groups="tasys_permission.wh_user"/>
+            <!--        SWH - Orders - Quotation -->
+        <menuitem
+                id="menu_sale_quotation_order_wh"
+                name="Quotation"
+                sequence="20"
+                parent ="menu_sale_orders_wh"
+                action="sale.action_quotations_with_onboarding"
+                groups="tasys_permission.wh_user"/>
+         <!--        SWH - Reporting-->
+        <menuitem
+                id="menu_sale_reporting_wh"
+                name="Reporting"
+                sequence="30"
+                parent ="menu_sale_wh"
+                groups="tasys_permission.wh_user"/>
+        <!--        SWH - Reporting - Sales -->
+        <menuitem
+                id="menu_sale_reporting_sales_wh"
+                name="Sales"
+                sequence="5"
+                parent ="menu_sale_reporting_wh"
+                action="sale_enterprise.sale_report_action_dashboard"
+                groups="tasys_permission.wh_user"/>
+
+        <!--        Sales WH - To invoice-->
+        <menuitem
+                id="menu_sale_to_invoice_wh"
+                name="To Invoice"
+                sequence="20"
+                parent ="menu_sale_wh"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.wh_user"/>
+
+        <!--        Sales WH - To invoice - O to Invoice-->
+        <menuitem
+                id="menu_sale_order_to_invoice_wh"
+                name="Order to Invoice"
+                sequence="20"
+                parent ="menu_sale_to_invoice_wh"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.wh_user"/>
+<!--        Sales WH - Product - Product-->
+        <menuitem
+                id="menu_sale_product_product_wh"
+                name="Products"
+                sequence="10"
+                parent="menu_sale_product_wh"
+                action="sale.product_template_action"
+                groups="tasys_permission.wh_user"/>
+<!--        Sales WH - Product - Pricelists-->
+        <menuitem
+                id="menu_sale_product_pricelists_wh"
+                name="Pricelists"
+                sequence="10"
+                parent="menu_sale_product_wh"
+                action="product.product_pricelist_action2"
+                groups="tasys_permission.wh_user"/>
+
+
+    </data>
+
+</odoo>

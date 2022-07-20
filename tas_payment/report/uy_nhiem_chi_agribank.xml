@@ -1,0 +1,485 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+
+    <report
+            id="tas_payment_uy_nhiem_chi_agribank"
+            model="account.move"
+            string="Ủy nhiệm chi - Agribank"
+            report_type="qweb-pdf"
+            name="tas_payment.template_tas_payment_uy_nhiem_chi_agribank"
+            file="In phiếu thu chi"
+            attachment_use="True"
+            paperformat="bms_paperformat_uy_nhiem_chi"/>
+
+    <template id="template_tas_payment_uy_nhiem_chi_agribank">
+      <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+          <div class="body" style="font-family: 'Arial'; font-size: 12px; width:97%; padding-left:30px;line-height:130%">
+            <div style="display:block;
+                        -webkit-transform: rotate(-90deg);
+                        -moz-transform: rotate(-90deg);
+                        line-height:0.5px;
+                        position: absolute;
+                        top: 300px;
+                        left: -107px;
+                        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                        font-size: 8px; text-align:center;">
+                <i>Mẫu số DP004 kèm theo Quyết định 599/QĐ-NHNo-TCKT ngày 19/04/2017</i>
+            </div>
+            <div style="display:block;
+                        -webkit-transform: rotate(-90deg);
+                        -moz-transform: rotate(-90deg);
+                        line-height:0.5px;
+                        position: absolute;
+                        top: 1000px;
+                        left: -107px;
+                        filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                        font-size: 8px; text-align:center;">
+                <i>Mẫu số DP004 kèm theo Quyết định 599/QĐ-NHNo-TCKT ngày 19/04/2017</i>
+            </div>
+            <div class="row" >
+              <div class="col-4" style="width: 40% ">
+                <img style="width: 100%; " src="/tas_payment/static/images/agribank.jpg"/>
+                <p>CHI NHÁNH CN Đồng Nai</p>
+              </div>
+              <div class="col-4" style=" text-align:center; width: 40%; line-height: 5px; margin-top: 18px;">
+                <p style="font-size: 25px;font-weight: bold; color: #920b23;">ỦY NHIỆM CHI</p>
+                <p style="font-size: 15px;font-weight: bold; ">Payment Order</p>
+                <p>Ngày <span t-esc="o.date"/></p>
+                <p>Date</p>
+              </div>
+              <div class="col-4 text-left" style="width: 40% ; text-align:center; margin-top: 18px; display: inherit;">
+                  <table width="100%">
+                      <tr>
+                          <td width="50%">Số: EVP000001</td>
+                          <td width="50%">Liên 1: Ngân hàng</td>
+                      </tr>
+                      <tr>
+                          <td width="50%"><i>No</i></td>
+                          <td width="50%"><i>Original Bank</i></td>
+                      </tr>
+                      <tr>
+                          <td width="50%"> </td>
+                          <td width="50%">Loại tiền tệ: <span t-esc="o.journal_id.currency_id.name"/></td>
+                      </tr>
+                      <tr>
+                          <td width="50%"> </td>
+                          <td width="50%"><i>Currency</i></td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+            <div class="row" style="font-size: 12px;">
+              <div class="col-12" style=" border-radius: 20px;width:100%;border: 1px solid black;padding: 0px; margin: 5px 0px 0px 0px; ">
+                  <div >
+                      <div style="padding:20px">
+                          <table width="100%">
+                              <tr>
+                                <td width="50%">Khách hàng trả tiền: CÔNG TY TNHH ONP - VIỆT NAM</td>
+                                <td width="25%"> </td>
+                                <td width="25%">Điện thoại: 02516281975</td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Applicant</i></td>
+                                <td> </td>
+                                <td><i style="font-size:10px">Tel</i></td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Số tài khoản: 180114851007867</i></td>
+                                <td>Tại Agribank: Agribank CN Đồng Nai</td>
+                                <td> </td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Account No</i></td>
+                                <td><i style="font-size:10px">At Agribank</i></td>
+                                <td> </td>
+                              </tr>
+                          </table>
+                          <table width="100%" >
+                              <tr>
+                                <td width="75%" style="letter-spacing: 1.25px">Khách hàng thụ hưởng: <span t-esc="o.line_ids.partner_id.name"/></td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Điện thoại:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Beneficiary</i></td>
+                                <td><i style="font-size:10px">Tel</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                <td width="50%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Số CMT/Hộ chiếu: </td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Ngày cấp:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Nơi cấp:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                  <td><i style="font-size:10px">ID/Passport No</i></td>
+                                  <td><i style="font-size:10px">Date of issue</i></td>
+                                  <td><i style="font-size:10px">Place of issue</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="50%">Số tài khoản: <span t-esc="o.line_ids.partner_id.bank_ids.acc_number"/></td>
+                                  <td width="50%">Tại ngân hàng: <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.name"/></td>
+                              </tr>
+                              <tr>
+                                  <td width="50%"><i style="font-size:10px">Account No</i></td>
+                                  <td width="50%"><i style="font-size:10px">At bank</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="75%">Số tiền bằng chữ: <b><span t-esc="o.money_char"/></b></td>
+                                  <td width="25%">Số tiền bằng số: <b><span t-esc="o.amount_total"/> VND</b></td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px">Amount in words</i></td>
+                                  <td width="25%"><i style="font-size:10px">Amount in figures</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="75%">Nội dung: <span t-esc="o.lydo"/></td>
+                                  <td width="5%">Phí</td>
+                                  <td width="20%">
+                                      <table>
+                                          <tr>
+                                              <td style="font-size:30px;vertical-align:bottom">&#x25a2;</td>
+                                              <td>Phí trong</td>
+                                          </tr>
+                                      </table>
+
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px">Details</i></td>
+                                  <td width="5%"><i style="font-size:10px">Charge</i></td>
+                                  <td width="20%"><i style="font-size:10px">   Charge included</i></td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"> </td>
+                                  <td width="5%"> </td>
+                                  <td width="20%">
+                                      <table>
+                                          <tr>
+                                              <td style="font-size:30px;vertical-align:bottom">&#x25a2;</td>
+                                              <td>Phí ngoài</td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px"> </i></td>
+                                  <td width="5%"><i style="font-size:10px"> </i></td>
+                                  <td width="20%"><i style="font-size:10px">   Charge excluded</i></td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 12px ">
+                <div class="col-12" style=" border-radius: 15px;width:100%;border: 1px solid black;padding: 0px; margin: 0px 0px 0px 0px;height:100px">
+                    <div style="display:block;
+                            -webkit-transform: rotate(-90deg);
+                            -moz-transform: rotate(-90deg);
+                            line-height:0.5px;
+                            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                            font-size: 8px; width: 100px ; height: 90px; text-align:center;">
+                        <p>Dành cho ngân hàng</p>
+                        <p><i>For bank use only</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 12px ">
+                <div class="col-12" style="text-align:center">
+                    <table width="100%">
+                      <tr>
+                        <td width="50%">Khách hàng trả tiền <i>(Applicant)</i></td>
+                        <td width="25%">Giao dịch viên <i>(Teller)</i></td>
+                        <td width="25%">Kiểm soát <i>(Supervisor)</i></td>
+                      </tr>
+                    </table>
+                    <table width="100%">
+                      <tr>
+                        <td width="25%">Kế toán trưởng </td>
+                        <td width="25%">Chủ tài khoản</td>
+                        <td width="25%"> </td>
+                        <td width="25%"> </td>
+                      </tr>
+                        <tr>
+                        <td width="25%"><i>Chief accountant</i></td>
+                        <td width="25%"><i>Account holder</i></td>
+                        <td width="25%"> </td>
+                        <td width="25%"> </td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div style="margin: 60px 0px 0px 0px;">
+                <i>Khách hàng kiểm tra và chịu trách nhiệm về thông tin trước khi ký/ Customer checks and takes responsibility for infor mation on receipt</i>
+            </div>
+            <div style="background-color:#920b23; text-align:right;">
+                <a href= "https://www.agribank.com.vn/" ><b style="color: #ffffff">www.agribank.com.vn</b>/</a>
+            </div>
+            <hr style="border-top: dotted 1px;margin: 30px 0px 0px 0px;" />
+            <br/>
+
+
+            <div class="row">
+              <div class="col-4" style="width: 40% ">
+                <img style="width: 100%; " src="/tas_payment/static/images/agribank.jpg"/>
+                <p>CHI NHÁNH CN Đồng Nai</p>
+              </div>
+              <div class="col-4" style=" text-align:center; width: 40%; line-height: 5px; margin-top: 18px;">
+                <p style="font-size: 25px;font-weight: bold; color: #920b23;">ỦY NHIỆM CHI</p>
+                <p style="font-size: 15px;font-weight: bold; ">Payment Order</p>
+                <p>Ngày <span t-esc="o.date"/></p>
+                <p>Date</p>
+              </div>
+              <div class="col-4 text-left" style="width: 40% ; text-align:center; margin-top: 18px; display: inherit;">
+                  <table width="100%">
+                      <tr>
+                          <td width="50%">Số: EVP000001</td>
+                          <td width="50%">Liên 2: Khách hàng</td>
+                      </tr>
+                      <tr>
+                          <td width="50%"><i>No</i></td>
+                          <td width="50%"><i>Copy 2 Customer</i></td>
+                      </tr>
+                      <tr>
+                          <td width="50%"> </td>
+                          <td width="50%">Loại tiền tệ: <span t-esc="o.journal_id.currency_id.name"/></td>
+                      </tr>
+                      <tr>
+                          <td width="50%"> </td>
+                          <td width="50%"><i>Currency</i></td>
+                      </tr>
+                  </table>
+              </div>
+            </div>
+            <div class="row" style="font-size: 12px;">
+              <div class="col-12" style=" border-radius: 20px;width:100%;border: 1px solid black;padding: 0px; margin: 5px 0px 0px 0px; ">
+                  <div style="display:flex; padding-left">
+                  <div >
+                      <div style="padding:20px">
+                          <table width="100%">
+                              <tr>
+                                <td width="50%">Khách hàng trả tiền: CÔNG TY TNHH ONP - VIỆT NAM</td>
+                                <td width="25%"> </td>
+                                <td width="25%">Điện thoại: 02516281975</td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Applicant</i></td>
+                                <td> </td>
+                                <td><i style="font-size:10px">Tel</i></td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Số tài khoản: 180114851007867</i></td>
+                                <td>Tại Agribank: Agribank CN Đồng Nai</td>
+                                <td> </td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Account No</i></td>
+                                <td><i style="font-size:10px">At Agribank</i></td>
+                                <td> </td>
+                              </tr>
+                          </table>
+                          <table width="100%" >
+                              <tr>
+                                <td width="75%" style="letter-spacing: 1.25px">Khách hàng thụ hưởng: <span t-esc="o.line_ids.partner_id.name"/></td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Điện thoại:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td><i style="font-size:10px">Beneficiary</i></td>
+                                <td><i style="font-size:10px">Tel</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                <td width="50%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Số CMT/Hộ chiếu: </td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Ngày cấp:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <td width="25%">
+                                    <table width="100%">
+                                        <tr>
+                                            <td width="30%">Nơi cấp:</td>
+                                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                              </tr>
+                              <tr>
+                                  <td><i style="font-size:10px">ID/Passport No</i></td>
+                                  <td><i style="font-size:10px">Date of issue</i></td>
+                                  <td><i style="font-size:10px">Place of issue</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="50%">Số tài khoản: <span t-esc="o.line_ids.partner_id.bank_ids.acc_number"/></td>
+                                  <td width="50%">Tại ngân hàng: <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.name"/></td>
+                              </tr>
+                              <tr>
+                                  <td width="50%"><i style="font-size:10px">Account No</i></td>
+                                  <td width="50%"><i style="font-size:10px">At bank</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="75%">Số tiền bằng chữ: <b><span t-esc="o.money_char"/></b></td>
+                                  <td width="25%">Số tiền bằng số: <b><span t-esc="o.amount_total"/> VND</b></td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px">Amount in words</i></td>
+                                  <td width="25%"><i style="font-size:10px">Amount in figures</i></td>
+                              </tr>
+                          </table>
+                          <table width="100%">
+                              <tr>
+                                  <td width="75%">Nội dung: <span t-esc="o.lydo"/></td>
+                                  <td width="5%">Phí</td>
+                                  <td width="20%">
+                                      <table>
+                                          <tr>
+                                              <td style="font-size:30px;vertical-align:bottom">&#x25a2;</td>
+                                              <td>Phí trong</td>
+                                          </tr>
+                                      </table>
+
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px">Details</i></td>
+                                  <td width="5%"><i style="font-size:10px">Charge</i></td>
+                                  <td width="20%"><i style="font-size:10px">   Charge included</i></td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"> </td>
+                                  <td width="5%"> </td>
+                                  <td width="20%">
+                                      <table>
+                                          <tr>
+                                              <td style="font-size:30px;vertical-align:bottom">&#x25a2;</td>
+                                              <td>Phí ngoài</td>
+                                          </tr>
+                                      </table>
+                                  </td>
+                              </tr>
+                              <tr>
+                                  <td width="75%"><i style="font-size:10px"> </i></td>
+                                  <td width="5%"><i style="font-size:10px"> </i></td>
+                                  <td width="20%"><i style="font-size:10px">   Charge excluded</i></td>
+                              </tr>
+                          </table>
+                      </div>
+                  </div>
+                  </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 12px ">
+                <div class="col-12" style=" border-radius: 15px;width:100%;border: 1px solid black;padding: 0px; margin: 0px 0px 0px 0px;height:100px">
+                    <div style="display:block;
+                            -webkit-transform: rotate(-90deg);
+                            -moz-transform: rotate(-90deg);
+                            line-height:0.5px;
+                            filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+                            font-size: 8px; width: 100px ; height: 90px; text-align:center;">
+                        <p>Dành cho ngân hàng</p>
+                        <p><i>For bank use only</i></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="font-size: 12px ">
+                <div class="col-12" style="text-align:center">
+                    <table width="100%">
+                      <tr>
+                        <td width="50%">Khách hàng trả tiền <i>(Applicant)</i></td>
+                        <td width="25%">Giao dịch viên <i>(Teller)</i></td>
+                        <td width="25%">Kiểm soát <i>(Supervisor)</i></td>
+                      </tr>
+                    </table>
+                    <table width="100%">
+                      <tr>
+                        <td width="25%">Kế toán trưởng </td>
+                        <td width="25%">Chủ tài khoản</td>
+                        <td width="25%"> </td>
+                        <td width="25%"> </td>
+                      </tr>
+                        <tr>
+                        <td width="25%"><i>Chief accountant</i></td>
+                        <td width="25%"><i>Account holder</i></td>
+                        <td width="25%"> </td>
+                        <td width="25%"> </td>
+                      </tr>
+                    </table>
+                </div>
+            </div>
+            <br/>
+            <br/>
+            <div style="margin: 60px 0px 0px 0px;">
+                <i>Khách hàng kiểm tra và chịu trách nhiệm về thông tin trước khi ký/ Customer checks and takes responsibility for infor mation on receipt</i>
+            </div>
+            <div style="background-color:#920b23; text-align:right;">
+                <a href= "https://www.agribank.com.vn/" ><b style="color: #ffffff">www.agribank.com.vn</b>/</a>
+            </div>
+
+          </div>
+        </t>
+      </t>
+    </template>
+
+  </data>
+</odoo>

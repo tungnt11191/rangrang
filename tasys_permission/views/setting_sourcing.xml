@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_setting_sourcing"
+              name="Setting Sourcing"
+              sequence="99"
+              groups="tasys_permission.sourcing"
+              web_icon="tasys_permission,static/description/settings.png"/>
+    <menuitem id="menu_setting_technical_sourcing"
+              name="Technical"
+              parent="menu_setting_sourcing"
+              sequence="10"/>
+    <menuitem id="menu_setting_reports_sourcing"
+              name="Reports"
+              parent="menu_setting_technical_sourcing"
+              sequence="10"
+              action="base.ir_action_report"/>
+</odoo>

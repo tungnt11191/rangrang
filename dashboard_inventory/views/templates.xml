@@ -1,0 +1,17 @@
+<openerp>
+  <data>
+    <template id="assets_backend" name="project_management_dashboard_assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/project_management_dashboard.js"/>-->
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/value_inventory_management_dashboard.js"/>-->
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/in_inventory_management_dashboard.js"/>-->
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/overview_int_inventory_dashboard.js"/>-->
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/int_inventory_management_dashboard.js"/>-->
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/multi_location_dashboard.js"/>-->
+        <script type="text/javascript" src="/dashboard_inventory/static/src/js/overview_int_inventory_dashboard_tung.js"/>
+        <script type="text/javascript" src="/dashboard_inventory/static/src/js/value_inventory_management_dashboard_tung.js"/>
+<!--        <script type="text/javascript" src="/dashboard_inventory/static/src/js/bao_cao_hao_hut_tung.js"/>-->
+      </xpath>
+    </template>
+  </data>
+</openerp>

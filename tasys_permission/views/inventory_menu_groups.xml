@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inventory -->
+        <record id="stock.menu_stock_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('tasys_permission.category_manager')), (4, ref('tasys_permission.category_executive')), (4, ref('tasys_permission.cs_manager')), (4, ref('tasys_permission.cs_executive')), (4, ref('tasys_permission.sourcing'))]"/>
+        </record>
+
+        <!--  -->
+        <record id="stock.all_picking" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('tasys_permission.category_manager')), (4, ref('tasys_permission.category_executive')), (4, ref('tasys_permission.cs_manager')), (4, ref('tasys_permission.cs_executive')), (4, ref('tasys_permission.sourcing'))]"/>
+        </record>
+
+        <!-- Inventory / Reporting -->
+        <record id="stock.menu_warehouse_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4, ref('tasys_permission.category_manager')), (4, ref('tasys_permission.category_executive')), (4, ref('tasys_permission.cs_manager')), (4, ref('tasys_permission.sourcing'))]"/>
+        </record>
+
+
+    </data>
+</odoo>

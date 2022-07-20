@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_move_form_asset_inherit" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="active">False</field>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+              <button name="create_vninvoice"
+                  type="object"
+                  class="oe_highlight" string="Tạo EInvoice"
+                  attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                <!-- <button name="open_asset_view"
+                    attrs="{'invisible': ['|', ('asset_id', '=', False), ('asset_asset_type', '=', 'sale')]}"
+                    class="oe_stat_button"
+                    icon="fa-cube"
+                    type="object">
+                    <field name="asset_id_display_name" nolabel="1"/>
+                </button>
+                <button name="action_open_asset_ids"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-id-card-o"
+                    attrs="{'invisible': ['|', ('number_asset_ids', '=', 0), ('draft_asset_ids', '=', True)]}">
+                    <field name="asset_ids_display_name" nolabel="1"/>
+                </button>
+                <button name="action_open_asset_ids"
+                    type="object"
+                    class="oe_stat_button text-danger"
+                    icon="fa-id-card-o"
+                    attrs="{'invisible': ['|', ('number_asset_ids', '=', 0), ('draft_asset_ids', '=', False)]}">
+                    <field name="asset_ids_display_name" nolabel="1"/>
+                </button> -->
+            </xpath>
+
+            <xpath expr="//field[@name='partner_id']" position="after">
+              <field name="invoice_address"/>
+              <field name="buyer_vat"/>
+            </xpath>
+
+            <xpath expr="//field[@name='payment_reference']" position="before">
+              <field name="so_id" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="revenue_recognize_id"/>
+              <field name="buyerName" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="vsi_status" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="invoice_viettel_ids" widget="many2many_tags" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="SalesOrderUuid" />
+              <field name="paymentType" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="invoiceStatus" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="company_branch_id" attrs="{'invisible': [('move_type', 'in', ['entry','in_invoice'])]}"/>
+              <field name="company_branch_vat" string="Company branch" attrs="{'invisible': [('move_type', 'not in', ['in_invoice', 'entry'])]}"/>
+              <field name="vsi_template" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="vsi_series" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="vsi_number" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record id="epsilo_view_move_form_asset_inherit" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_reference']" position="before">
+              <field name="vsi_template" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="vsi_series" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+              <field name="vsi_number" attrs="{'invisible': [('move_type', '=', 'entry')]}"/>
+            </xpath>
+
+        </field>
+    </record>
+    <record id="view_sv_move_line_tree" model="ir.ui.view">
+        <field name="name">account.move.line.tree</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree"/>
+        <field name="arch" type="xml">
+            <field name="statement_id" position="before">
+                <field name="company_branch_id"/>
+                <field name="lydo"/>
+            </field>
+        </field>
+    </record>
+  </odoo>

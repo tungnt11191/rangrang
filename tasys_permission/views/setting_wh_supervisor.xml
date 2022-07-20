@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_setting_wh_supervisor"
+              name="Setting Wh Supervisor"
+              sequence="99"
+              groups="tasys_permission.wh_supervisor"
+              web_icon="tasys_permission,static/description/settings.png"/>
+    <menuitem id="menu_setting_technical_wh_supervisor"
+              name="Technical"
+              parent="menu_setting_wh_supervisor"
+              sequence="10"/>
+    <menuitem id="menu_setting_reports_wh_supervisor"
+              name="Reports"
+              parent="menu_setting_technical_wh_supervisor"
+              sequence="10"
+              action="base.ir_action_report"/>
+</odoo>

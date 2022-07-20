@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="restful_sale_order_log_view_form" model="ir.ui.view">
+        <field name="name">restful.sale.order.log.form</field>
+        <field name="model">sale.order.log</field>
+        <field name="arch" type="xml">
+            <form string="Logs">
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="log_status"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <record id="restful_sale_order_log_view_tree" model="ir.ui.view">
+        <field name="name">restful.sale.order.log.tree</field>
+        <field name="model">sale.order.log</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <tree string="Log" default_order="id desc">
+                <field name="id" />
+                <field name="name" />
+                <field name="log_status" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="restful_sale_order_log_action" model="ir.actions.act_window">
+        <field name="name">Sale Order API Log</field>
+        <field name="res_model">sale.order.log</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+     <menuitem id="restful_sale_order_log_menu"
+        name="Sale Order API Log"
+        sequence="200"
+        parent="sale.menu_sale_config"
+        action="restful_sale_order_log_action"/>
+</odoo>

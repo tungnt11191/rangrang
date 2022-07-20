@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Inventory-->
+        <menuitem
+                name="Inventory WH Supervisor"
+                id="menu_inventory_wh_supervisor"
+                sequence="70"
+                groups="tasys_permission.wh_supervisor"
+                web_icon="tasys_permission,static/description/inventory_icon.png"/>
+        <!--       Inventory - Overview -->
+        <menuitem
+                id="menu_inventory_overview_wh_supervisor"
+                name="Overview"
+                sequence="1"
+                parent ="menu_inventory_wh_supervisor"
+                action="stock.stock_picking_type_action"
+                groups="tasys_permission.wh_supervisor"/>
+
+
+<!--       Inventory - Operations -->
+        <menuitem
+                id="menu_inventory_operations_wh_supervisor"
+                name="Operations"
+                sequence="10"
+                parent ="menu_inventory_wh_supervisor"
+                groups="tasys_permission.wh_supervisor"/>
+            <!--       Inventory - Reporting -->
+        <menuitem
+                id="menu_inventory_reporting_wh_supervisor"
+                name="Reporting"
+                sequence="99"
+                parent ="menu_inventory_wh_supervisor"
+                groups="tasys_permission.wh_supervisor"/>
+
+             <!--       Inventory - Reporting - Valuation-->
+        <menuitem
+                id="menu_inventory_reporting_valuation_wh_supervisor"
+                name="Inventory Valuation"
+                sequence="12"
+                parent ="menu_inventory_reporting_wh_supervisor"
+                action="stock_account.stock_valuation_layer_action"
+                groups="tasys_permission.wh_supervisor"/>
+            <!--       Inventory - Reporting - Report-->
+        <menuitem
+                id="menu_inventory_reporting_report_wh_supervisor"
+                name="Inventory Report"
+                sequence="10"
+                parent ="menu_inventory_reporting_wh_supervisor"
+                action="stock.dashboard_open_quants"
+                groups="tasys_permission.wh_supervisor"/>
+         <!--       Inventory - Reporting - Báo cáo-->
+        <menuitem
+                id="menu_inventory_reporting_report_xnk_wh_supervisor"
+                name="Báo cáo giá trị XNT"
+                sequence="20"
+                parent ="menu_inventory_reporting_wh_supervisor"
+                action="dashboard_inventory.action_inventory_value_management_tung_dashboard"
+                groups="tasys_permission.wh_supervisor"/>
+
+        <!-- Inventory - Operations - Inventory Adjustment-->
+        <menuitem
+                id="menu_inventory_operations_adjustment_wh_supervisor"
+                name="Inventory Adjustment"
+                sequence="5"
+                parent ="menu_inventory_operations_wh_supervisor"
+                action="stock.action_inventory_form"
+                groups="tasys_permission.wh_supervisor"/>
+
+            <!-- Inventory - Operations - Scrap-->
+        <menuitem
+                id="menu_inventory_operations_scrap_wh_supervisor"
+                name="Scrap"
+                sequence="15"
+                parent ="menu_inventory_operations_wh_supervisor"
+                action="stock.action_stock_scrap"
+                groups="tasys_permission.wh_supervisor"/>
+             <!-- Inventory - Operations - Transfer-->
+        <menuitem
+                id="menu_inventory_operations_transfer_wh_supervisor"
+                name="Transfer"
+                sequence="10"
+                parent ="menu_inventory_operations_wh_supervisor"
+                action="stock.action_picking_tree_all"
+                groups="tasys_permission.wh_supervisor"/>
+
+        <!--     Inventory - SO hoàn trả -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_so_hoan_tra_wh_supervisor"-->
+<!--                name="SO hoàn trả (Operations)"-->
+<!--                sequence="20"-->
+<!--                parent ="menu_inventory_wh_supervisor"-->
+<!--                action="sale.action_orders_to_invoice"-->
+<!--                groups="tasys_permission.wh_supervisor"/>-->
+
+        <!--        Inventory -  Quality Control (B2B +B2C) -->
+<!--        <menuitem-->
+<!--                id="menu_inventory_quality_control_wh_supervisor"-->
+<!--                name="Quality Control (B2B +B2C)"-->
+<!--                sequence="25"-->
+<!--                parent ="menu_inventory_wh_supervisor"-->
+<!--                action="stock.stock_picking_type_action"-->
+<!--                groups="tasys_permission.wh_supervisor"/>-->
+        <!--         Inventory - Product -->
+        <menuitem
+                id="menu_sale_products_wh_supervisor"
+                name="Products"
+                sequence="10"
+                parent="menu_inventory_wh_supervisor"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.wh_supervisor"/>
+<!--         Inventory - Product - Product-->
+        <menuitem
+                id="menu_sale_product_product_wh_supervisor"
+                name="Products"
+                sequence="10"
+                parent="menu_sale_products_wh_supervisor"
+                action="stock.product_template_action_product"
+                groups="tasys_permission.wh_supervisor"/>
+
+    </data>
+
+</odoo>

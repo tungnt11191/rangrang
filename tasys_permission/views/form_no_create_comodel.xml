@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--    Sale order    -->
+        <record id="sale_order_no_create_view_form" model="ir.ui.view">
+             <field name="name">sale.order.no.create.form.inherit</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale.view_order_form" />
+             <field name="priority">10</field>
+             <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='user_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+             </field>
+        </record>
+
+        <record id="sale_order_management_no_create_view_form" model="ir.ui.view">
+             <field name="name">sale.order.no.create.form.inherit</field>
+             <field name="model">sale.order</field>
+             <field name="inherit_id" ref="sale_management.sale_order_form_quote" />
+             <field name="priority">10</field>
+             <field name="arch" type="xml">
+                 <xpath expr="//field[@name='sale_order_option_ids']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='sale_order_option_ids']/tree/field[@name='uom_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+             </field>
+        </record>
+        <!--    End Sale order    -->
+
+        <!--    Product template-->
+        <record id="product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='uom_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='uom_po_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='attribute_line_ids']/tree/field[@name='attribute_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_supplierinfo_no_create_view_tree" model="ir.ui.view">
+            <field name="name">product.supplierinfo.nocreate.tree.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <record id="account_product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">account.product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_account_income_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="purchase_product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">purchase.product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_account_creditor_price_difference']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="sale_product_configurator_product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">purchase.product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="sale_product_configurator.product_template_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='optional_product_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="stock_product_configurator_product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">stock.product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="stock.view_template_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_stock_production']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+        <record id="purchase_product_template_no_create_view_form" model="ir.ui.view">
+            <field name="name">purchase.product.template.no.create.form.inherit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="purchase.view_product_account_purchase_ok_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='supplier_taxes_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!--    End Product template-->
+
+        <!--    Customer item-->
+        <record id="res_partner_no_create_form_view" model="ir.ui.view">
+            <field name="name">res.partner.no.create.item.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='child_ids']/kanban" position="attributes">
+                    <attribute name="create">0</attribute>
+                </xpath>
+                <xpath expr="//group[@name='sale']/field[@name='user_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="delivery_res_partner_no_create_form_view" model="ir.ui.view">
+            <field name="name">delivery.res.partner.no.create.item.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="delivery.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='property_delivery_carrier_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="res_partner_view_form_property_no_create_inherit" model="ir.ui.view">
+            <field name="name">res.partner.view.form.property.no.create.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="arch" type="xml">
+
+                <field name="property_payment_term_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_supplier_payment_term_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_account_receivable_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_account_payable_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <xpath expr="//field[@name='bank_ids']/tree/field[@name='bank_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="product_view_partner_no_create_property_form" model="ir.ui.view">
+            <field name="name">product.res.partner.view.form.property.no.create.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="product.view_partner_property_form"/>
+            <field name="arch" type="xml">
+                <field name="property_product_pricelist" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+            </field>
+        </record>
+        <record id="stock_view_partner_no_create_property_form" model="ir.ui.view">
+            <field name="name">stock.res.partner.view.form.property.no.create.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="stock.view_partner_stock_form"/>
+            <field name="arch" type="xml">
+                <field name="property_stock_customer" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="property_stock_supplier" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+            </field>
+        </record>
+
+
+
+        <!--    End Customer item-->
+
+        <!--    Account invoice -->
+
+        <record id="account_invoice_no_create_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.no.create.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_user_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='team_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_bank_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='invoice_incoterm_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='product_uom_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_account_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='invoice_line_ids']/tree/field[@name='tax_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+
+
+                 <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='line_ids']/tree/field[@name='tax_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='line_ids']/tree/field[@name='tax_tag_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='line_ids']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!--    End Account invoice -->
+
+
+        <!--    Purchase order -->
+        <record id="purchase_order_no_create_form_inherit" model="ir.ui.view">
+            <field name="name">purchase.order.no.create.form.inherit</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="user_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="incoterm_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_template_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='account_analytic_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='analytic_tag_ids']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--    End Purchase order -->
+
+        <!--    Stock picking -->
+        <record id="stock_picking_no_create_form_view" model="ir.ui.view">
+            <field name="name">stock.picking.no.create.form.view</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form" />
+            <field name="arch" type="xml">
+                 <field name="partner_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                 <field name="picking_type_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                 <field name="location_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                 <field name="location_dest_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                 <field name="user_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+
+                 <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+                 <xpath expr="//field[@name='move_ids_without_package']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </xpath>
+            </field>
+        </record>
+        <!--    End Stock picking -->
+
+
+        <!--    Scrap -->
+        <record id="stock_scrap_no_create_form_view" model="ir.ui.view">
+            <field name="name">stock.scrap.form.inherit.no.create</field>
+            <field name="model">stock.scrap</field>
+            <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+            <field name="arch" type="xml">
+                <field name="product_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="product_uom_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="owner_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+            </field>
+        </record>
+        <!--  End Scrap -->
+
+<!--        Supplier info-->
+
+        <record id="supplier_info_no_create_form_inherit" model="ir.ui.view">
+            <field name="name">product.supplierinfo.no.create.requisition.view</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="priority">20</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_form_view"/>
+            <field name="arch" type="xml">
+                <field name="name" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="product_tmpl_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+                <field name="product_id" position="attributes">
+                    <attribute name="options">{'no_create': True}</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>

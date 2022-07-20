@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_inventory_cs_manager"
+                  name="Inventory CS Manager"
+                  sequence="11"
+                  groups="tasys_permission.cs_manager"/>
+        <!--Inventory/Operation-->
+        <menuitem id="menu_inventory_operations_cs_manager"
+                  name="Operations"
+                  parent="menu_inventory_cs_manager"
+                  sequence="21"
+                  groups="tasys_permission.cs_manager"/>
+        <!--Inventory/Operation/Inventory Adjustments-->
+        <menuitem id="menu_inventory_operations_inventory_adjustments_cs_manager"
+                  name="Inventory Adjustments"
+                  parent="menu_inventory_operations_cs_manager"
+                  sequence="31"
+                  groups="tasys_permission.cs_manager"
+                  action="stock.action_inventory_form"/>
+        <!--Inventory/Operation/Scrap-->
+        <menuitem id="menu_inventory_operations_scrap_cs_manager"
+                  name="Scrap"
+                  parent="menu_inventory_operations_cs_manager"
+                  sequence="41"
+                  groups="tasys_permission.cs_manager"
+                  action="stock.action_stock_scrap"/>
+        <!--Inventory/Operation/Transfers-->
+        <menuitem id="menu_inventory_operations_transfers_cs_manager"
+                  name="Transfers"
+                  parent="menu_inventory_operations_cs_manager"
+                  sequence="51"
+                  groups="tasys_permission.cs_manager"
+                  action="stock.action_picking_tree_all"/>
+        <!--Inventory/Reporting-->
+        <menuitem id="menu_inventory_reporting_cs_manager"
+                  name="Reporting"
+                  parent="menu_inventory_cs_manager"
+                  sequence="61"
+                  groups="tasys_permission.cs_manager"/>
+        <!--Inventory/Reporting/Inventory Report-->
+        <menuitem id="menu_inventory_reporting_inventory_report_cs_manager"
+                  name="Inventory Report"
+                  parent="menu_inventory_reporting_cs_manager"
+                  sequence="71"
+                  groups="tasys_permission.cs_manager"
+                  action="stock.dashboard_open_quants"/>
+        <!--Inventory/Reporting/Báo cáo giá trị XNT-->
+        <menuitem id="menu_inventory_reporting_baocaoxnt_cs_manager"
+                  name="Báo cáo giá trị XNT"
+                  parent="menu_inventory_reporting_cs_manager"
+                  sequence="71"
+                  groups="tasys_permission.cs_manager"
+                  action="dashboard_inventory.action_inventory_value_management_tung_dashboard"/>
+        <!--Inventory/Overview-->
+        <menuitem id="menu_inventory_overview_cs_manager"
+                  name="Overview"
+                  parent="menu_inventory_cs_manager"
+                  sequence="53"
+                  groups="tasys_permission.cs_manager"
+                  action="stock.stock_picking_type_action"/>
+
+
+    </data>
+</odoo>

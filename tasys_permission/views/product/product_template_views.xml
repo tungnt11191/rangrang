@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tasys_permission_product_template_attribute_permission_form" model="ir.ui.view">
+         <field name="name">tasys.permission.product.template.attribute.permission.form.inherit</field>
+         <field name="model">product.template</field>
+         <field name="inherit_id" ref="product.product_template_form_view" />
+         <field name="arch" type="xml">
+             <field name="type" position="after">
+                 <field name="is_cs_manager" invisible="1"/>
+                 <field name="is_wh_supervisor"/>
+                 <field name="is_wh_user"/>
+             </field>
+             <field name="list_price" position="attributes">
+                    <attribute name="attrs">
+                        {'readonly': ['|','|',('is_cs_manager', '=', True),('is_wh_user', '=', True),('is_wh_supervisor', '=', True)]}</attribute>
+             </field>
+<!--             <field name="list_price" position="attributes">-->
+<!--                    <attribute name="attrs">{'readonly': [('is_wh_supervisor', '=', True)]}</attribute>-->
+<!--             </field>-->
+             <field name="standard_price" position="attributes">
+                    <attribute name="attrs">{'readonly': [('is_wh_user', '=', True)]}</attribute>
+             </field>
+         </field>
+    </record>
+</odoo>

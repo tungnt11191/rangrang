@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_cs_executive"
+                  name="Accounting CS Executive"
+                  sequence="15"
+                  groups="tasys_permission.cs_executive"
+                web_icon="tasys_permission,static/description/accounting_icon.png"
+        />
+<!--        &lt;!&ndash;Accounting/Reporting&ndash;&gt;-->
+<!--        <menuitem id="menu_accounting_reporting_category_manager"-->
+<!--                  name="Reporting"-->
+<!--                  parent="menu_accounting_category_manager"-->
+<!--                  sequence="21"-->
+<!--                  groups="tasys_permission.category_manager"/>-->
+<!--        &lt;!&ndash;Accounting/Reporting/Partner Ledger&ndash;&gt;-->
+<!--        <menuitem id="menu_accounting_reporting_partner_ledger_category_manager"-->
+<!--                  name="Partner Ledger"-->
+<!--                  parent="menu_accounting_reporting_category_manager"-->
+<!--                  sequence="31"-->
+<!--                  groups="tasys_permission.category_manager"-->
+<!--                  action="account_reports.action_account_report_partner_ledger"/>-->
+        <!--Accounting/Customers-->
+        <menuitem id="menu_accounting_customers_cs_executive"
+                  name="Customers"
+                  parent="menu_accounting_cs_executive"
+                  sequence="21"
+                  groups="tasys_permission.cs_executive"/>
+         <!--Accounting/Customers/invoice-->
+        <menuitem id="menu_accounting_customers_invoices_cs_executive"
+                  name="Invoices"
+                  parent="menu_accounting_customers_cs_executive"
+                  sequence="21"
+                  groups="tasys_permission.cs_executive"
+                  action="account.action_move_out_invoice_type"/>
+
+
+    </data>
+</odoo>

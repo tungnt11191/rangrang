@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_inventory_sales_lead"
+                  name="Inventory Sales Lead"
+                  sequence="11"
+                  web_icon="tasys_permission,static/description/inventory_icon.png"
+                  groups="tasys_permission.sales_lead"/>
+
+        <menuitem
+                id="menu_inventory_overview_sales_lead"
+                name="Overview"
+                sequence="1"
+                parent ="menu_inventory_sales_lead"
+                action="stock.stock_picking_type_action"/>
+
+        <menuitem id="menu_inventory_reporting_sales_lead"
+                  name="Reporting"
+                  parent="menu_inventory_sales_lead"
+                  sequence="61"
+                  groups="tasys_permission.sales_lead"/>
+        <!--Inventory/Reporting/Inventory Report-->
+        <menuitem id="menu_inventory_reporting_inventory_report_sales_lead"
+                  name="Inventory Report"
+                  parent="menu_inventory_reporting_sales_lead"
+                  sequence="71"
+                  groups="tasys_permission.sales_lead"
+                  action="stock.dashboard_open_quants"/>
+        <!--Inventory/Reporting/Báo cáo giá trị XNT-->
+        <menuitem id="menu_inventory_reporting_baocaoxnt_sales_lead"
+                  name="Inventory Valuation"
+                  parent="menu_inventory_reporting_sales_lead"
+                  sequence="71"
+                  groups="tasys_permission.sales_lead"
+                  action="stock_account.stock_valuation_layer_action"/>
+
+    </data>
+</odoo>

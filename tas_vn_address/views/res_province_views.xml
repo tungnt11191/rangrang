@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!--
+        Province
+        -->
+        <record id="view_country_province_tree" model="ir.ui.view">
+            <field name="name">res.country.province.tree</field>
+            <field name="model">res.country.province</field>
+            <field name="arch" type="xml">
+                <tree string="Province" editable="bottom">
+                    <field name="name"/>
+                    <field name="code"/>
+                    <field name="country_id" options="{'no_create': True}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_country_province_form" model="ir.ui.view">
+            <field name="name">res.country.province.form</field>
+            <field name="model">res.country.province</field>
+            <field name="arch" type="xml">
+                <form string="Province">
+                    <sheet>
+                        <group>
+                            <field name="name"/>
+                            <field name="code"/>
+                            <field name="country_id" options='{"no_open": True, "no_create": True}'/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <record id="action_province" model="ir.actions.act_window">
+            <field name="name">Province</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.country.province</field>
+            <field name="view_id" ref="view_country_province_tree"/>
+            <field name="help">Display and manage the list of all provinces that can be assigned to your partner records. You can create or delete countries to make sure the ones you are working on will be maintained.</field>
+        </record>
+
+<!--        <menuitem id="contacts.menu_country_state_partner"-->
+<!--                  action="action_province"-->
+<!--                  name="Province" parent="contacts.menu_localisation"-->
+<!--                  sequence="2"/>-->
+    </data>
+</odoo>

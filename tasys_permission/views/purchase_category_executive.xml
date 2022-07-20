@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_purchase_category_executive"
+                  name="Purchase Category Executive"
+                  sequence="12"
+                  groups="tasys_permission.category_executive"/>
+        <!-- Purchase/Orders-->
+        <menuitem id="menu_purchase_orders_category_executive"
+                  name="Orders"
+                  parent="menu_purchase_category_executive"
+                  sequence="18"
+                  groups="tasys_permission.category_executive"/>
+        <!-- Purchase/Orders/Request for Quotations-->
+        <menuitem id="menu_purchase_orders_request_for_quotations_category_executive"
+                  name="Request for Quotations"
+                  parent="menu_purchase_orders_category_executive"
+                  sequence="31"
+                  groups="tasys_permission.category_executive"
+                  action="purchase.purchase_rfq"/>
+        <!-- Purchase/Orders/Purchase Orders-->
+        <menuitem id="menu_purchase_orders_purchase_orders_category_executive"
+                  name="Purchase Orders"
+                  parent="menu_purchase_orders_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="purchase.purchase_form_action"/>
+        <!-- Purchase/Reporting-->
+        <menuitem id="menu_purchase_reporting_category_executive"
+                  name="Reporting"
+                  parent="menu_purchase_category_executive"
+                  sequence="31"
+                  groups="tasys_permission.category_executive"
+                  action="purchase_enterprise.purchase_report_action_dashboard"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,70 @@
+<odoo>
+    <data>
+        <record id="inventory_valuation_wizard_form" model="ir.ui.view">
+            <field name="name">Báo cáo xuất nhập tồn</field>
+            <field name="model">bms.inventory.valuation.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Báo cáo xuất nhập tồn">
+                    <header>
+                        <button name="inventory_template_excel_report" type="object" string="Xuất excel"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="date_start"/>
+                            </group>
+                            <group>
+                                <field name="date_end"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="location_ids">
+                                <tree editable="bottom">
+                                    <field name="display_name"></field>
+                                </tree>
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="inventory_valuation_wizard_action" model="ir.actions.act_window">
+            <field name="name">Tải về báo cáo XNT</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bms.inventory.valuation.wizard</field>
+            <field name="view_mode">form</field>
+        </record>
+
+        <menuitem
+                action="inventory_valuation_wizard_action"
+                id="bms_inventory_valuation_wizard_menu"
+                parent="stock.menu_warehouse_report" sequence="151"/>
+
+        <record id="view_inventory_excel_form_extended" model="ir.ui.view">
+            <field name="name">bms.inventory.excel.extended</field>
+            <field name="model">bms.inventory.excel.extended</field>
+            <field name="arch" type="xml">
+                <form string="Excel Report file">
+                    <group>
+                        <field name="excel_file" string="Tải xuống" readonly="1" filename="file_name"/>
+                        <field name="file_name" invisible="1"/>
+                    </group>
+                    <footer>
+                        <button string="Hủy" class="oe_highlight" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Excel Report Download Wizard Action View-->
+<!--        <record id="action_inventory_excel_form" model="ir.actions.act_window">-->
+<!--            <field name="name">Reports Excel</field>-->
+<!--            <field name="view_id" ref="view_inventory_excel_form_extended"/>-->
+<!--            <field name="view_type">form</field>-->
+<!--            <field name="view_mode">form</field>-->
+<!--            <field name="res_model">bms.inventory.excel.extended</field>-->
+<!--            <field name="target">new</field>-->
+<!--        </record>-->
+    </data>
+</odoo>

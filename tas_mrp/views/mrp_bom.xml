@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+
+        <record id="tas_mrp_bom_view_form_inherit" model="ir.ui.view">
+            <field name="name">tas.mrp.bom.view.form.inherit.plm</field>
+            <field name="model">mrp.bom</field>
+            <field name="inherit_id" ref="mrp.mrp_bom_form_view"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@name='components']/field[@name='bom_line_ids']/tree//field[@name='product_qty']" position="after">
+                    <field name="sub_quantity"/>
+                     <field name="width"/>
+                     <field name="high"/>
+                     <field name="onp_ht"/>
+                     <field name="qty_per_sheet"/>
+                     <field name="fin_sur"/>
+                     <field name="waste_factor"/>
+                </xpath>
+
+                <xpath expr="//page[@name='components']/field[@name='bom_line_ids']/tree//field[@name='product_qty']" position="attributes">
+                    <attribute name="string">Main Qty</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='type']" position="after">
+                  <field name="engineering_bom"/>
+                  <field name="manufacturing_bom"/>
+                  <field name="onp_bom_type"/>
+                  <field name="effective_date" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                  <field name="revision" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                  <field name="reason" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                  <field name="pcs_pallet" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                  <field name="pallet_cont" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                  <field name="product_cont" attrs="{'invisible': [('onp_bom_type', 'not in', ('engineering', 'manufacturing'))]}"/>
+                </xpath>
+            </field>
+        </record>
+
+</odoo>

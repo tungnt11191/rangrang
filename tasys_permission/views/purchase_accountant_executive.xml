@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_purchase_accountant_executive"
+                  name="Purchase Accountant Executive"
+                  sequence="1"
+                  groups="tasys_permission.accountant_executive"
+                  web_icon="tasys_permission,static/description/purchase_icon.png"/>
+
+
+        <!-- Purchase/Orders-->
+        <menuitem id="menu_purchase_orders_accountant_executive"
+                  name="Orders"
+                  parent="menu_purchase_accountant_executive"
+                  sequence="1"/>
+        <!-- Purchase/Orders/Request for Quotations-->
+        <menuitem id="request_for_quotations_accountant_executive_menuitem"
+                  name="Request for Quotations"
+                  parent="menu_purchase_orders_accountant_executive"
+                  sequence="1"
+                  action="purchase.purchase_rfq"/>
+        <!-- Purchase/Orders/Purchase Orders-->
+        <menuitem id="purchase_orders_accountant_executive_menuitem"
+                  name="Purchase Orders"
+                  parent="menu_purchase_orders_accountant_executive"
+                  sequence="1"
+                  action="purchase.purchase_form_action"/>
+
+
+        <menuitem id="purchase_report_accountant_executive"
+                  name="Reporting"
+                  parent="menu_purchase_accountant_executive"
+                  sequence="99"
+                  action="tasys_permission.action_purchase_order_report"/>
+    </data>
+</odoo>

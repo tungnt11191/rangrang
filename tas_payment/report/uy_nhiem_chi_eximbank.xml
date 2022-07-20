@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+
+
+    <report
+            id="tas_payment_uy_nhiem_chi_eximbank"
+            model="account.move"
+            string="Ủy nhiệm chi - Eximbank"
+            report_type="qweb-pdf"
+            name="tas_payment.template_tas_payment_uy_nhiem_chi_eximbank"
+            file="In phiếu thu chi"
+            attachment_use="True"
+            paperformat="bms_paperformat_uy_nhiem_chi"/>
+
+    <template id="template_tas_payment_uy_nhiem_chi_eximbank">
+      <t t-call="web.basic_layout">
+        <t t-foreach="docs" t-as="o">
+          <div class="body" style="font-family: 'Arial'; padding:0px; margin:0px; font-size:13px;width:100%; line-space:0.8">
+            <div class="row" width="100%">
+              <div class="col-4" style="width:40%">
+                <img style="width: 70%;vertical-align:top " src="/tas_payment/static/images/eximbank.png"/>
+              </div>
+              <div class="col-4" style="width:40%">
+                <center>
+                  <div><b style="font-size: 22px;">ỦY NHIỆM CHI</b></div>
+                  <div style="font-size: 18px;vertical-align:top">PAYMENT ORDER</div>
+                </center>
+              </div>
+              <div class="col-4" style="font-size: 14px;width:40%;margin: 20px 0px 0px 0px;">
+                <table align="right">
+                  <tr> </tr>
+                  <tr> </tr>
+                  <tr>
+                    <td><b>Số</b>/<i>No</i>:<span t-esc="o.ma_phieu_in"/></td>
+                  </tr>
+                  <tr>
+                    <td><b>Ngày</b>/<i>Date</i>:<span t-esc="o.date"/> </td>
+                  </tr>
+                </table>
+              </div>
+              <br/>
+            </div>
+            <div class="row" width="100%">
+              <div class="col-12" width="100%">
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="100%"><b>CHUYỂN KHOẢN</b>/<i>Transfer</i>:</td>
+                  </tr>
+                  <tr>
+                    <td width="100%"><b>Đơn vị trả tiền:</b> CÔNG TY TNHH ONP - VIỆT NAM<br><i style="font-size:10px;vertical-align:top">Orderer's Name</i></br></td>
+                  </tr>
+                  <tr>
+                    <td width="100%"><b>Số tài khoản:</b> 180114851007867<br><i style="font-size:10px;vertical-align:top">Account number</i></br></td>
+                  </tr>
+                  <tr>
+                    <td width="100%" ><b>Tại Ngân hàng Xuất Nhập Khẩu Việt Nam – SGD/Chi nhánh/PGD: </b>CN Đồng Nai
+                      <br><i style="font-size:10px;vertical-align:top">width VIET NAM EXPORT IMPORT BANK – M.T.O/Branch/T.O</i></br>
+                    </td>
+                  </tr>
+                </table>
+                <hr style="border-top: 1px solid black;margin: 0px 0px 0px 0px;"/>
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="100%"><b>Đơn vị nhận tiền:</b> <span t-esc="o.line_ids.partner_id.name"/><br><i style="font-size:10px;vertical-align:top">Beneficiary's Name</i></br></td>
+                  </tr>
+                </table>
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="3%" style="font-size: 30px;">&#x25A2;</td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Số tài khoản:</b> <span t-esc="o.line_ids.partner_id.bank_ids.acc_number"/>
+                      <br><i style="font-size:10px;vertical-align:top;">Account No.</i></br>
+                    </td>
+                    <td width="3%" style="font-size: 30px;">&#x25A2;</td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>CMND/Hộ chiếu:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top;">I.D No./PP No.</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="3%"> </td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Tại Ngân hàng:</b> <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.name"/><br><i style="font-size:10px;vertical-align:top">width Bank</i></br>
+                    </td>
+                    <td width="3%"> </td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>Ngày cấp:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top">Issued date</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="3%"> </td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Tỉnh/TP:</b> <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.street"/>
+                      <br><i style="font-size:10px;vertical-align:top">Province/City</i></br>
+                    </td>
+                    <td width="3%"> </td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>Nơi cấp:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top">Issued place</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <br/>
+                <table width="100%" style="border-top: 1px solid black;" class="col-12">
+                  <tr>
+                    <td width="75%" style="border-right: 1px solid black"><b>Số tiền bằng chữ: <span t-esc="o.money_char"/></b>
+                      <br><i style="font-size:10px;vertical-align:top">Amount in words</i></br>
+                    </td>
+                    <td width="25%" style="border-right: 1px solid black;text-align:center"><b>Số tiền bằng số</b>
+                      <br><i style="font-size:10px;vertical-align:top">Amount in figures</i></br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="75%" style="border-right: 1px solid black;"> </td>
+                    <td width="25%" style="border-right: 1px solid black;text-align:center">   <b><span t-esc="o.amount_total"/> VND</b></td>
+                  </tr>
+                </table>
+
+                <div><b>Nội dung:</b><span t-esc="o.lydo"/>
+                  <br><i style="font-size:10px;vertical-align:top">Details</i></br>
+                </div>
+
+                <table width="100%" style="text-align: center" class="col-12">
+                  <tr>
+                    <td style="border-right: 1px solid black;text-align:left" colspan="2"><b>ĐV trả tiền ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Ordered on</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black;text-align:left" colspan="2"><b>NH A</b><i>(Eximbank)</i><b> ghi sổ ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Registered by Bank A (Eximbank) on</i></br>
+                    </td>
+                    <td colspan="2" style="text-align:left"><b>NH B</b><i>(Beneficiary's Bank)</i><b> ghi sổ ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Registered by Bank B on</i></br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="16.66%"><b>Kế toán trưởng</b>
+                      <br><i style="font-size:10px;vertical-align:top">Chief Accountant</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black" width="16.66%"><b>Chủ tài khoản</b>
+                      <br><i style="font-size:10px;vertical-align:top">Account holder</i></br>
+                    </td>
+                    <td width="16.66%"><b>Giao dịch viên</b>
+                      <br><i style="font-size:10px;vertical-align:top">Teller</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black" width="16.66%"><b>Kiểm soát</b>
+                      <br><i style="font-size:10px;vertical-align:top">Verifier</i></br>
+                    </td>
+                    <td width="16.66%"><b>Giao dịch viên</b>
+                      <br><i style="font-size:10px;vertical-align:top">Teller</i></br>
+                    </td>
+                    <td width="16.66%"><b>Kiểm soát</b>
+                      <br><i style="font-size:10px;vertical-align:top">Verifier</i></br>
+                    </td>
+                  </tr>
+                  <tr height="80px">
+                    <td> </td>
+                    <td style="border-right: 1px solid black"> </td>
+                    <td> </td>
+                    <td style="border-right: 1px solid black"> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                </table>
+                <hr style="border-top: dotted 1px;margin: 20px 0px 0px 0px;"/>
+              </div>
+            </div>
+            <br/>
+            <br/>
+            <div class="row" width="100%">
+              <div class="col-4" style="width:40%">
+                <img style="width: 70%;vertical-align:top " src="/tas_payment/static/images/eximbank.png"/>
+              </div>
+              <div class="col-4" style="width:40%">
+                <center>
+                  <div><b style="font-size: 22px;">ỦY NHIỆM CHI</b></div>
+                  <div style="font-size: 18px;vertical-align:top">PAYMENT ORDER</div>
+                </center>
+              </div>
+              <div class="col-4" style="font-size: 14px;width:40%;margin: 20px 0px 0px 0px;">
+                <table align="right">
+                  <tr> </tr>
+                  <tr> </tr>
+                  <tr>
+                    <td><b>Số</b>/<i>No</i>:<span t-esc="o.ma_phieu_in"/></td>
+                  </tr>
+                  <tr>
+                    <td><b>Ngày</b>/<i>Date</i>:<span t-esc="o.date"/> </td>
+                  </tr>
+                </table>
+              </div>
+              <br/>
+            </div>
+            <div class="row" width="100%">
+              <div class="col-12" width="100%">
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="100%"><b>CHUYỂN KHOẢN</b>/<i>Transfer</i>:</td>
+                  </tr>
+                  <tr>
+                    <td width="100%"><b>Đơn vị trả tiền:</b> CÔNG TY TNHH ONP - VIỆT NAM<br><i style="font-size:10px;vertical-align:top">Orderer's Name</i></br></td>
+                  </tr>
+                  <tr>
+                    <td width="100%"><b>Số tài khoản:</b> 180114851007867<br><i style="font-size:10px;vertical-align:top">Account number</i></br></td>
+                  </tr>
+                  <tr>
+                    <td width="100%" ><b>Tại Ngân hàng Xuất Nhập Khẩu Việt Nam – SGD/Chi nhánh/PGD: </b>CN Đồng Nai
+                      <br><i style="font-size:10px;vertical-align:top">width VIET NAM EXPORT IMPORT BANK – M.T.O/Branch/T.O</i></br>
+                    </td>
+                  </tr>
+                </table>
+                <hr style="border-top: 1px solid black;margin: 0px 0px 0px 0px;"/>
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="100%"><b>Đơn vị nhận tiền:</b> <span t-esc="o.line_ids.partner_id.name"/><br><i style="font-size:10px;vertical-align:top">Beneficiary's Name</i></br></td>
+                  </tr>
+                </table>
+                <table width="100%" class="col-12">
+                  <tr>
+                    <td width="3%" style="font-size: 30px;">&#x25A2;</td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Số tài khoản:</b> <span t-esc="o.line_ids.partner_id.bank_ids.acc_number"/>
+                      <br><i style="font-size:10px;vertical-align:top;">Account No.</i></br>
+                    </td>
+                    <td width="3%" style="font-size: 30px;">&#x25A2;</td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>CMND/Hộ chiếu:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top;">I.D No./PP No.</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="3%"> </td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Tại Ngân hàng:</b> <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.name"/><br><i style="font-size:10px;vertical-align:top">width Bank</i></br>
+                    </td>
+                    <td width="3%"> </td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>Ngày cấp:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top">Issued date</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="3%"> </td>
+                    <td width="47%" style="border-right: 1px solid black"><b>Tỉnh/TP:</b> <span t-esc="o.line_ids.partner_id.bank_ids.bank_id.street"/>
+                      <br><i style="font-size:10px;vertical-align:top">Province/City</i></br>
+                    </td>
+                    <td width="3%"> </td>
+                    <td width="47%">
+                      <table width="100%">
+                        <tr>
+                            <td width="30%"><b>Nơi cấp:</b></td>
+                            <td width="70%" style="border-bottom: dotted 1px"> </td>
+                        </tr>
+                        <tr>
+                          <td><i style="font-size:10px;vertical-align:top">Issued place</i></td>
+                          <td> </td>
+                        </tr>
+                      </table>
+                    </td>
+                  </tr>
+                </table>
+                <br/>
+                <table width="100%" style="border-top: 1px solid black;" class="col-12">
+                  <tr>
+                    <td width="75%" style="border-right: 1px solid black"><b>Số tiền bằng chữ: <span t-esc="o.money_char"/></b>
+                      <br><i style="font-size:10px;vertical-align:top">Amount in words</i></br>
+                    </td>
+                    <td width="25%" style="border-right: 1px solid black;text-align:center"><b>Số tiền bằng số</b>
+                      <br><i style="font-size:10px;vertical-align:top">Amount in figures</i></br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="75%" style="border-right: 1px solid black;"> </td>
+                    <td width="25%" style="border-right: 1px solid black;text-align:center">   <b><span t-esc="o.amount_total"/> VND</b></td>
+                  </tr>
+                </table>
+
+                <div><b>Nội dung:</b><span t-esc="o.lydo"/>
+                  <br><i style="font-size:10px;vertical-align:top">Details</i></br>
+                </div>
+
+                <table width="100%" style="text-align: center" class="col-12">
+                  <tr>
+                    <td style="border-right: 1px solid black;text-align:left" colspan="2"><b>ĐV trả tiền ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Ordered on</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black;text-align:left" colspan="2"><b>NH A</b><i>(Eximbank)</i><b> ghi sổ ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Registered by Bank A (Eximbank) on</i></br>
+                    </td>
+                    <td colspan="2" style="text-align:left"><b>NH B</b><i>(Beneficiary's Bank)</i><b> ghi sổ ngày</b>
+                      <br><i style="font-size:10px;vertical-align:top">Registered by Bank B on</i></br>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="16.66%"><b>Kế toán trưởng</b>
+                      <br><i style="font-size:10px;vertical-align:top">Chief Accountant</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black" width="16.66%"><b>Chủ tài khoản</b>
+                      <br><i style="font-size:10px;vertical-align:top">Account holder</i></br>
+                    </td>
+                    <td width="16.66%"><b>Giao dịch viên</b>
+                      <br><i style="font-size:10px;vertical-align:top">Teller</i></br>
+                    </td>
+                    <td style="border-right: 1px solid black" width="16.66%"><b>Kiểm soát</b>
+                      <br><i style="font-size:10px;vertical-align:top">Verifier</i></br>
+                    </td>
+                    <td width="16.66%"><b>Giao dịch viên</b>
+                      <br><i style="font-size:10px;vertical-align:top">Teller</i></br>
+                    </td>
+                    <td width="16.66%"><b>Kiểm soát</b>
+                      <br><i style="font-size:10px;vertical-align:top">Verifier</i></br>
+                    </td>
+                  </tr>
+                  <tr height="80px">
+                    <td> </td>
+                    <td style="border-right: 1px solid black"> </td>
+                    <td> </td>
+                    <td style="border-right: 1px solid black"> </td>
+                    <td> </td>
+                    <td> </td>
+                  </tr>
+                </table>
+                <hr style="border-top: dotted 1px;margin: 20px 0px 0px 0px;"/>
+              </div>
+            </div>
+          </div>
+        </t>
+      </t>
+    </template>
+
+  </data>
+</odoo>

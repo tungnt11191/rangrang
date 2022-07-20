@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates >
+  <t t-name="value_xnt_dashboard_tung">
+    <div class="clearfix"></div>
+    <div style="margin-top: 20px; margin-bottom:20px; padding: 10px 10px; background-color: white; overflow-y:scroll;height:100%">
+      <div class="row">
+        <div class="col-md-12" style="text-align: center; padding-top: 15px;padding-bottom: 15px;">
+          <h3>
+            BÁO CÁO XUẤT NHẬP TỒN GỒM GIÁ TRỊ HÀNG
+          </h3>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label >Ngày bắt đầu</label>
+            <input id="start_date" type="date" name="bday" max="3000-12-31" min="1000-01-01" class="form-control"/>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group">
+            <label >Ngày kết thúc</label>
+            <input id="end_date" type="date" name="bday" min="2000-01-01" max="3000-12-31" class="form-control"/>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <label >Địa điểm kho</label>
+          <div class="locations-container">
+            <select id="locations_selectbox" style="padding-top: 11px;">
+              <option value="-1">--- Chọn địa điểm ---</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="form-group" style="margin-left: 1.5rem;">
+            <input type="checkbox" class="form-check-input" id="include_sub_location" checked="true"/>
+            <label class="form-check-label" for="include_sub_location">Bao gồm các kho cấp dưới</label>
+          </div>
+          <button class="btn btn-primary o-kanban-button-new" type="button" id="quet_du_lieu">
+            <span>Lấy báo cáo</span>
+          </button>
+        </div>
+
+        <div class="col-md-6"></div>
+
+    </div>
+    <!-- Nhap hang -->
+    <hr/>
+    <div class="row">
+      <div class="col-md-2">
+        <label >Nhập trong kỳ từ NCC (N1)</label>
+      </div>
+      <div class="col-md-2">
+        <label >Nhập trong kỳ nội bộ (N2)</label>
+      </div>
+    </div>
+    <!-- Xuat hang -->
+    <hr/>
+    <div class="row">
+      <div class="col-md-2">
+        <label >Xuất định lượng (X1)</label>
+      </div>
+      <div class="col-md-2">
+        <label >Xuất trả (X2)</label>
+      </div>
+      <div class="col-md-2">
+        <label >Xuất hủy (X3)</label>
+      </div>
+      <div class="col-md-2">
+        <label >Xuất khác (X4)</label>
+      </div>
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12" style="margin-top: 15px;">
+          <table id="xntkemgiatri" class="table table-striped table-bordered nowrap" cellspacing="0" width="100%">
+            <thead>
+              <tr>
+                <th>Mã VT</th>
+                <th>Tên vật tư</th>
+                <th>ĐVT</th>
+                <th>SL Tồn Đầu</th>
+                <th>GT Tồn Đầu</th>
+                <th>N1</th>
+                <th>GTN1</th>
+                <th>N2</th>
+                <th>GTN2</th>
+                <th>X1</th>
+                <th>GTX1</th>
+                <th>X2</th>
+                <th>GTX2</th>
+                <th>X3</th>
+                <th>GTX3</th>
+                <th>X4</th>
+                <th>GTX4</th>
+                <th>SL Nhập</th>
+                <th>GT Nhập</th>
+                <th>SL Xuất</th>
+                <th>GT Xuất</th>
+                <th>SL Tồn Cuối</th>
+                <th>GT Tồn Cuối</th>
+              </tr>
+            </thead>
+            <tfoot align="right">
+                <tr>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                  <th></th>
+                </tr>
+            </tfoot>
+          </table>
+        </div>
+      </div>
+    </div>
+  </t>
+</templates>

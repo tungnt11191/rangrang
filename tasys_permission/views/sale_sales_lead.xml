@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_sales_sales_lead"
+                  name="Sales Sales Lead"
+                  sequence="1"
+                  groups="tasys_permission.sales_lead"
+                  web_icon="tasys_permission,static/description/sale_icon.png"/>
+
+        <menuitem id="menu_products_sales_lead"
+                  name="Products"
+                  parent="menu_sales_sales_lead"
+                  sequence="15"/>
+        <menuitem id="products_sales_lead_menuitem"
+                  name="Products"
+                  parent="menu_products_sales_lead"
+                  sequence="1"
+                  action="sale.product_template_action"/>
+<!--        <menuitem id="pricelists_sales_lead_menuitem"-->
+<!--                  name="Pricelists"-->
+<!--                  parent="menu_products_sales_lead"-->
+<!--                  sequence="2"-->
+<!--                  action="product.product_pricelist_action"/>-->
+
+
+        <menuitem id="menu_orders_sales_lead"
+                  name="Orders"
+                  parent="menu_sales_sales_lead"
+                  sequence="1"/>
+        <menuitem id="quotations_sales_lead_menuitem"
+                  name="Quotations"
+                  parent="menu_orders_sales_lead"
+                  sequence="1"
+                  action="sale.action_quotations_with_onboarding"/>
+        <menuitem id="mcustomers_sales_lead_menuitem"
+                  name="Customers"
+                  parent="menu_orders_sales_lead"
+                  sequence="1"
+                  action="account.res_partner_action_customer"/>
+
+
+        <menuitem id="menu_toinvoice_sales_lead"
+                  name="To Invoice"
+                  parent="menu_sales_sales_lead"
+                  sequence="5"/>
+        <menuitem id="menu_sales_to_invoice_order_to_invoice_sales_lead"
+                  name="Order to Invoice"
+                  parent="menu_toinvoice_sales_lead"
+                  sequence="1"
+                  action="sale.action_orders_to_invoice"/>
+         <!-- Sale/Reporting-->
+        <menuitem id="menu_sales_reporting_sales_lead"
+                  name="Reporting"
+                  parent="menu_sales_sales_lead"
+                  sequence="5"
+                  groups="tasys_permission.sales_lead"/>
+        <!-- Sale/Reporting/Sales-->
+        <menuitem id="menu_sales_reporting_sales_sales_lead"
+                  name="Sales"
+                  parent="menu_sales_reporting_sales_lead"
+                  sequence="5"
+                  groups="tasys_permission.sales_lead"
+                  action="sale_enterprise.sale_report_action_dashboard"/>
+
+    </data>
+</odoo>

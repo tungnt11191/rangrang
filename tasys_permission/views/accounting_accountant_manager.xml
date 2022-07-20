@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_accountant_manager"
+                  name="Accounting Accountant Manager"
+                  sequence="15"
+                  groups="tasys_permission.accountant_manager"
+                web_icon="tasys_permission,static/description/accounting_icon.png"
+        />
+        <!--Accounting/Reporting-->
+        <menuitem id="menu_accounting_reporting_accountant_manager"
+                  name="Reporting"
+                  parent="menu_accounting_accountant_manager"
+                  sequence="21"
+                  groups="tasys_permission.accountant_manager"/>
+        <!--Accounting/Reporting/Partner Ledger-->
+        <menuitem id="menu_accounting_reporting_partner_ledger_accountant_manager"
+                  name="Partner Ledger"
+                  parent="menu_accounting_reporting_accountant_manager"
+                  sequence="31"
+                  groups="tasys_permission.accountant_manager"
+                  action="account_reports.action_account_report_partner_ledger"/>
+<!--        Accounting/Customers-->
+        <menuitem id="menu_accounting_customers_accountant_manager"
+                  name="Customers"
+                  parent="menu_accounting_accountant_manager"
+                  sequence="21"
+                  groups="tasys_permission.accountant_manager"/>
+         <!--Accounting/Customers/Payments-->
+        <menuitem id="menu_accounting_customers_payments_accountant_manager"
+                  name="Payments"
+                  parent="menu_accounting_customers_accountant_manager"
+                  sequence="21"
+                  groups="tasys_permission.accountant_manager"
+                  action="account.action_account_payments"/>
+
+
+    </data>
+</odoo>

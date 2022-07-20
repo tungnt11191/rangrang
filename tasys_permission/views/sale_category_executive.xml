@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_sales_category_executive"
+                  name="Sales Category Executive"
+                  sequence="12"
+                  groups="tasys_permission.category_executive"
+                  web_icon="tasys_permission,static/description/sale_icon.png"/>
+        <!--Sales/Products-->
+            <menuitem id="menu_sales_products_category_executive"
+                  name="Products"
+                  sequence="21"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_category_executive"/>
+        <!--Sales/Products/Products-->
+                <menuitem id="menu_sales_products_products_category_executive"
+                  name="Products"
+                  sequence="31"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_products_category_executive"
+                  action="sale.product_template_action"/>
+        <!-- Sale/Products/Pricelists-->
+                <menuitem id="menu_sales_products_pricelists_category_executive"
+                  name="Pricelists"
+                  parent="menu_sales_products_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive,"
+                  action="product.product_pricelist_action2"/>
+            <!--Sales/Orders-->
+            <menuitem id="menu_sales_orders_category_executive"
+                  name="Orders"
+                  sequence="51"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_category_executive"/>
+                <!--Sales/Orders/Quotations-->
+                <menuitem id="menu_sales_orders_quotations_category_executive"
+                  name="Quotations"
+                  sequence="61"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_orders_category_executive"
+                  action="sale.action_quotations_with_onboarding"/>
+        <!--Sales/Orders/Customers-->
+                <menuitem id="menu_sales_orders_customers_category_executive"
+                  name="Customers"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_orders_category_executive"
+                  action="account.res_partner_action_customer"/>
+        <!--Sales/To Invoice-->
+            <menuitem id="menu_sales_to_invoice_category_executive"
+                  name="To Invoice"
+                  sequence="81"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_category_executive"/>
+        <!--Sales/To Invoice/Orders to invoice-->
+                <menuitem id="menu_sales_to_invoice_orders_to_invoice_category_executive"
+                  name="Orders to Invoice"
+                  sequence="91"
+                  groups="tasys_permission.category_executive"
+                  parent="menu_sales_to_invoice_category_executive"
+                  action="sale.action_orders_to_invoice"/>
+        <!-- Sale/Reporting-->
+        <menuitem id="menu_sales_reporting_category_executive"
+                  name="Reporting"
+                  parent="menu_sales_category_executive"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"/>
+        <!-- Sale/Reporting/Sales-->
+        <menuitem id="menu_sales_reporting_sales_category_executive"
+                  name="Sales"
+                  parent="menu_sales_reporting_category_executive"
+                  sequence="71"
+                  groups="tasys_permission.category_executive"
+                  action="sale_enterprise.sale_report_action_dashboard"/>
+
+
+
+
+
+    </data>
+</odoo>

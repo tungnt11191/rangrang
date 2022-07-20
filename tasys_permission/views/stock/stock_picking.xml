@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="tasys_permission_stock_picking_form" model="ir.ui.view">
+         <field name="name">tasys.permission.stock.view.picking.form</field>
+         <field name="model">stock.picking</field>
+         <field name="inherit_id" ref="stock.view_picking_form" />
+         <field name="arch" type="xml">
+             <xpath expr="//button[@name='button_validate']" position="attributes">
+                    <attribute name="groups">tasys_permission.wh_supervisor,tasys_permission.category_manager,tasys_permission.category_executive,tasys_permission.sourcing,tasys_permission.accountant_manager,tasys_permission.accountant_executive</attribute>
+            </xpath>
+             <xpath expr="//button[@name='337']" position="attributes">
+                    <attribute name="groups">tasys_permission.wh_supervisor,tasys_permission.wh_user,tasys_permission.sourcing,tasys_permission.accountant_manager,tasys_permission.accountant_executive,tasys_permission.category_executive,tasys_permission.category_manager,tasys_permission.cs_manager</attribute>
+            </xpath>
+
+         </field>
+    </record>
+</odoo>

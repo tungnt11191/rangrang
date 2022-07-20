@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Sales WH super-->
+        <menuitem
+                name="Sale WH Supervisor"
+                id="menu_sale_wh_supervisor"
+                sequence="10"
+                groups="tasys_permission.wh_supervisor"
+                web_icon="tasys_permission,static/description/sale_icon.png"/>
+
+<!--        Sales WH - Products-->
+        <menuitem
+                id="menu_sale_product_wh_supervisor"
+                name="Products"
+                sequence="10"
+                parent ="menu_sale_wh_supervisor"
+                groups="tasys_permission.wh_supervisor"/>
+            <!--        Sales WH - Products - Products-->
+        <menuitem id="menu_sales_products_products_wh_supervisor"
+                  name="Products"
+                  sequence="31"
+                  groups="tasys_permission.wh_supervisor"
+                  parent="menu_sale_product_wh_supervisor"
+                  action="sale.product_template_action"/>
+<!--        Sales WH - Products - Pricelists-->
+        <menuitem
+                id="menu_sale_product_pricelists_wh_supervisor"
+                name="Pricelists"
+                sequence="15"
+                parent="menu_sale_product_wh_supervisor"
+                action="product.product_pricelist_action2"
+                groups="tasys_permission.wh_supervisor"/>
+        <!--        SWH - Orders-->
+        <menuitem
+                id="menu_sale_orders_wh_supervisor"
+                name="Orders"
+                sequence="25"
+                parent ="menu_sale_wh_supervisor"
+                action="sale.action_orders"
+                groups="tasys_permission.wh_supervisor"/>
+             <!--        SWH - Orders - Orders-->
+        <menuitem
+                id="menu_sale_orders_orders_wh_supervisor"
+                name="Orders"
+                sequence="10"
+                parent ="menu_sale_orders_wh_supervisor"
+                action="sale.action_orders"
+                groups="tasys_permission.wh_supervisor"/>
+        <!--        SWH - Orders - Customers-->
+        <menuitem
+                id="menu_sale_orders_customers_wh_supervisor"
+                name="Customers"
+                sequence="15"
+                parent ="menu_sale_orders_wh_supervisor"
+                action="account.res_partner_action_customer"
+                groups="tasys_permission.wh_supervisor"/>
+            <!--        SWH - Orders - Quotation -->
+        <menuitem
+                id="menu_sale_quotation_wh_supervisor"
+                name="Quotation"
+                sequence="10"
+                parent ="menu_sale_orders_wh_supervisor"
+                action="sale.action_quotations_with_onboarding"
+                groups="tasys_permission.wh_supervisor"/>
+
+         <!--        SWH - Reporting-->
+        <menuitem
+                id="menu_sale_reporting_wh_supervisor"
+                name="Reporting"
+                sequence="30"
+                parent ="menu_sale_wh_supervisor"
+                action="sale.action_orders"
+                groups="tasys_permission.wh_supervisor"/>
+        <!--        SWH - Reporting - Sales -->
+        <menuitem
+                id="menu_sale_reporting_sales_wh_supervisor"
+                name="Sales"
+                sequence="5"
+                parent ="menu_sale_reporting_wh_supervisor"
+                action="sale_enterprise.sale_report_action_dashboard"
+                groups="tasys_permission.wh_supervisor"/>
+
+        <!--        Sales WH - To invoice-->
+        <menuitem
+                id="menu_sale_toinvoice_wh_supervisor"
+                name="To Invoice"
+                sequence="20"
+                parent ="menu_sale_wh_supervisor"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.wh_supervisor"/>
+        <!--        Sales WH - To invoice - O to Invoice-->
+        <menuitem
+                id="menu_sale_order_to_invoice_wh_supervisor"
+                name="Order to Invoice"
+                sequence="20"
+                parent ="menu_sale_toinvoice_wh_supervisor"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.wh_supervisor"/>
+
+
+
+    </data>
+
+</odoo>

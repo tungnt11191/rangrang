@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_category_executive"
+                  name="Accounting Category Executive"
+                  sequence="31"
+                  groups="tasys_permission.category_executive"
+                web_icon="tasys_permission,static/description/accounting_icon.png"
+        />
+<!--        &lt;!&ndash;Accounting/Reporting&ndash;&gt;-->
+<!--        <menuitem id="menu_accounting_reporting_category_executive"-->
+<!--                  name="Reporting"-->
+<!--                  parent="menu_accounting_category_executive"-->
+<!--                  sequence="41"-->
+<!--                  groups="tasys_permission.category_executive"/>-->
+<!--        &lt;!&ndash;Accounting/Reporting/Partner Ledger&ndash;&gt;-->
+<!--        <menuitem id="menu_accounting_reporting_partner_ledger_category_executive"-->
+<!--                  name="Partner Ledger"-->
+<!--                  parent="menu_accounting_reporting_category_executive"-->
+<!--                  sequence="51"-->
+<!--                  groups="tasys_permission.category_executive"-->
+<!--                  action="account_reports.action_account_report_partner_ledger"/>-->
+        <!--Accounting/Dashboard-->
+        <menuitem id="menu_accounting_dashboard_category_executive"
+                  name="Dashboard"
+                  parent="menu_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.open_account_journal_dashboard_kanban"/>
+        <!--Accounting/Customer-->
+        <menuitem id="menu_accounting_customer_category_executive"
+                  name="Customer"
+                  parent="menu_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"/>
+        <!--Accounting/Customer/Invoice-->
+        <menuitem id="menu_accounting_customer_invoice_category_executive"
+                  name="Invoice"
+                  parent="menu_accounting_customer_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_move_out_invoice_type"/>
+        <!--Accounting/Customer/Credit Notes-->
+        <menuitem id="menu_accounting_customer_credit_notes_category_executive"
+                  name="Credit Notes"
+                  parent="menu_accounting_customer_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_move_out_refund_type"/>
+        <!--Accounting/Customer/Payments-->
+        <menuitem id="menu_accounting_customer_payments_category_executive"
+                  name="Payments"
+                  parent="menu_accounting_customer_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_account_payments"/>
+         <!--Accounting/Customer/Batch Payments-->
+        <menuitem id="menu_accounting_customer_batch_payments_category_executive"
+                  name="Batch Payments"
+                  parent="menu_accounting_customer_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account_batch_payment.action_batch_payment_in"/>
+        <!--Accounting/Vendors-->
+        <menuitem id="menu_accounting_vendors_category_executive"
+                  name="Vendors"
+                  parent="menu_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"/>
+        <!--Accounting/Vendor/Bills-->
+        <menuitem id="menu_accounting_vendors_bills_category_executive"
+                  name="Bills"
+                  parent="menu_accounting_vendors_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_move_in_invoice_type"/>
+        <!--Accounting/Vendor/Refunds-->
+        <menuitem id="menu_accounting_vendors_refunds_category_executive"
+                  name="Refunds"
+                  parent="menu_accounting_vendors_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_move_in_refund_type"/>
+        <!--Accounting/Vendor/Receipts-->
+        <menuitem id="menu_accounting_vendors_receipts_category_executive"
+                  name="Receipts"
+                  parent="menu_accounting_vendors_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_move_in_receipt_type"/>
+        <!--Accounting/Vendor/Payments-->
+        <menuitem id="menu_accounting_vendors_payments_category_executive"
+                  name="Payments"
+                  parent="menu_accounting_vendors_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account.action_account_payments_payable"/>
+        <!--Accounting/Vendor/Batch Payments-->
+        <menuitem id="menu_accounting_vendors_batch_payments_category_executive"
+                  name="Batch Payments"
+                  parent="menu_accounting_vendors_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="account_batch_payment.action_batch_payment_out"/>
+        <!--Accounting/Budget-->
+        <menuitem id="menu_accounting_budget_category_executive"
+                  name="Budget"
+                  parent="menu_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"/>
+        <!--Accounting/Budget/Accounting-->
+        <menuitem id="menu_accounting_budget_accounting_category_executive"
+                  name="Accounting"
+                  parent="menu_accounting_budget_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"/>
+        <!--Accounting/Budget/Accounting/Payments Receipts-->
+        <menuitem id="menu_accounting_budget_accounting_payments_receipts_category_executive"
+                  name="Payments Receipts"
+                  parent="menu_accounting_budget_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="tas_payment.tas_payment_phieu_thu_act"/>
+         <!--Accounting/Budget/Accounting/Payments Vouchers-->
+        <menuitem id="menu_accounting_budget_accounting_payments_vouchers_category_executive"
+                  name="Payments Vouchers"
+                  parent="menu_accounting_budget_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="tas_payment.tas_payment_phieu_chi_act"/>
+        <!--Accounting/Budget/Accounting/Debit Note-->
+        <menuitem id="menu_accounting_budget_accounting_debit_note_category_executive"
+                  name="Debit Note"
+                  parent="menu_accounting_budget_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="tas_payment.tas_payment_giay_bao_no_act"/>
+        <!--Accounting/Budget/Accounting/Credit Note-->
+        <menuitem id="menu_accounting_budget_accounting_credit_note_category_executive"
+                  name="Credit Note"
+                  parent="menu_accounting_budget_accounting_category_executive"
+                  sequence="41"
+                  groups="tasys_permission.category_executive"
+                  action="tas_payment.tas_giay_bao_co_act"/>
+
+    </data>
+</odoo>

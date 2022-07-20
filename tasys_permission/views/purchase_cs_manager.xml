@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        <menuitem id="menu_purchase_cs_manager"-->
+<!--                  name="Purchase CS Manager"-->
+<!--                  sequence="15"-->
+<!--                  groups="tasys_permission.cs_manager"/>-->
+<!--        &lt;!&ndash; Purchase/Orders&ndash;&gt;-->
+<!--        <menuitem id="menu_purchase_orders_cs_manager"-->
+<!--                  name="Orders"-->
+<!--                  parent="menu_purchase_cs_manager"-->
+<!--                  sequence="31"-->
+<!--                  groups="tasys_permission.cs_manager"/>-->
+<!--        &lt;!&ndash; Purchase/Orders/Request for Quotations&ndash;&gt;-->
+<!--        <menuitem id="menu_purchase_orders_request_for_quotations_cs_manager"-->
+<!--                  name="Request for Quotations"-->
+<!--                  parent="menu_purchase_orders_cs_manager"-->
+<!--                  sequence="41"-->
+<!--                  groups="tasys_permission.cs_manager"-->
+<!--                  action="purchase.purchase_rfq"/>-->
+<!--        &lt;!&ndash; Purchase/Orders/Purchase Orders&ndash;&gt;-->
+<!--        <menuitem id="menu_purchase_orders_purchase_orders_cs_manager"-->
+<!--                  name="Purchase Orders"-->
+<!--                  parent="menu_purchase_orders_cs_manager"-->
+<!--                  sequence="51"-->
+<!--                  groups="tasys_permission.cs_manager"-->
+<!--                  action="purchase.purchase_form_action"/>-->
+
+
+    </data>
+</odoo>

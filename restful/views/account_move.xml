@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+   <data>
+        <record id="view_sv_move_form_inherit" model="ir.ui.view">
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                 <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree//field[@name='sequence']" position="after">
+                    <field name="lineID"/>
+                </xpath>
+                <xpath expr="//page[@id='invoice_tab']/field[@name='invoice_line_ids']/tree//field[@name='price_unit']" position="before">
+                    <field name="price_without_tax" attrs="{ 'column_invisible' : [('parent.move_type', 'in', ['in_invoice'])]}" />
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

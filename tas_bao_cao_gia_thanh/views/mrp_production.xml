@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<odoo>
+    <record id="tas_mrp_production_view_form_inherit" model="ir.ui.view">
+        <field name="name">mrp.production.view.form.inherit.cost.line</field>
+        <field name="model">mrp.production</field>
+        <field name="inherit_id" ref="mrp.mrp_production_form_view"/>
+        <field name="arch" type="xml">
+             <xpath expr="//page[@name='miscellaneous']" position="after">
+                 <page string="Cost Lines" name="cost_lines">
+                    <field name="production_cost_line_ids">
+                        <tree create="0" delete="0" editable="bottom">
+                            <field name="cost_driver_id"/>
+                            <field name="planned_count"/>
+                            <field name="planned_cost_per_uom_unit"/>
+                            <field name="planned_cost_per_bom_unit"/>
+                            <field name="planned_cost_of_activity"/>
+                            <field name="actual_count"/>
+                            <field name="actual_cost_per_uom_unit"/>
+                            <field name="actual_cost_per_bom_unit"/>
+                            <field name="actual_cost_of_activity"/>
+                            <field name="complete_percentage"/>
+                            <field name="uom_id"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

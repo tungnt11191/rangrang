@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <data>
+<!--        Sales Sourcing -->
+        <menuitem
+                name="Sale Sourcing"
+                id="menu_sale_sourcing"
+                sequence="30"
+                groups="tasys_permission.sourcing"
+                web_icon="tasys_permission,static/description/sale_icon.png"/>
+
+<!--        Sales WH - Product-->
+        <menuitem
+                id="menu_sale_product_sourcing"
+                name="Products"
+                sequence="5"
+                parent ="menu_sale_sourcing"
+                action="sale.product_template_action"
+                groups="tasys_permission.sourcing"/>
+        <!--        SWH - Orders-->
+        <menuitem
+                id="menu_sale_orders_sourcing"
+                name="Orders"
+                sequence="25"
+                parent ="menu_sale_sourcing"
+                action="sale.action_orders"
+                groups="tasys_permission.sourcing"/>
+        <!--        SWH - Orders - Orders-->
+        <menuitem
+                id="menu_sale_orders_orders_sourcing"
+                name="Orders"
+                sequence="10"
+                parent ="menu_sale_orders_sourcing"
+                action="sale.action_orders"
+                groups="tasys_permission.sourcing"/>
+        <!--        SWH - Orders - Customers-->
+        <menuitem
+                id="menu_sale_orders_customers_sourcing"
+                name="Customers"
+                sequence="15"
+                parent ="menu_sale_orders_sourcing"
+                action="account.res_partner_action_customer"
+                groups="tasys_permission.sourcing"/>
+            <!--        SWH - Orders - Quotation -->
+        <menuitem
+                id="menu_sale_order_quotation_sourcing"
+                name="Quotation"
+                sequence="20"
+                parent ="menu_sale_orders_sourcing"
+                action="sale.action_quotations_with_onboarding"
+                groups="tasys_permission.sourcing"/>
+         <!--        SWH - Reporting-->
+        <menuitem
+                id="menu_sale_reporting_sourcing"
+                name="Reporting"
+                sequence="30"
+                parent ="menu_sale_sourcing"
+                action="sale.action_orders"
+                groups="tasys_permission.sourcing"/>
+        <!--        SWH - Reporting - Sales -->
+        <menuitem
+                id="menu_sale_reporting_sales_sourcing"
+                name="Sales"
+                sequence="5"
+                parent ="menu_sale_reporting_sourcing"
+                action="sale_enterprise.sale_report_action_dashboard"
+                groups="tasys_permission.sourcing"/>
+
+        <!--        Sales WH - To invoice-->
+        <menuitem
+                id="menu_sale_to_invoice_sourcing"
+                name="To Invoice"
+                sequence="20"
+                parent ="menu_sale_sourcing"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.sourcing"/>
+        <!--        Sales WH - To invoice - O to Invoice-->
+        <menuitem
+                id="menu_sale_order_to_invoice_sourcing"
+                name="Order to Invoice"
+                sequence="20"
+                parent ="menu_sale_to_invoice_sourcing"
+                action="sale.action_orders_to_invoice"
+                groups="tasys_permission.sourcing"/>
+<!--        Sales WH - Product - Product-->
+        <menuitem
+                id="menu_sale_product_product_sourcing"
+                name="Products"
+                sequence="10"
+                parent="menu_sale_product_sourcing"
+                action="sale.product_template_action"
+                groups="tasys_permission.sourcing"/>
+<!--        Sales WH - Product - Pricelists-->
+        <menuitem
+                id="menu_sale_product_pricelists_sourcing"
+                name="Pricelists"
+                sequence="5"
+                parent="menu_sale_product_sourcing"
+                action="product.product_pricelist_action2"
+                groups="tasys_permission.sourcing"/>
+    </data>
+</odoo>

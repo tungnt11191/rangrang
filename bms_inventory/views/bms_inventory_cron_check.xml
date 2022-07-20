@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="bms_inventory_cron_check_action" model="ir.actions.act_window">
+      <field name="name">Kiểm Tra Cronjob</field>
+      <field name="type">ir.actions.act_window</field>
+      <field name="res_model">bms.inventory.cron.check</field>
+      <field name="view_mode">tree,form</field>
+      <field name="help" type="html">
+        <p class="oe_view_nocontent_create">
+          <!-- Add Text Here -->
+        </p>
+        <p>
+          <!-- More details about what a user can do with this object will be OK -->
+        </p>
+      </field>
+    </record>
+
+    <record id="bms_inventory_cron_check_tree_view" model="ir.ui.view">
+      <field name="name">Kiểm Tra Cronjob</field>
+      <field name="model">bms.inventory.cron.check</field>
+      <field name="arch" type="xml">
+        <tree string="">
+          <field name="date"/>
+          <field name="name"/>
+          <field name="is_cron"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="bms_inventory_cron_check_form_view" model="ir.ui.view">
+      <field name="name">Kiểm Tra Cronjob</field>
+      <field name="model">bms.inventory.cron.check</field>
+      <field name="arch" type="xml">
+        <form string="">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+                <field name="is_cron"/>
+              </group>
+              <group>
+                <field name="date"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <menuitem action="bms_inventory_cron_check_action" id="bms_inventory_cron_check_menu" parent="stock.menu_warehouse_report" sequence="170"/>
+
+  </data>
+</odoo>

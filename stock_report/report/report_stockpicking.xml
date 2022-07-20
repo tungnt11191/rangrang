@@ -1,0 +1,1648 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_receipt_in">
+            <t t-call="web.html_container">
+              <style>
+                div.header{
+                  display: none;
+                }
+              </style>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="row justify-content-end mb16">
+                                <div class="col-4" name="right_box">
+                                    <!--img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--div class="col-6" name="div_outgoing_address">
+                                    <div t-if="o.move_ids_without_package and o.move_ids_without_package[0].partner_id and o.move_ids_without_package[0].partner_id.id != o.partner_id.id">
+                                        <span><strong>Delivery Address:</strong></span>
+                                        <div t-field="o.move_ids_without_package[0].partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code != 'internal' and (not o.move_ids_without_package or not o.move_ids_without_package[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                        <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                    </div>
+                                </div>
+                                <div class="col-5 offset-1" name="div_incoming_address">
+                                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                                        <span><strong>Vendor Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
+                                        <span><strong>Customer Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.partner_id" name="partner_header">
+                                        <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                        <p t-if="o.sudo().partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.sudo().partner_id.vat"/></p>
+                                    </div>
+                                </div-->
+                            </div>
+                            <br/>
+                            <h1 t-field="o.name" class="mt0 float-left"/>
+                            <div class="row">
+                                <div t-if="o.origin" class="col-auto" name="div_origin">
+                                    <strong>Order:</strong>
+                                    <p t-field="o.origin"/>
+                                </div>
+                                <div class="col-auto" name="div_state">
+                                    <strong>Status:</strong>
+                                    <p t-field="o.state"/>
+                                </div>
+                                <div class="col-auto" name="div_sched_date">
+                                    <strong>Scheduled Date:</strong>
+                                    <p t-field="o.scheduled_date"/>
+                                </div>
+                            </div>
+                            <table class="table table-sm" t-if="o.move_line_ids and o.move_ids_without_package">
+                                <t t-set="has_barcode" t-value="any([move_ids_without_package.product_id and move_ids_without_package.product_id.sudo().barcode or move_ids_without_package.package_id for move_ids_without_package in o.move_line_ids])"/>
+                                <t t-set="has_serial_number" t-value="o.move_line_ids.filtered(lambda ml: ml.lot_id or ml.lot_name)" groups="stock.group_production_lot"/>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <strong>No.</strong>
+                                        </th>
+                                        <th name="th_product">
+                                            <strong>Product</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Quantity</strong>
+                                        </th>
+                                        <!--th name="th_serial_number" class="text-center" t-if="has_serial_number">
+                                           <strong>Lot/Serial Number</strong>
+                                        </th>
+                                        <th name="th_barcode" class="text-center" t-if="has_barcode">
+                                            <strong>Product Barcode</strong>
+                                        </th-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <t t-set="i" t-value="1"/>
+                                    <t t-foreach="o.move_ids_without_package.sorted(key=lambda m: m.product_id.id)" t-as="move">
+                                        <!-- In case you come accross duplicated lines, ask NIM or LAP -->
+                                        <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
+                                            <tr>
+                                          <td> <span t-esc="i"/> </td>
+                                          <t t-set="i" t-value="i+1"/>
+
+                                                <td>
+                                                    <span t-field="ml.product_id.display_name"/><br/>
+                                                    <span t-field="ml.product_id.description_picking"/>
+                                                </td>
+                                                <td>
+                                                    <span t-if="o.state != 'done'" t-field="ml.product_uom_qty"/>
+                                                    <span t-if="o.state == 'done'" t-field="ml.qty_done"/>
+                                                    <!--span t-field="ml.product_uom_id" groups="uom.group_uom"/-->
+
+                                                </td>
+                                                <!--td class=" text-center h6" t-if="has_serial_number">
+                                                    <img t-if="has_serial_number and (ml.lot_id or ml.lot_name)" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', ml.lot_id.name or ml.lot_name, 400, 100)" style="width:100%;height:35px;" alt="Barcode"/>
+
+                                                </td>
+                                                <td class="text-center" t-if="has_barcode">
+                                                    <t t-if="product_barcode != move.product_id.barcode">
+                                                        <span t-if="move.product_id and move.product_id.barcode">
+                                                            <img t-if="len(move.product_id.barcode) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN13', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                                                            <img t-elif="len(move.product_id.barcode) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN8', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                                                            <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+
+                                                        </span>
+                                                        <t t-set="product_barcode" t-value="move.product_id.barcode"/>
+                                                    </t>
+                                                </td-->
+                                            </tr>
+                                        </t>
+                                    </t>
+                                  </tbody>
+                            </table>
+                            <table class="table table-sm" t-if="o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done']">
+                                <thead>
+                                    <tr>
+                                        <th name="th_package">Package</th>
+                                        <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">From</th>
+                                        <th name="th_pki_from" t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)" t-as="package">
+                                        <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>
+                                        <td name="td_pk_barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', package.package_id.name, 600, 100)" style="width:300px;height:50px; margin-left: -50px;" alt="Barcode"/><br/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_id"/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_dest_id"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <br/><br/><br/><br/>
+                            <t t-set="no_reserved_product" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty != x.reserved_availability and x.move_line_ids and x.state!='done')"/>
+                            <!--p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product"><i class="fa fa-exclamation-triangle"/>
+                                All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                            </p-->
+                            <div>
+                              <div class="text-right">Form No.: SPI123-1  </div>
+                            </div>
+                            <p />
+                        </div>
+                        <div class="footer">
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="report_receipt_in_customization" inherit_id="report_receipt_in">
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[1]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[2]" position="after">
+                <div class="row">
+                  <div class="col h2">
+                    <span>New Title</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[3]/div/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[3]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[4]/div/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/h1" position="after">
+                <div class="row">
+                  <div class="col h2">
+                    <span>New Title</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/h1[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[5]/div/span" position="replace">
+                <span>PHIẾU NHẬP KHO</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[5]/div" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[2]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[2]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[5]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[6]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <!--span t-field="o.date"/-->
+                    <span>Ngày </span>
+                    <!--span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/-->
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                    <span>tháng </span>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                    <span>năm </span>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-widget">"date"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-widget">"relative"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-widget">""</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+                <attribute name="t-options-widget">"date"</attribute>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[7]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[8]/div/span" position="replace">
+                <span>Số: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[7]/div" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[8]/div" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[8]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[9]/div/span" position="replace">
+                <span>- Họ và tên người giao: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[9]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div/span" position="replace">
+                <span>- Địa chỉ: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div/span" position="replace">
+                <span>- Tài liệu gốc:</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]" position="after">
+                <th>
+                  <span>Reference</span>
+                </th>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[1]" position="after">
+                <td>
+                  <span t-field="ml.product_id.code"/>
+                </td>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="after">
+                <th>
+                  <span>Unit of Measure Name</span>
+                </th>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="after">
+                <td>
+                  <span t-field="ml.product_id.uom_name"/>
+                </td>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[1]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[4]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span" position="replace">
+                <span>ĐVT</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/strong" position="replace">
+                <strong>Số lượng</strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]/strong" position="replace">
+                <strong>STT</strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/span" position="replace">
+                <span>Mã hàng</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/strong" position="replace">
+                <strong>Tên hàng</strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[5]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[3]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[3]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[4]/div/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[13]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[14]/div/span" position="replace">
+                <span>- Theo ..................... ngày......... tháng.......... năm......... của......................................................................</span><span>Ghi chú: </span><span t-field="o.note"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[14]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[15]/div[1]/span" position="replace">
+                <span>- Nhập tại kho: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[15]/div[2]/span" position="replace">
+                <span>Địa điểm: ..................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]" position="after">
+                <div class="row">
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-6">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[16]/div[1]/span" position="replace">
+                <span>Người lập                  </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[16]/div[2]/span" position="replace">
+                <span>Người nhận hàng                         Trưởng BP Kho</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div/span" position="after">
+                <span t-field="o.purchase_id.partner_id.company_name"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div/span" position="after">
+                <span t-field="o.purchase_id.partner_id.contact_address"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[12]/div/span" position="after">
+                <span t-field="o.origin"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[9]/div/span" position="after">
+                <span t-field="o.name"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[16]/div/span" position="replace">
+                <span>- Tổng số tiền (Viết bằng chữ): ...........................................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[16]/div/span" position="replace">
+                <span>- Tổng số tiền (Viết bằng chữ): .....................................................................................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[16]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+                <span>- Số chứng từ gốc kèm theo: ........................................................................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+                <span>- Số chứng từ gốc kèm theo: .....................................................................................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+                <span>- Số chứng từ gốc kèm theo: .........................................................................................................................................</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[17]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[18]/div/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]/span" position="replace">
+                <span>Người lập                  </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]/span" position="replace">
+                <span>
+                  <p>Người lập phiếu                   Xác nhận chất lượng<br/>(Ký, họ tên)                              (Ký, họ tên)</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[2]/span" position="replace">
+                <span>
+                  <p>Người nhận hàng                         Trưởng bộ phận<br/>     <span style="font-size: 1.08333rem;">(Ký, họ tên)                                  </span><span style="font-size: 1.08333rem;">(Ký, họ tên)</span></p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div/span[1]" position="after">
+                <span t-field="o.purchase_id.partner_id.name"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[15]/div[1]/span" position="after">
+                <span t-field="o.product_id.categ_id.display_name"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]" position="after">
+                <th>
+                  <span>Dongia</span>
+                </th>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[5]" position="after">
+                <td>
+                  <span t-field="ml.product_id.x_dongia"/>
+                </td>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]" position="after">
+                <th>
+                  <span>ThanhTien</span>
+                </th>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[6]" position="after">
+                <td>
+                  <span t-field="ml.product_id.x_thanhtien"/>
+                </td>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/span" position="replace">
+                <span>Đơn giá</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span" position="replace">
+                <span>Thành tiền</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]/strong" position="replace">
+                <strong>
+                  <p>STT<br/>  A</p>
+                </strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/span" position="replace">
+                <span>
+                  <p>Mã hàng<br/>    B</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/strong" position="replace">
+                <strong>
+                  <p>Tên hàng<br/>     C</p>
+                </strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="after">
+                <th>
+                  <span>Dongia</span>
+                </th>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="after">
+                <td>
+                  <span t-field="ml.product_id.x_dongia"/>
+                </td>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span" position="replace">
+                <span>
+                  <p>Mã quy cách<br/>        D</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/span" position="replace">
+                <span>
+                  <p>ĐVT<br/>  E</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong" position="replace">
+                <strong>
+                  <p>Số lượng<br/>      1</p>
+                </strong>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span" position="replace">
+                <span>
+                  <p>Đơn giá<br/>     2</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span" position="replace">
+                <span>
+                  <p>Thành tiền<br/>      3</p>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong/p" position="replace">
+                <p>Số lượng<br/>    1</p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span/p" position="replace">
+                <p>Đơn giá<br/>   2</p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span/p" position="replace">
+                <p>Thành tiền<br/>   3</p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span/p" position="replace">
+                <p>Mã quy cách<br/>     D</p>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[6]/span[2]" position="attributes">
+                <attribute name="t-options-widget">"float"</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[6]/span[2]" position="attributes">
+                <attribute name="t-options-precision">4</attribute>
+                <attribute name="t-options-widget">"float"</attribute>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]/span/p" position="replace">
+                <p>
+                  <b>Người lập                 </b>
+                  <br/>
+                  <!--i>   (Ký, họ tên)                              (Ký, họ tên)</i-->
+                </p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[2]/span/p" position="replace">
+                <p>
+                  <b>Người nhận hàng                       Trưởng BP Kho</b>
+                  <br/>
+                  <!--i>
+                    <span style="font-size: 1.08333rem;">(Ký, họ tên)                                  </span>
+                    <span style="font-size: 1.08333rem;">(Ký, họ tên)</span>
+                  </i-->
+                </p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <!--xpath expr="/t/t/t/t/div/div[19]/div[1]/span/p/i" position="replace">
+                <i>(Ký, họ tên)                              (Ký, họ tên)</i>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[2]/span/p/i" position="replace">
+                <i>
+                  <span style="font-size: 1.08333rem;">(Ký, họ tên)                                    </span>
+                  <span style="font-size: 1.08333rem;">(Ký, họ tên)</span>
+                </i>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]/span/p/i" position="replace">
+                <i>(Ký, họ tên)                              (Ký, họ tên)</i>
+              </xpath-->
+              <xpath expr="/t/t/t/t/div/div[19]/div[1]/span/p/b" position="replace">
+                <b>  Người lập                 </b>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[6]/span[2]" position="attributes">
+                <attribute name="t-field">ml.product_qty</attribute>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[6]/span[2]" position="attributes">
+                <attribute name="t-field">ml.qty_done</attribute>
+                <attribute name="t-options-widget">"float"</attribute>
+                <attribute name="t-options-precision">4</attribute>
+                <attribute name="t-options-widget">"float"</attribute>
+              </xpath>
+
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[8]/div[1]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[9]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[9]" position="after">
+                <div class="row">
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]" position="after">
+                <div class="row">
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                  <div class="col-4">
+                    <span>New Column</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div[2]/span" position="replace">
+                <span></span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div[2]/span" position="replace">
+                <span>Số: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div[2]/span" position="after">
+                <!--span t-field="o.date"/-->
+                    <span>Ngày </span>
+                    <!--span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/-->
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                    <span>tháng </span>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                    <span>năm </span>
+                    <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div[2]/span" position="after">
+                <span t-field="o.name"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div[1]/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div[1]/span" position="replace">
+                <span> </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div[3]/span" position="replace">
+                <span>Nợ: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div[3]/span" position="replace">
+                <span>Có: </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[10]/div[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[11]/div[2]" position="attributes">
+                <attribute name="class" separator=" " add="text-center"/>
+              </xpath>
+              <!--xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[21]/div[1]/span[1]/p[1]/i[1]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[21]/div[2]/span[1]/p[1]/i[1]/span[1]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[21]/div[2]/span[1]/p[1]/i[1]" position="replace"/-->
+              <xpath expr="/t/t/t/t/div/div[21]/div[1]/span/p" position="replace">
+                <p>
+                  <b>  Người lập phiếu                                 Xác nhận chất lượng</b>
+                  <br/>
+                </p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div[1]/span/p" position="replace">
+                <p>
+                  <b>  Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</b>
+                  <br/>
+                </p>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[21]/div[2]/span[1]/p[1]/b[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[21]/div[1]/span/p" position="replace">
+                <p>
+                  <b>  Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</b>
+                  <br/>
+                </p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div[1]/span/p" position="replace">
+                <p>
+                  <b>  Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</b>
+                  <br/>
+                </p>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div[1]/span/p" position="replace">
+                <p>
+                  <b>  Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</b>
+                  <br/>
+                </p>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[21]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/div[20]" position="after">
+                <div class="row">
+                  <div class="col">
+                    <span>New Text Block</span>
+                  </div>
+                </div>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div/span" position="replace">
+                <span>
+                  <span style="font-weight: bolder;">        Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</span>
+                </span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div/span/span" position="replace">
+                <span style="font-weight: bolder;">              Người lập phiếu                                 Người nhận hàng                                           Trưởng BP Kho</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div/span/span" position="replace">
+                <span style="font-weight: bolder;">              Người lập phiếu                                        Người nhận hàng                                                  Trưởng BP Kho</span>
+              </xpath>
+              <xpath expr="/t/t/t/t/div/div[21]/div/span/span" position="replace">
+                <span style="font-weight: bolder;">                   Người lập                                                           Người nhận hàng                                                            Trưởng BP Kho</span>
+              </xpath>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/thead[1]/tr[1]/th[4]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[4]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[17]/div[1]" position="replace"/>
+              <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[17]/div[1]" position="replace"/>
+              <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span/p" position="replace">
+                <p>ĐVT<br/>  D</p>
+              </xpath>
+        </template>
+        <template id="report_delivery_out">
+          <t t-call="web.html_container">
+              <style>
+                div.header{
+                  display: none;
+                }
+              </style>
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <div class="page">
+                            <div class="row justify-content-end mb16">
+                                <div class="col-4" name="right_box">
+                                    <!--img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s' % ('Code128', o.name, 600, 100)" style="width:300px;height:50px;" alt="Barcode"/-->
+                                </div>
+                            </div>
+                            <div class="row">
+                                <!--div class="col-6" name="div_outgoing_address">
+                                    <div t-if="o.move_ids_without_package and o.move_ids_without_package[0].partner_id and o.move_ids_without_package[0].partner_id.id != o.partner_id.id">
+                                        <span><strong>Delivery Address:</strong></span>
+                                        <div t-field="o.move_ids_without_package[0].partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code != 'internal' and (not o.move_ids_without_package or not o.move_ids_without_package[0].partner_id) and o.picking_type_id.warehouse_id.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                        <div t-field="o.picking_type_id.warehouse_id.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;address&quot;, &quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                    </div>
+                                </div>
+                                <div class="col-5 offset-1" name="div_incoming_address">
+                                    <div t-if="o.picking_type_id.code=='incoming' and o.partner_id">
+                                        <span><strong>Vendor Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='internal' and o.partner_id">
+                                        <span><strong>Warehouse Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.picking_type_id.code=='outgoing' and o.partner_id">
+                                        <span><strong>Customer Address:</strong></span>
+                                    </div>
+                                    <div t-if="o.partner_id" name="partner_header">
+                                        <div t-field="o.partner_id" t-options="{&quot;widget&quot;: &quot;contact&quot;, &quot;fields&quot;: [&quot;name&quot;, &quot;phone&quot;], &quot;no_marker&quot;: True, &quot;phone_icons&quot;: True}"/>
+                                        <p t-if="o.sudo().partner_id.vat"><t t-esc="o.company_id.country_id.vat_label or 'Tax ID'"/>: <span t-field="o.sudo().partner_id.vat"/></p>
+                                    </div>
+                                </div-->
+                            </div>
+                            <br/>
+                            <h1 t-field="o.name" class="mt0 float-left"/>
+                            <div class="row">
+                                <div t-if="o.origin" class="col-auto" name="div_origin">
+                                    <strong>Order:</strong>
+                                    <p t-field="o.origin"/>
+                                </div>
+                                <div class="col-auto" name="div_state">
+                                    <strong>Status:</strong>
+                                    <p t-field="o.state"/>
+                                </div>
+                                <div class="col-auto" name="div_sched_date">
+                                    <strong>Scheduled Date:</strong>
+                                    <p t-field="o.scheduled_date"/>
+                                </div>
+                            </div>
+                            <table class="table table-sm" t-if="o.move_line_ids and o.move_ids_without_package">
+                                <t t-set="has_barcode" t-value="any([move_ids_without_package.product_id and move_ids_without_package.product_id.sudo().barcode or move_ids_without_package.package_id for move_ids_without_package in o.move_line_ids])"/>
+                                <t t-set="has_serial_number" t-value="o.move_line_ids.filtered(lambda ml: ml.lot_id or ml.lot_name)" groups="stock.group_production_lot"/>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            <strong>No.</strong>
+                                        </th>
+                                        <th name="th_product">
+                                            <strong>Product</strong>
+                                        </th>
+                                        <th>
+                                            <strong>Quantity</strong>
+                                        </th>
+                                        <!--th name="th_serial_number" class="text-center" t-if="has_serial_number">
+                                           <strong>Lot/Serial Number</strong>
+                                        </th>
+                                        <th name="th_barcode" class="text-center" t-if="has_barcode">
+                                            <strong>Product Barcode</strong>
+                                        </th-->
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                  <t t-set="i" t-value="1"/>
+                                    <t t-foreach="o.move_ids_without_package.sorted(key=lambda m: m.product_id.id)" t-as="move">
+                                        <!-- In case you come accross duplicated lines, ask NIM or LAP -->
+                                        <t t-foreach="move.move_line_ids.sorted(key=lambda ml: ml.location_id.id)" t-as="ml">
+                                            <tr>
+                                          <td> <span t-esc="i"/> </td>
+                                          <t t-set="i" t-value="i+1"/>
+
+                                                <td>
+                                                    <span t-field="ml.product_id.display_name"/><br/>
+                                                    <span t-field="ml.product_id.description_picking"/>
+                                                </td>
+                                                <td>
+                                                    <span t-if="o.state != 'done'" t-field="ml.product_uom_qty"/>
+                                                    <span t-if="o.state == 'done'" t-field="ml.qty_done"/>
+                                                    <!--span t-field="ml.product_uom_id" groups="uom.group_uom"/-->
+
+                                                </td>
+                                                <!--td class=" text-center h6" t-if="has_serial_number">
+                                                    <img t-if="has_serial_number and (ml.lot_id or ml.lot_name)" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', ml.lot_id.name or ml.lot_name, 400, 100)" style="width:100%;height:35px;" alt="Barcode"/>
+
+                                                </td>
+                                                <td class="text-center" t-if="has_barcode">
+                                                    <t t-if="product_barcode != move.product_id.barcode">
+                                                        <span t-if="move.product_id and move.product_id.barcode">
+                                                            <img t-if="len(move.product_id.barcode) == 13" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN13', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                                                            <img t-elif="len(move.product_id.barcode) == 8" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('EAN8', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+                                                            <img t-else="" t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;quiet=%s' % ('Code128', move.product_id.barcode, 400, 100, 0)" style="height:35px" alt="Barcode"/>
+
+                                                        </span>
+                                                        <t t-set="product_barcode" t-value="move.product_id.barcode"/>
+                                                    </t>
+                                                </td-->
+                                            </tr>
+                                        </t>
+                                    </t>
+                                  </tbody>
+                            </table>
+                            <table class="table table-sm" t-if="o.package_level_ids and o.picking_type_entire_packs and o.state in ['assigned', 'done']">
+                                <thead>
+                                    <tr>
+                                        <th name="th_package">Package</th>
+                                        <th name="th_pko_from" t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">From</th>
+                                        <th name="th_pki_from" t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">To</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.package_level_ids.sorted(key=lambda p: p.package_id.name)" t-as="package">
+                                        <t t-set="package" t-value="package.with_context(picking_id=o.id)"/>
+                                        <td name="td_pk_barcode">
+                                            <img t-att-src="'/report/barcode/?type=%s&amp;value=%s&amp;width=%s&amp;height=%s&amp;humanreadable=1' % ('Code128', package.package_id.name, 600, 100)" style="width:300px;height:50px; margin-left: -50px;" alt="Barcode"/><br/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'incoming'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_id"/>
+                                        </td>
+                                        <td t-if="o.picking_type_id.code != 'outgoing'" groups="stock.group_stock_multi_locations">
+                                            <span t-field="package.location_dest_id"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <t t-set="no_reserved_product" t-value="o.move_lines.filtered(lambda x: x.product_uom_qty != x.reserved_availability and x.move_line_ids and x.state!='done')"/>
+                            <!--p t-if="o.state in ['draft', 'waiting', 'confirmed'] or no_reserved_product"><i class="fa fa-exclamation-triangle"/>
+                                All products could not be reserved. Click on the "Check Availability" button to try to reserve products.
+                            </p-->
+                            <br/><br/><br/><br/>
+                            <div>
+                              <div class="text-right">Form No.: SPI123-2  </div>
+                            </div>
+                            <p />
+                        </div>
+                        <div class="footer">
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+        <template id="report_delivery_out_customization" inherit_id="report_delivery_out">
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[1]/div[1]" position="replace"/>
+            <xpath expr="/t/t/t/t/div/div[2]" position="after">
+              <div class="row">
+                <div class="col h2">
+                  <span>New Title</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[3]/div/span" position="replace">
+              <span> </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[3]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[4]/div/span" position="replace">
+              <span> </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/h1" position="after">
+              <div class="row">
+                <div class="col h2">
+                  <span>New Title</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/h1[1]" position="replace"/>
+            <xpath expr="/t/t/t/t/div/div[5]/div/span" position="replace">
+              <span>PHIẾU XUẤT KHO</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[5]/div" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[2]" position="replace"/>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[2]" position="replace"/>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[1]" position="replace"/>
+            <xpath expr="/t/t/t/t/div/div[5]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[1]" position="replace"/>
+            <xpath expr="/t/t/t/t/div/div[6]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>Ngày </span>
+                  <!--span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/-->
+                  <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                  <span>tháng </span>
+                  <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                  <span>năm </span>
+                  <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>      </div>
+              </div>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+              <attribute name="t-options-widget">"date"</attribute>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+              <attribute name="t-options-widget">"relative"</attribute>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+              <attribute name="t-options-widget">""</attribute>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[7]/div[1]/span[1]" position="attributes">
+              <attribute name="t-options-widget">"date"</attribute>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[7]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[8]/div/span" position="replace">
+              <span>Số: </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[7]/div" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[8]/div" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[8]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[9]/div/span" position="replace">
+              <span>- Họ và tên người giao: </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[9]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[10]/div/span" position="replace">
+              <span>- Địa chỉ: </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[10]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[11]/div/span" position="replace">
+              <span>- Tài liệu gốc:</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]" position="after">
+              <th>
+                <span>Reference</span>
+              </th>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[1]" position="after">
+              <td>
+                <span t-field="ml.product_id.code"/>
+              </td>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="after">
+              <th>
+                <span>Unit of Measure Name</span>
+              </th>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="after">
+              <td>
+                <span t-field="ml.product_id.uom_name"/>
+              </td>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[1]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[4]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span" position="replace">
+              <span>ĐVT</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/strong" position="replace">
+              <strong>Số lượng</strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]/strong" position="replace">
+              <strong>STT</strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/span" position="replace">
+              <span>Mã hàng</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/strong" position="replace">
+              <strong>Tên hàng</strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[5]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[2]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[3]/div[1]" position="replace"/>
+            <xpath expr="/t/t/t/t/div/div[3]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[4]/div/span" position="replace">
+              <span> </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[13]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[14]/div/span" position="replace">
+              <span>- Theo ..................... ngày......... tháng.......... năm......... của......................................................................</span><span>Ghi chú: </span><span t-field="o.note"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[14]" position="after">
+              <div class="row">
+                <div class="col-6">
+                  <span>New Column</span>
+                </div>
+                <div class="col-6">
+                  <span>New Column</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[15]/div[1]/span" position="replace">
+              <span>- Nhập tại kho: </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[15]/div[2]/span" position="replace">
+              <span>Địa điểm: ..................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]" position="after">
+              <div class="row">
+                <div class="col-6">
+                  <span>New Column</span>
+                </div>
+                <div class="col-6">
+                  <span>New Column</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[16]/div[1]/span" position="replace">
+              <span>Người lập phiếu                Xác nhận chất lượng</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[16]/div[2]/span" position="replace">
+              <span>Người nhận hàng                         Trưởng bộ phận</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[10]/div/span" position="after">
+              <span/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[11]/div/span" position="after">
+              <span/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[12]/div/span" position="after">
+              <span t-field="o.origin"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[9]/div/span" position="after">
+              <span t-field="o.name"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[16]/div/span" position="replace">
+              <span>- Tổng số tiền (Viết bằng chữ): ...........................................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[16]/div/span" position="replace">
+              <span>- Tổng số tiền (Viết bằng chữ): .....................................................................................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[16]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+              <span>- Số chứng từ gốc kèm theo: ........................................................................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+              <span>- Số chứng từ gốc kèm theo: .....................................................................................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[17]/div/span" position="replace">
+              <span>- Số chứng từ gốc kèm theo: .........................................................................................................................................</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[17]" position="after">
+              <div class="row">
+                <div class="col">
+                  <span>New Text Block</span>
+                </div>
+              </div>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[18]/div/span" position="replace">
+              <span> </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[19]/div[1]/span" position="replace">
+              <span>Người lập phiếu                   Xác nhận chất lượng</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[19]/div[1]/span" position="replace">
+              <span>
+                <p>Người lập phiếu                   Xác nhận chất lượng<br/>   (Ký, họ tên)                              (Ký, họ tên)</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[19]/div[2]/span" position="replace">
+              <span>
+                <p>Người nhận hàng                         Trưởng bộ phận<br/>     <span style="font-size: 1.08333rem;">(Ký, họ tên)                                  </span><span style="font-size: 1.08333rem;">(Ký, họ tên)</span></p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[10]/div/span[1]" position="after">
+              <span t-field="o.user_id.name"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/div[15]/div[1]/span" position="after">
+              <span t-field="o.product_id.categ_id.display_name"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]" position="after">
+              <th>
+                <span>Dongia</span>
+              </th>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[5]" position="after">
+              <td>
+                <span t-field="ml.product_id.x_dongia"/>
+              </td>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]" position="after">
+              <th>
+                <span>ThanhTien</span>
+              </th>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[6]" position="after">
+              <td>
+                <span t-field="ml.product_id.x_thanhtien"/>
+              </td>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/span" position="replace">
+              <span>Đơn giá</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span" position="replace">
+              <span>Thành tiền</span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]/strong" position="replace">
+              <strong>
+                <p>STT<br/>  A</p>
+              </strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/span" position="replace">
+              <span>
+                <p>Mã hàng<br/>    B</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/strong" position="replace">
+              <strong>
+                <p>Tên hàng<br/>     C</p>
+              </strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="after">
+              <th>
+                <span>Dongia</span>
+              </th>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="after">
+              <td>
+                <span t-field="ml.product_id.x_dongia"/>
+              </td>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span" position="replace">
+              <span>
+                <p>Mã quy cách<br/>        D</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/span" position="replace">
+              <span>
+                <p>ĐVT<br/>  E</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong" position="replace">
+              <strong>
+                <p>Số lượng<br/>      1</p>
+              </strong>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span" position="replace">
+              <span>
+                <p>Đơn giá<br/>     2</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span" position="replace">
+              <span>
+                <p>Thành tiền<br/>      3</p>
+              </span>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]" position="attributes">
+              <attribute name="class" separator=" " add="text-center"/>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong/p" position="replace">
+              <p>Số lượng<br/>    1</p>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span/p" position="replace">
+              <p>Đơn giá<br/>   2</p>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span/p" position="replace">
+              <p>Thành tiền<br/>   3</p>
+            </xpath>
+            <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span/p" position="replace">
+              <p>Mã quy cách<br/>     D</p>
+            </xpath>
+        </template>
+        <template id="report_delivery_out_customization_new" inherit_id="report_delivery_out">
+          <xpath expr="/t/t/t/t/div/div[10]/div/span[1]" position="replace">
+            <span>- Họ và tên người giao: </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[3]" position="after">
+            <div class="row">
+              <div class="col-6">
+                <span>New Column</span>
+              </div>
+              <div class="col-6">
+                <span>New Column</span>
+              </div>
+            </div>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[1]/span" position="replace">
+            <span> </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[1]/span" position="replace">
+            <span>
+              <p> <br/><br/></p>
+            </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[1]/span/p" position="replace">
+            <p> <br/></p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span" position="replace">
+            <span>
+              <p>Mẫu số: 02 - VT<br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+            </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>Mẫu số: 02 - VT<br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>Mẫu số: 02 - VT<br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>Mẫu số: 02 - VT<br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>Mẫu số: 02 - VT<br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p><b>Mẫu số: 02 - VT</b><br/>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>
+              <b>Mẫu số: 02 - VT</b>
+              <br/>
+              <i>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</i>
+            </p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>
+              <b>Mẫu số: 02 - VT</b>
+              <br/>
+              <i>(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</i>
+            </p>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[5]/div[1]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[6]/div[1]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/div[20]/div[1]/span/p" position="replace">
+            <p>Người lập phiếu                   Xác nhận chất lượng<br/><i>   (Ký, họ tên)                              (Ký, họ tên)</i></p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[20]/div[2]/span/p" position="replace">
+            <p>Người nhận hàng                         Trưởng bộ phận<br/><i><span style="font-size: 1.08333rem;">(Ký, họ tên)                                  </span><span style="font-size: 1.08333rem;">(Ký, họ tên)</span></i></p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[20]/div[1]/span/p" position="replace">
+            <p>
+              <b>Người lập phiếu                   Người giao hàng</b>
+              <br/>
+              <i>   (Ký, họ tên)                              (Ký, họ tên)</i>
+            </p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[20]/div[2]/span/p" position="replace">
+            <p>
+              <b>Người nhận hàng                         Trưởng bộ phận</b>
+              <br/>
+              <i>
+                <span style="font-size: 1.08333rem;">(Ký, họ tên)                                  </span>
+                <span style="font-size: 1.08333rem;">(Ký, họ tên)</span>
+              </i>
+            </p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[20]/div[1]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[20]/div[2]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p/i" position="replace">
+            <i>
+              <font style="font-size: 10px;">(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</font>
+            </i>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p/i/font" position="replace">
+            <font style="font-size: 10px;">
+              <font style="font-size: 11px;">(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</font>
+            </font>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p/i" position="replace">
+            <i>
+              <font style="font-size: 10px;">
+                <font style="font-size: 12px;">(Ban hành theo thông tư số 200/2014/TT-BTC Ngày 22/12/2014 của Bộ Tài chính)</font>
+              </font>
+            </i>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[4]/div[2]/span/p" position="replace">
+            <p>
+              <b> </b>
+              <br/>
+              <i>
+                <font style="font-size: 10px;">
+                  <font style="font-size: 12px;"> </font>
+                </font>
+              </i>
+            </p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div/span[1]" position="after">
+            <span t-field="o.partner_id.name"/><br/>
+            <span>- Tài xế giao hàng: </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div/span[1]" position="after">
+            <span t-field="o.partner_id.contact_address"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]" position="after">
+            <th>
+              <span>Dongia</span>
+            </th>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[6]" position="after">
+            <td>
+              <span t-field="ml.product_id.x_dongia"/>
+            </td>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span" position="replace">
+            <span>
+              <p>SL Thực xuất<br/>2</p>
+            </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong/p" position="replace">
+            <p>SL Yêu cầu<br/>    1</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[4]/span/p" position="replace">
+            <p>Mã quy cách<br/>D</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/span/p" position="replace">
+            <p/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/span/p" position="replace">
+            <p>ĐVT<br/>E</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/strong/p" position="replace">
+            <p>SL Yêu cầu<br/>1</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span/p" position="replace">
+            <p>Đơn giá<br/>2</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[9]/span/p" position="replace">
+            <p>Thành tiền<br/>3</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[1]/strong/p" position="replace">
+            <p>STT<br/>A</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/span/p" position="replace">
+            <p>Mã hàng<br/>B</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/strong/p" position="replace">
+            <p>Tên hàng<br/> C</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[8]/span/p" position="replace">
+            <p>Đơn giá<br/>3</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[9]/span/p" position="replace">
+            <p>Thành tiền<br/>4</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/span/p" position="replace">
+            <p>ĐVT<br/>D</p>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[2]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/thead[1]/tr[1]/th[2]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/strong/p" position="replace">
+            <p>Tên hàng<br/> B</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/span/p" position="replace">
+            <p>Mã quy cách<br/>C</p>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[3]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/thead[1]/tr[1]/th[3]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]" position="after">
+            <th>
+              <span>Reference</span>
+            </th>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[2]" position="after">
+            <td>
+              <span t-field="ml.product_id.code"/>
+            </td>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/span" position="replace">
+            <span>
+              <p>Mã số<br/>C</p>
+            </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[5]/span[2]" position="attributes">
+            <attribute name="t-options-precision">4</attribute>
+          </xpath>
+
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[9]/div[1]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[10]/div[1]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/div[10]" position="after">
+            <div class="row">
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+            </div>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]" position="after">
+            <div class="row">
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+              <div class="col-4">
+                <span>New Column</span>
+              </div>
+            </div>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div[1]/span" position="replace">
+            <span> </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div[1]/span" position="replace">
+            <span> </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div[2]/span" position="replace">
+            <span></span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div[2]/span" position="replace">
+            <span>Số: </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div[3]/span" position="replace">
+            <span>Nợ: </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div[3]/span" position="replace">
+            <span>Có: </span>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div[2]/span" position="after">
+            <!--span t-field="o.date"/-->
+                <span>Ngày </span>
+                <!--span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d-%m-%Y')"/-->
+                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d')"/>
+                <span>tháng </span>
+                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%m')"/>
+                <span>năm </span>
+                <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%Y')"/>
+
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div[2]/span" position="after">
+            <span t-field="o.name"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[11]/div[2]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[12]/div[2]" position="attributes">
+            <attribute name="class" separator=" " add="text-center"/>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[18]/div[1]/span[1]" position="replace">
+            <span>- Lý do xuất kho: </span>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[18]/div[1]/span[2]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/div[18]/div[1]/span" position="replace">
+            <span>- Lý do xuất kho: </span><span t-field="o.note"/>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[22]/div[1]/span[1]/p[1]/i[1]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[22]/div[2]/span[1]/p[1]/i[1]/span[1]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[22]/div[2]/span[1]/p[1]/i[1]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/div[22]/div[1]/span/p/b" position="replace">
+            <b>Người lập phiếu                   Người nhận hàng</b>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[22]/div[2]/span/p/b" position="replace">
+            <b>Người phát hàng                         Trưởng BP Kho</b>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/div[13]/div/span[1]" position="replace">
+            <span>- Tài liệu gốc: </span><span t-field="o.origin"/><br/>
+            <span>- Họ và tên người nhận hàng: </span>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[15]/div[1]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[17]/div[1]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[2]/strong/p" position="replace">
+            <p>Mã hàng<br/> B</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[3]/span/p" position="replace">
+            <p>Tên hàng<br/>C</p>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[2]/span[1]" position="attributes">
+            <attribute name="t-field">ml.product_id.default_code</attribute>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[3]/span[1]" position="attributes">
+            <attribute name="t-field">ml.product_id.display_name</attribute>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/tbody/t[2]/t/tr/td[3]" position="attributes">
+            <attribute name="class" separator=" " add="text-left" remove="text-center"/>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/div[18]/div[2]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/strong/p" position="replace">
+            <p>SL Yêu cầu<br/>1</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[5]/strong/p" position="replace">
+            <p>Số Lượng<br/>1</p>
+          </xpath>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/thead[1]/tr[1]/th[6]" position="replace"/>
+          <xpath expr="/t[1]/t[1]/t[1]/t[1]/div[1]/table[1]/tbody[1]/t[2]/t[1]/tr[1]/td[6]" position="replace"/>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[6]/span/p" position="replace">
+            <p>Đơn giá<br/>2</p>
+          </xpath>
+          <xpath expr="/t/t/t/t/div/table[1]/thead/tr/th[7]/span/p" position="replace">
+            <p>Thành tiền<br/>3</p>
+          </xpath>
+        </template>
+    </data>
+</odoo>

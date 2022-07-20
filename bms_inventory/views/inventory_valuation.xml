@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bms_inventory_valuation_action" model="ir.actions.act_window">
+            <field name="name">Xuất nhập trong ngày</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">bms.inventory.valuation</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    <!-- Add Text Here -->
+                </p>
+                <p>
+                    <!-- More details about what a user can do with this object will be OK -->
+                </p>
+            </field>
+        </record>
+
+        <record id="bms_inventory_valuation_tree_view" model="ir.ui.view">
+            <field name="name">Xuất nhập trong ngày</field>
+            <field name="model">bms.inventory.valuation</field>
+            <field name="arch" type="xml">
+                <tree string="">
+                    <field name="date"/>
+                    <field name="location_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="bms_inventory_valuation_form_view" model="ir.ui.view">
+            <field name="name">Xuất nhập trong ngày</field>
+            <field name="model">bms.inventory.valuation</field>
+            <field name="arch" type="xml">
+                <form string="">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="location_id"/>
+                            </group>
+                            <group>
+                                <field name="date"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Chi tiết xuất nhập tồn trong ngày">
+                                <field name="line_ids"></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        <menuitem
+                action="bms_inventory_valuation_action"
+                id="bms_inventory_valuation_menu"
+                parent="stock.menu_warehouse_report" sequence="150"/>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+<!--        Purchase -->
+        <menuitem
+                name="Purchase Sourcing"
+                id="menu_purchase_sourcing"
+                sequence="13"
+                groups="tasys_permission.sourcing"
+                web_icon="tasys_permission,static/description/purchase_icon.png"/>
+
+<!--        Purchase sourcing - Reporting t-->
+        <menuitem
+                id="menu_purchase_reporting_sourcing"
+                name="Reporting"
+                sequence="10"
+                parent ="menu_purchase_sourcing"
+                action="purchase_enterprise.purchase_report_action_dashboard"
+                groups="tasys_permission.sourcing"/>
+        <!--        Purchase WH - Order -->
+        <menuitem
+                id="menu_purchase_orders_sourcing"
+                name="Orders"
+                sequence="15"
+                parent ="menu_purchase_sourcing"
+                groups="tasys_permission.sourcing"/>
+        <!-- Purchase/Orders/Purchase Orders-->
+        <menuitem id="menu_purchase_orders_purchase_orders_sourcing"
+                  name="Purchase Orders"
+                  parent="menu_purchase_orders_sourcing"
+                  sequence="51"
+                  groups="tasys_permission.sourcing"
+                  action="purchase.purchase_form_action"/>
+        <!--        Purchase WH - Order - Requests for Quotation-->
+        <menuitem
+                id="menu_purchase_orders_request_quotation_sourcing"
+                name="Requests for Quotation"
+                sequence="10"
+                parent ="menu_purchase_orders_sourcing"
+                action="purchase.purchase_rfq"
+                groups="tasys_permission.sourcing"/>
+    </data>
+</odoo>

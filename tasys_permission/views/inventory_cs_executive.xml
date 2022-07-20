@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_inventory_cs_executive"
+                  name="Inventory CS Executive"
+                  sequence="11"
+                  groups="tasys_permission.cs_executive"/>
+<!--        &lt;!&ndash;Inventory/Operation&ndash;&gt;-->
+<!--        <menuitem id="menu_inventory_operations_cs_executive"-->
+<!--                  name="Operations"-->
+<!--                  parent="menu_inventory_cs_executive"-->
+<!--                  sequence="21"-->
+<!--                  groups="tasys_permission.cs_executive"/>-->
+        <!--Inventory/Overview-->
+        <menuitem id="menu_inventory_overview_cs_executive"
+                  name="Overview"
+                  parent="menu_inventory_cs_executive"
+                  sequence="21"
+                  groups="tasys_permission.cs_executive"
+                  action="stock.stock_picking_type_action"/>
+<!--        &lt;!&ndash;Inventory/Operation/Inventory Adjustments&ndash;&gt;-->
+<!--        <menuitem id="menu_inventory_operations_inventory_adjustments_cs_manager"-->
+<!--                  name="Inventory Adjustments"-->
+<!--                  parent="menu_inventory_operations_cs_manager"-->
+<!--                  sequence="31"-->
+<!--                  groups="tasys_permission.cs_manager"-->
+<!--                  action="stock.action_inventory_form"/>-->
+<!--        &lt;!&ndash;Inventory/Operation/Scrap&ndash;&gt;-->
+<!--        <menuitem id="menu_inventory_operations_scrap_cs_executive"-->
+<!--                  name="Scrap"-->
+<!--                  parent="menu_inventory_operations_cs_executive"-->
+<!--                  sequence="41"-->
+<!--                  groups="tasys_permission.cs_executive"-->
+<!--                  action="stock.action_stock_scrap"/>-->
+<!--        &lt;!&ndash;Inventory/Operation/Transfers&ndash;&gt;-->
+<!--        <menuitem id="menu_inventory_operations_transfers_cs_manager"-->
+<!--                  name="Transfers"-->
+<!--                  parent="menu_inventory_operations_cs_manager"-->
+<!--                  sequence="51"-->
+<!--                  groups="tasys_permission.cs_manager"-->
+<!--                  action="stock.action_picking_tree_all"/>-->
+        <!--Inventory/Reporting-->
+        <menuitem id="menu_inventory_reporting_cs_executive"
+                  name="Reporting"
+                  parent="menu_inventory_cs_executive"
+                  sequence="61"
+                  groups="tasys_permission.cs_executive"/>
+        <!--Inventory/Reporting/Inventory Report-->
+        <menuitem id="menu_inventory_reporting_inventory_report_cs_executive"
+                  name="Inventory Report"
+                  parent="menu_inventory_reporting_cs_executive"
+                  sequence="71"
+                  groups="tasys_permission.cs_executive"
+                  action="stock.dashboard_open_quants"/>
+
+
+    </data>
+</odoo>

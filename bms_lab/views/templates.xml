@@ -1,0 +1,23 @@
+<openerp>
+  <data>
+    <template id="assets_backend" name="bms_lab_assets" inherit_id="web.assets_backend">
+      <xpath expr="." position="inside">
+        <link rel="stylesheet" href="/bms_lab/static/src/lib/datatables.min.css"/>
+        <link rel="stylesheet" href="/bms_lab/static/src/lib/fixedHeader.dataTables.min.css"/>
+        <link rel="stylesheet" href="/bms_lab/static/src/lib/buttons.dataTables.min.css"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/datatables.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/dataTables.fixedHeader.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/dataTables.responsive.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/dataTables.buttons.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/buttons.flash.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/jszip.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/pdfmake.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/vfs_fonts.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/buttons.html5.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/buttons.print.min.js"/>
+        <script type="text/javascript" src="/bms_lab/static/src/lib/sum().js"/>
+        <!-- <script type="text/javascript" src="/bms_lab/static/src/lib/selectize.js"/> -->
+      </xpath>
+    </template>
+  </data>
+</openerp>

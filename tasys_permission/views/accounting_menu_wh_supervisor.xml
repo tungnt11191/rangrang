@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_accounting_wh_supervisor"
+                  name="Accounting WH Supervisor"
+                  sequence="5"
+                  groups="tasys_permission.wh_supervisor"
+                web_icon="tasys_permission,static/description/accounting_icon.png"
+        />
+
+<!--        Accounting/Customers-->
+        <menuitem id="menu_accounting_customers_wh_supervisor"
+                  name="Customers"
+                  parent="menu_accounting_wh_supervisor"
+                  sequence="10"
+                  groups="tasys_permission.wh_supervisor"/>
+
+         <!--Accounting/Customers/payment-->
+        <menuitem id="menu_accounting_customers_payment_wh_supervisor"
+                  name="Payments"
+                  parent="menu_accounting_customers_wh_supervisor"
+                  sequence="10"
+                  groups="tasys_permission.wh_supervisor"
+                  action="account.action_account_payments"/>
+
+         <!--Accounting/Customers/invoices-->
+        <menuitem id="menu_accounting_customers_invoices_wh_supervisor"
+                  name="Invoices"
+                  parent="menu_accounting_customers_wh_supervisor"
+                  sequence="15"
+                  groups="tasys_permission.wh_supervisor"
+                  action="account.action_move_out_invoice_type"/>
+        <!--Accounting - Reporting -->
+        <menuitem id="menu_accounting_reporting_wh_supervisor"
+                  name="Reporting"
+                  parent="menu_accounting_wh_supervisor"
+                  sequence="21"
+                  groups="tasys_permission.wh_supervisor"/>
+
+        <!--Accounting - Reporting - Partner Ledger -->
+<!--        <menuitem id="menu_accounting_reporting_ledger_wh_supervisor"-->
+<!--                  name="Partner Ledger"-->
+<!--                  parent="menu_accounting_reporting_wh_supervisor"-->
+<!--                  sequence="21"-->
+<!--                  groups="tasys_permission.wh_supervisor"-->
+<!--                  action="account_reports.action_account_report_partner_ledger"/>-->
+
+
+    </data>
+</odoo>

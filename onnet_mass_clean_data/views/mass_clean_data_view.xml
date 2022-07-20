@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="view_popup_clean_data" model="ir.ui.view">
+            <field name="name">Mass Clean Data</field>
+            <field name="model">mass.clean.data</field>
+            <field name="arch" type="xml">
+                <form string="Mass Clean Data">
+                    <group>
+                        <field name="chk_sales_and_transfers"/>
+                        <field name="chk_purchases_and_transfers"/>
+                        <field name="chk_only_transfer"/>
+                        <field name="chk_invoice_payment_journal"/>
+                        <field name="chk_journal_entries"/>
+                        <field name="chk_customers_and_vendors"/>
+                        <field name="chk_accounting_data"/>
+                        <field name="chk_clean_all"/>
+                    </group>
+                    <footer>
+                        <button name="clean_data" string="_Clean" type="object" class="btn-primary"/>
+                        <button string="Cancel" class="btn-secondary" special="cancel" />
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_view_popup_clean_data" model="ir.actions.act_window">
+            <field name="name">Mass Clean Data</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">mass.clean.data</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_popup_clean_data"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem id="menu_clean_data" name="Clean Data" parent="base.menu_administration" sequence="100"/>
+        <menuitem action="action_view_popup_clean_data" id="menu_mass_clean_data" name="Mass Clean Data" parent="menu_clean_data" sequence="0"/>
+    </data>
+</odoo>
