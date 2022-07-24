@@ -6,10 +6,9 @@
     'category': 'Tasys Inventory Management',
     'website': "http://tasys.vn",
     'summary': """""",
-    'depends': ['bms_inventory', 'bms_lab'],
+    'depends': ['bms_inventory', 'bms_lab', 'mrp'],
     'data': [
         "security/security.xml",
-        "views/templates.xml",
         "views/inventory_management_dashboard_view.xml"
     ],
     'images': [
@@ -28,4 +27,10 @@
     ],
     'installable': True,
     'auto_install': False,
+    'assets': {
+        'web.assets_backend': [
+            'dashboard_inventory/static/src/js/overview_int_inventory_dashboard_tung.js',
+            'dashboard_inventory/static/src/js/value_inventory_management_dashboard_tung.js',
+        ]
+    }
 }

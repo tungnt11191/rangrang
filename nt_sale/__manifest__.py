@@ -10,7 +10,7 @@
     'category': 'tasys',
     'version': '1.0',
     'sequence': 1,
-    'depends': ['sale_management'],
+    'depends': ['sale_management', 'purchase', 'stock', 'sale_stock'],
     'images': [
     ],
     'data': [

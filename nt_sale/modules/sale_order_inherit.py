@@ -17,11 +17,23 @@ TYPE_ORDER = [
 class SaleOrderInherit(models.Model):
     _inherit = 'sale.order'
 
+    SalesOrderUuid = fields.Char('SalesOrderUuid', index=True, copy=False)
     type_order = fields.Selection(TYPE_ORDER, string='Type order', default='normal', compute='_compute_type_order')
     # delivery_express = fields.Boolean(string='Express', default=False)
     # readonly_express = fields.Boolean(default=True)
     delivery_time = fields.Float(string='Delivery time', default=8.0)
     delivery_date = fields.Date(default=fields.Date.today(), string='Delivery date')
+    paymentType = fields.Selection(
+        [('ck', 'Bank transfer'),
+         ('tm', 'Cash'),
+         ('tm/ck', 'Bank transfer / Cash')], string="Payment Type")
+    invoiceStatus = fields.Selection(
+        [('0', _(u'Không lấy hóa đơn')), ('1', _(u'Lấy hóa đơn ngay')),
+         ('2', _(u'Lấy hóa đơn sau'))], string="Invoice Status")
+    company_branch_id = fields.Many2one("company.branch",
+                                        string="Company Branch")
+    svcustomerName = fields.Char('SV Customer Name', index=True, store=True,
+                                 compute="_sv_name")
 
     @api.depends('partner_invoice_id', 'commitment_date')
     def _compute_type_order(self):

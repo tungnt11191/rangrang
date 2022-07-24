@@ -6,19 +6,7 @@ from odoo import fields, models, api, _
 class SaleOrder(models.Model):
     _inherit = "sale.order"
 
-    SalesOrderUuid = fields.Char('SalesOrderUuid', index=True, copy=False)
     date_call_api = fields.Date(string="API Call Date")
-    paymentType = fields.Selection(
-        [('ck', 'Bank transfer'),
-         ('tm', 'Cash'),
-         ('tm/ck', 'Bank transfer / Cash')], string="Payment Type")
-    invoiceStatus = fields.Selection(
-        [('0', _(u'Không lấy hóa đơn')), ('1', _(u'Lấy hóa đơn ngay')),
-         ('2', _(u'Lấy hóa đơn sau'))], string="Invoice Status")
-    company_branch_id = fields.Many2one("company.branch",
-                                        string="Company Branch")
-    svcustomerName = fields.Char('SV Customer Name', index=True, store=True,
-                                 compute="_sv_name")
 
     @api.depends('partner_id')
     def _sv_name(self):

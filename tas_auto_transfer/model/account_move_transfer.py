@@ -14,7 +14,7 @@ class AccountMoveTransfer(models.Model):
 
     start_date = fields.Date(string="Start date")
     end_date = fields.Date(string="End date")
-    status = type = fields.Selection([
+    status = fields.Selection([
         ('draft', 'Draft'),
         ('transferred', 'Transferred')
     ], string="Status", default='draft')

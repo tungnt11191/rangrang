@@ -17,7 +17,7 @@
         'view/account_move.xml',
     ],
     "license": "LGPL-3",
-    "depends": ['base', 'sale', 'account', 'sv_account_revenue'],
+    "depends": ['base', 'sale', 'account', 'sv_account_revenue', 'nt_sale'],
     'author': "TASYS",
     'category': 'Accounting',
     'version': '1.0.1',

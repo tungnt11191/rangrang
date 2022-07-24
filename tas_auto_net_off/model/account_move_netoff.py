@@ -19,7 +19,7 @@ class AccountMoveNetoff(models.Model):
 
     start_date = fields.Date(string="Start date")
     end_date = fields.Date(string="End date")
-    status = type = fields.Selection([
+    status = fields.Selection([
         ('draft', 'Draft'),
         ('done', 'Done')
     ], string="Status", default='draft')
