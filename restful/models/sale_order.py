@@ -8,15 +8,6 @@ class SaleOrder(models.Model):
 
     date_call_api = fields.Date(string="API Call Date")
 
-    @api.depends('partner_id')
-    def _sv_name(self):
-        for record in self:
-            name = record.partner_id.name
-            if record.partner_id.company_type == 'employer':
-                if record.partner_id.customerName is not False:
-                    name = record.partner_id.customerName
-            record.svcustomerName = name
-
     def find_changed_items(self, new_lines):
         self.ensure_one()
 

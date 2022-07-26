@@ -35,6 +35,15 @@ class SaleOrderInherit(models.Model):
     svcustomerName = fields.Char('SV Customer Name', index=True, store=True,
                                  compute="_sv_name")
 
+    @api.depends('partner_id')
+    def _sv_name(self):
+        for record in self:
+            name = record.partner_id.name
+            if record.partner_id.company_type == 'employer':
+                if record.partner_id.customerName is not False:
+                    name = record.partner_id.customerName
+            record.svcustomerName = name
+
     @api.depends('partner_invoice_id', 'commitment_date')
     def _compute_type_order(self):
         for rec in self:
