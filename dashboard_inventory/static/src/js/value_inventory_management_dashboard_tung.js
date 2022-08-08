@@ -9,7 +9,7 @@ odoo.define("dashboard_inventory.value_xnt_management_dashboard_tung", function(
 
   var value_xnt_dashboard = AbstractAction.extend({
 //    hasControlPanel: true,
-    template: 'value_xnt_dashboard_tung',
+    contentTemplate: 'value_xnt_dashboard_tung',
     events: {
       'change #locations_selectbox': 'locations_selectbox_onchange',
       'click #quet_du_lieu': 'bms_quet_du_lieu',
@@ -58,6 +58,7 @@ odoo.define("dashboard_inventory.value_xnt_management_dashboard_tung", function(
 
     // Code chay khoi dong trang
     start: function() {
+        console.log("start dashboard_inventory.value_xnt_management_dashboard_tung");
       var self = this;
       this._rpc({
         model: 'inventory.management.dashboard',

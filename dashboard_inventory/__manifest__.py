@@ -28,6 +28,10 @@
     'installable': True,
     'auto_install': False,
     'assets': {
+        'web.assets_qweb': [
+            'dashboard_inventory/static/src/xml/value_inventory_management_dashboard_tung.xml',
+            'dashboard_inventory/static/src/xml/overview_dashboard_tung.xml',
+        ],
         'web.assets_backend': [
             'dashboard_inventory/static/src/js/overview_int_inventory_dashboard_tung.js',
             'dashboard_inventory/static/src/js/value_inventory_management_dashboard_tung.js',
