@@ -89,10 +89,15 @@ class MrpProduction(models.Model):
 
     def _compute_operation_quantity(self):
         for record in self:
-            stock_picking = self.env['stock.picking'].search(
-                [('state', '=', 'done'), ('origin', '=', record.name)])
+            # odoo 14
+            # stock_picking = self.env['stock.picking'].search(
+            #     [('state', '=', 'done'), ('origin', '=', record.name)])
+            # stock_move_lines = self.env['stock.move.line'].search(
+            #     [('state', '=', 'done'), ('picking_id', 'in', stock_picking.ids)])
+
+            # odoo15
             stock_move_lines = self.env['stock.move.line'].search(
-                [('state', '=', 'done'), ('picking_id', 'in', stock_picking.ids)])
+                [('state', '=', 'done'), ('reference', 'like', record.name)])
 
             scrap = 0
             complete = 0

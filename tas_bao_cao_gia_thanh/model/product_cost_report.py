@@ -1,4 +1,6 @@
 from odoo import fields, models, api
+import logging
+logger = logging.getLogger(__name__)
 
 
 class TasProductCostReport(models.Model):
@@ -121,7 +123,7 @@ class TasProductCostReportLine(models.Model):
                 #     'cost_per_unit': record.cost_of_operation / record.complete_amount if record.complete_amount > 0 else 0
                 # })
                 # activity_lines.append(value)
-
+                logger.debug("activity_type 1 " + str(self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id))
                 value = (0, 0, {
                     'activity_type': self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id,
                     'cost_of_activity': record.cost_of_structure,
@@ -136,6 +138,9 @@ class TasProductCostReportLine(models.Model):
                         cost_per_bom_unit = bom_cost_driver.actual_count * cost_per_uom_unit
                         cost_of_activity = record.complete_amount * bom_cost_driver.actual_count * cost_per_bom_unit
                         # cost_of_activity = record.complete_amount * cost_per_activity
+                        logger.debug(
+                            "activity_type 2 " + str(cost_driver[bom_cost_driver.cost_driver_id.code]['id']))
+
                         value = (0, 0, {
                             'activity_type': cost_driver[bom_cost_driver.cost_driver_id.code]['id'],
                             'cost_of_activity': cost_of_activity,
