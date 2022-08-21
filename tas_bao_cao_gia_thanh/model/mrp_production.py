@@ -94,21 +94,21 @@ class MrpProduction(models.Model):
             #     [('state', '=', 'done'), ('origin', '=', record.name)])
             # stock_move_lines = self.env['stock.move.line'].search(
             #     [('state', '=', 'done'), ('picking_id', 'in', stock_picking.ids)])
+            # scrap = 0
+            # complete = 0
+            # for line in stock_move_lines:
+            #     if line.move_id.scrapped:
+            #         scrap += line.qty_done
+            #     elif line.location_id.barcode == 'WH-POSTPRODUCTION' and line.location_dest_id.barcode == 'WH-STOCK':
+            #         complete += line.qty_done
+            #
+            # record.complete_amount = complete
+            # record.scrap_amount = scrap
+            # record.wip_amount = record.product_qty - (record.complete_amount + record.scrap_amount)
 
             # odoo15
-            stock_move_lines = self.env['stock.move.line'].search(
-                [('state', '=', 'done'), ('reference', 'like', record.name)])
-
-            scrap = 0
-            complete = 0
-            for line in stock_move_lines:
-                if line.move_id.scrapped:
-                    scrap += line.qty_done
-                elif line.location_id.barcode == 'WH-POSTPRODUCTION' and line.location_dest_id.barcode == 'WH-STOCK':
-                    complete += line.qty_done
-
-            record.complete_amount = complete
-            record.scrap_amount = scrap
+            record.complete_amount = record.qty_producing
+            record.scrap_amount = 0
             record.wip_amount = record.product_qty - (record.complete_amount + record.scrap_amount)
 
     def _cal_price(self, consumed_moves):
