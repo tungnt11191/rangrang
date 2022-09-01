@@ -5,11 +5,11 @@
     'version': '13.0.1.0.0',
     'summary': """Specifiy the Order type in POS""",
     'description': """Specifiy the Order type in POS.""",
-    'author': "HAK Solutions",
-    'company': 'HAK Solutions',
+    'author': "tung nguyen thanh",
+    'company': 'Tasys',
     'category': 'Point of Sale',
     'depends': ['pos_restaurant', 'point_of_sale'],
-    'website': 'http://www.HAK Solutions.com',
+    'website': 'https://tasys.com.vn',
     'data': [
         'views/views.xml',
         'security/ir.model.access.csv'
