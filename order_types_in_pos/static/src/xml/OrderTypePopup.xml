@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="OrderTypeListScreen" owl="1">
+        <div class="clientlist-screen screen">
+            <div class="screen-content">
+                <div class="top-content">
+                    <div class="button back" t-on-click="back">
+                        <i class="fa fa-angle-double-left"/>
+                        <t> Back</t>
+                    </div>
+                </div>
+                <section class="full-content">
+                    <div class="client-window">
+                        <section class="subwindow list">
+                            <div class="subwindow-container">
+                                <div t-if="!state.detailIsShown" class="subwindow-container-fix scrollable-y">
+                                    <table class="client-list">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="client-list-contents">
+                                            <t t-foreach="delivery_types" t-as="type" t-key="type.id">
+                                                <tr t-attf-data-delivery_types_id="{{type.id}}" t-attf-class="{{(selected_delivery_type_id == type.id) ? 'delivery-type-line highlight': 'delivery-type-line'}}" t-on-click="click_delivery_type(type.id)">
+                                                    <td colspan="99">
+                                                        <span t-esc="type.name"/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </t>
+
+</templates>
