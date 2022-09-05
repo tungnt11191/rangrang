@@ -23,12 +23,13 @@ odoo.define("order_types_in_pos.OrderTypeButton", function (require) {
         } = await this.showTempScreen('OrderTypeListScreen', {
                                                                 'delivery_types': delivery_types,
                                                                 'selected_delivery_type_id': selected_delivery_type_id
-
                                                                 });
+        console.log(confirmed);
+        console.log(newClient);
 
         if (confirmed) {
-            order.set_client(newClient);
-            order.updatePricelist(newClient);
+            var el_order_type = $(this.el).find("#order_type_id")
+            el_order_type.text(this.env.pos.get_delivery_type_name(newClient))
         }
         return;
     }

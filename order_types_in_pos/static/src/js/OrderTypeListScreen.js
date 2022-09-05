@@ -31,8 +31,7 @@ odoo.define('order_types_in_pos.OrderTypeListScreen', function (require) {
             this.delivery_types = this.props.delivery_types;
             this.selected_delivery_type_id = this.props.selected_delivery_type_id;
             this.state = {
-                            detailIsShown: false,
-
+                detailIsShown: false,
             };
         }
         async click_delivery_type(delivery_type_id, event) {
@@ -62,7 +61,7 @@ odoo.define('order_types_in_pos.OrderTypeListScreen', function (require) {
                 this.state.detailIsShown = false;
                 this.render();
             } else {
-                this.props.resolve({ confirmed: false, payload: false });
+                this.props.resolve({ confirmed: true, payload: this.selected_delivery_type_id });
                 this.trigger('close-temp-screen');
             }
         }

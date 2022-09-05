@@ -34,6 +34,15 @@ models.PosModel = models.PosModel.extend({
         }
         return rewards;
     },
+    get_delivery_type_name: function(delivery_type_id){
+        var self = this;
+        for (var i = 0; i < self.delivery_types.length; i++) {
+            if(self.delivery_types[i]['id'] == delivery_type_id){
+                return self.delivery_types[i]['name'];
+            }
+        }
+        return 'Order Type';
+    },
 });
 
 var _super = models.Order;
@@ -45,7 +54,6 @@ models.Order = models.Order.extend({
         }
         return this.delivery_type;
     },
-
     set_delivery_type: function(delivery_type_id){
         if(delivery_type_id > 0){
             this.delivery_type = delivery_type_id;

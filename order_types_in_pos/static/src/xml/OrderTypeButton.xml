@@ -5,7 +5,7 @@
         <span class="control-button">
             <i class="fa fa-gift"></i>
             <span> </span>
-            <span>Order Type</span>
+            <span id="order_type_id">Order Type</span>
         </span>
     </t>
 
