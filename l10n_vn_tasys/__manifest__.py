@@ -39,5 +39,5 @@ with Chart of account under Circular No. 200/2014/TT-BTC
         'demo/demo_company.xml',
     ],
     'post_init_hook': '_post_init_hook',
-
+    'license': 'OEEL-1',
 }

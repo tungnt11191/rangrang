@@ -7,4 +7,5 @@
   "depends"              :  ['mrp'],
   "application"          :  False,
   "installable"          :  True,
+    'license': 'OEEL-1',
 }

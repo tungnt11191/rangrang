@@ -36,5 +36,6 @@
             'dashboard_inventory/static/src/js/overview_int_inventory_dashboard_tung.js',
             'dashboard_inventory/static/src/js/value_inventory_management_dashboard_tung.js',
         ]
-    }
+    },
+    'license': 'OEEL-1',
 }

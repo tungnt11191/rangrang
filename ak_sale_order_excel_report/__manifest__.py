@@ -13,6 +13,7 @@
     'depends': [
         'sale',
     ],
+    'license': 'OEEL-1',
     'data': [
         'views/product_template_view.xml',
         'views/sale_order_line_inherit_view.xml',

@@ -21,4 +21,5 @@
     'installable': True,
     'auto_install': False,
     'application': True,
+    'license': 'OEEL-1',
 }

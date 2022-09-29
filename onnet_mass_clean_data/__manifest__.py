@@ -27,4 +27,5 @@
     'demo': [],
     'installable': True,
     'application': False,
+    'license': 'OEEL-1',
 }

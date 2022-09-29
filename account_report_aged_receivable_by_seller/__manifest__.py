@@ -12,6 +12,7 @@
     'depends': ['account_reports'],
     'images': [
     ],
+    'license': 'OEEL-1',
     'data': [
         'security/ir.model.access.csv',
         'views/account_aged_seller.xml'

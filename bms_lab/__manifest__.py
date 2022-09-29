@@ -14,6 +14,7 @@
     'images': [
         'static/description/icon.png',
     ],
+    'license': 'OEEL-1',
     'installable': True,
     'auto_install': False,
     'assets': {
