@@ -73,8 +73,8 @@ class ReportAccountFinancialReport(models.AbstractModel):
                     columns.insert(1, {'name': financial_line.name if financial_line.name else ''})
         return financial_report_line
 
-    def _get_reports_buttons(self):
-        res = super(ReportAccountFinancialReport, self)._get_reports_buttons()
+    def _get_reports_buttons(self, options):
+        res = super(ReportAccountFinancialReport, self)._get_reports_buttons(options)
         res.append({'name': _('Export TT200'), 'action': 'export_detail_action', 'sequence': 8, 'file_export_type': _('XLSX')})
         return res
 

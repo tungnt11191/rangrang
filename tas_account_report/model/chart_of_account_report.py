@@ -16,8 +16,8 @@ import json
 class AccountChartOfAccountReport(models.AbstractModel):
     _inherit = "account.coa.report"
 
-    def _get_reports_buttons(self):
-        res = super(AccountChartOfAccountReport, self)._get_reports_buttons()
+    def _get_reports_buttons(self, options):
+        res = super(AccountChartOfAccountReport, self)._get_reports_buttons(options)
         res.append({'name': _('Xuất chi tiết tài khoản'), 'action': 'export_detail_action', 'sequence': 8, 'file_export_type': _('XLSX')})
         return res
 

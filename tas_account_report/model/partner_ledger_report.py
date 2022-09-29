@@ -24,8 +24,8 @@ class ReportPartnerLedger(models.AbstractModel):
         {'id': 'advance_payment', 'name': _lt('Tạm ứng nhân viên - 14110001'), 'selected': False},
     ]
 
-    def _get_reports_buttons(self):
-        res = super(ReportPartnerLedger, self)._get_reports_buttons()
+    def _get_reports_buttons(self, options):
+        res = super(ReportPartnerLedger, self)._get_reports_buttons(options)
         res.append({'name': _('Xuất chi tiết công nợ'), 'action': 'export_detail_action', 'sequence': 8, 'file_export_type': _('XLSX')})
         return res
 
