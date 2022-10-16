@@ -150,13 +150,20 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                 for field in changed_fields:
                     vals[field] = obj._fields[field].convert_to_write(obj[field], obj)
 
-    def create_allocation(self, po_line, pr_line, new_qty, alloc_uom):
+    def create_allocation(self, po_line, pr_line, new_qty, alloc_uom, pr_origin=""):
         vals = {
             "requested_product_uom_qty": new_qty,
             "product_uom_id": alloc_uom.id,
             "purchase_request_line_id": pr_line.id,
             "purchase_line_id": po_line.id,
         }
+
+        purchase_order = po_line.order_id
+        if purchase_order:
+            purchase_origin = purchase_order.origin if purchase_order.origin else ''
+            if pr_origin not in purchase_origin:
+                purchase_order.update({'origin': purchase_origin + ', ' + pr_origin})
+
         return self.env["purchase.request.allocation"].create(vals)
 
     @api.model
@@ -240,6 +247,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
 
         for item in self.item_ids:
             line = item.line_id
+            purchase_request_origin = item.line_id.request_id.name
             if item.product_qty <= 0.0:
                 raise UserError(_("Enter a positive quantity."))
             if self.purchase_order_id:
@@ -249,7 +257,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                     line.request_id.picking_type_id,
                     line.request_id.group_id,
                     line.company_id,
-                    line.origin,
+                    purchase_request_origin,
                 )
                 purchase = purchase_obj.create(po_data)
 
@@ -277,7 +285,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                     item.product_qty, alloc_uom
                 )
                 all_qty = min(po_line_product_uom_qty, wizard_product_uom_qty)
-                self.create_allocation(po_line, line, all_qty, alloc_uom)
+                self.create_allocation(po_line, line, all_qty, alloc_uom, purchase_request_origin)
             else:
                 po_line_data = self._prepare_purchase_order_line(purchase, item)
                 if item.keep_description:
@@ -290,7 +298,7 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                     item.product_qty, alloc_uom
                 )
                 all_qty = min(po_line_product_uom_qty, wizard_product_uom_qty)
-                self.create_allocation(po_line, line, all_qty, alloc_uom)
+                self.create_allocation(po_line, line, all_qty, alloc_uom, purchase_request_origin)
             # TODO: Check propagate_uom compatibility:
             new_qty = pr_line_obj._calc_new_qty(
                 line, po_line=po_line, new_pr_line=new_pr_line

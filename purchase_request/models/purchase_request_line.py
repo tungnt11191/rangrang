@@ -286,6 +286,16 @@ class PurchaseRequestLine(models.Model):
             self.product_qty = 1
             self.name = name
 
+            sellers = self.product_id.seller_ids.filtered(
+                lambda si: not si.company_id or si.company_id == self.company_id
+            )
+            if sellers:
+                self.estimated_cost = sellers[0].price
+            else:
+                self.estimated_cost = 0.0
+
+
+
     def do_cancel(self):
         """Actions to perform when cancelling a purchase request line."""
         self.write({"cancelled": True})
