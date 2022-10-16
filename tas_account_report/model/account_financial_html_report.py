@@ -60,8 +60,8 @@ class ReportAccountFinancialReport(models.AbstractModel):
         return financial_report_line
 
     @api.model
-    def _get_financial_aml_report_line(self, options, financial_line, groupby_id, display_name, results, groupby_keys):
-        financial_report_line = super(ReportAccountFinancialReport, self)._get_financial_aml_report_line(options, financial_line, groupby_id, display_name, results, groupby_keys)
+    def _get_financial_aml_report_line(self, options, financial_report_line_id, financial_line, groupby_id, display_name, results, groupby_keys):
+        financial_report_line = super(ReportAccountFinancialReport, self)._get_financial_aml_report_line(options, financial_report_line_id, financial_line, groupby_id, display_name, results, groupby_keys)
         if self._context.get('print_mode'):
             financial_report_line['code_report']: financial_line.code_report
             columns = financial_report_line.get('columns')

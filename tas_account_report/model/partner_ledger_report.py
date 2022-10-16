@@ -118,7 +118,7 @@ class ReportPartnerLedger(models.AbstractModel):
                     account_move_line.payment_id,
                     account_move_line.partner_id,
                     account_move_line.currency_id,
-                    account_move_line.amount_currency,
+                    account_move_line.amount_currency as amount_currency,
                     account_move_line.matching_number,
                     ROUND(account_move_line.debit * currency_table.rate, currency_table.precision)   AS debit,
                     ROUND(account_move_line.credit * currency_table.rate, currency_table.precision)  AS credit,
