@@ -115,6 +115,7 @@ class TasProductCostReportLine(models.Model):
 
         for record in self:
             activity_lines = [(5, 0, 0)]
+            activity_lines_2 = []
             if record.bom_id:
                 # value = (0, 0, {
                 #     'activity_type': self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_working_hour').id,
@@ -126,13 +127,16 @@ class TasProductCostReportLine(models.Model):
                 logger.debug("activity_type 1 " + str(self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id))
                 print('activity_type 1')
                 print(self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id)
-                value = (0, 0, {
-                    'activity_type': self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id,
+                activity_value = {
+                    'activity_type': int(self.env.ref('tas_bao_cao_gia_thanh.tas_cost_driver_nvl').id),
                     'cost_of_activity': record.cost_of_structure,
                     # 'cost_per_activity': record.cost_of_structure / record.complete_amount,
                     'cost_per_unit': record.cost_of_structure / record.complete_amount if record.complete_amount > 0 else 0
-                })
+                }
+                value = (0, 0, activity_value)
                 activity_lines.append(value)
+                activity = self.env['tas.product.cost.report.line.activity'].sudo().create(activity_value)
+                activity_lines_2.append(activity.id)
 
                 for bom_cost_driver in record.mrp_production_id.production_cost_line_ids:
                     if bom_cost_driver.cost_driver_id.code in cost_driver:
@@ -144,14 +148,22 @@ class TasProductCostReportLine(models.Model):
                             "activity_type 2 " + str(cost_driver[bom_cost_driver.cost_driver_id.code]['id']))
                         print('activity_type 2')
                         print(cost_driver[bom_cost_driver.cost_driver_id.code]['id'])
-                        value = (0, 0, {
-                            'activity_type': cost_driver[bom_cost_driver.cost_driver_id.code]['id'],
+                        activity_value = {
+                            'activity_type': int(cost_driver[bom_cost_driver.cost_driver_id.code]['id']),
                             'cost_of_activity': cost_of_activity,
                             # 'cost_per_activity': cost_per_activity,
                             'cost_per_unit': cost_per_bom_unit
-                        })
+                        }
+                        value = (0, 0, activity_value)
                         activity_lines.append(value)
-            record.update({'activity_ids': activity_lines})
+                        activity = self.env['tas.product.cost.report.line.activity'].sudo().create(activity_value)
+                        activity_lines_2.append(activity.id)
+            record.update({'activity_ids': [(6, 0, activity_lines_2)]})
+
+    @api.model
+    def create(self, vals):
+        res = super(TasProductCostReportLine, self).create(vals)
+        return res
 
 
 class TasProductCostReportLineActivity(models.Model):

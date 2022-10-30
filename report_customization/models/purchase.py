@@ -1,4 +1,4 @@
-from vietnam_number import n2w
+import n2w
 from odoo import api, fields, models
 
 class PurchaseOrder(models.Model):
