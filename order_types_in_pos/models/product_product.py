@@ -3,7 +3,12 @@
 from odoo import models, fields, api
 
 
-class Product(models.Model):
+class ProductTemplate(models.Model):
+    _inherit = "product.template"
+    order_type_map_ids = fields.One2many('product.product.order.type.map', 'product_id', string='Maps')
+
+
+class ProductProduct(models.Model):
     _inherit = "product.product"
 
     order_type_map_ids = fields.One2many('product.product.order.type.map', 'product_id', string='Maps')
