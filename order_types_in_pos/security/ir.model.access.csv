@@ -1,2 +1,3 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_delivery_type,access.delivery.type,model_delivery_type,base.group_user,1,1,1,1
+access_product_product_order_type_map,access.product.product.order.type.map,model_product_product_order_type_map,base.group_user,1,1,1,1

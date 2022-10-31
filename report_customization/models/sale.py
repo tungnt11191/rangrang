@@ -26,6 +26,7 @@ class SaleOrder(models.Model):
     x_internal_so = fields.Char('Internal Sales Order')
     x_method_of_delivery = fields.Char('Method of Delivery')
 
+
 class SaleOrderLine(models.Model):
     _inherit = 'sale.order.line'
 

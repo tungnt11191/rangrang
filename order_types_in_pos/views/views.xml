@@ -74,5 +74,25 @@
                 </field>
             </field>
         </record>
+
+        <record id="product_product_form_order_type_mapping_view" model="ir.ui.view">
+            <field name="name">product.product.order.type.mapping.form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="account.product_template_form_view"/>
+            <field name="arch" type="xml">
+               <page name="invoicing" position="after">
+                    <page string="Maps" name="mapping">
+                        <field name="order_type_map_ids">
+                            <tree editable="bottom">
+                                 <field name="delivery_type"/>
+                                 <field name="income_account_id"/>
+                                 <field name="expense_account_id"/>
+                            </tree>
+                        </field>
+                    </page>
+                </page>
+
+            </field>
+        </record>
     </data>
 </odoo>
