@@ -53,7 +53,6 @@ class PosSession(models.Model):
             'base_tags': tuple(tax_data['base_tags']),
         }
 
-
     def _accumulate_amounts(self, data):
         output_data = super(PosSession, self)._accumulate_amounts(data)
 
@@ -88,16 +87,16 @@ class PosSession(models.Model):
                             amount = -sum(move.sudo().stock_valuation_layer_ids.mapped('value'))
                             stock_expense[exp_key] = self._update_amounts(stock_expense[exp_key], {'amount': amount},
                                                                           move.picking_id.date, force_company_currency=True)
-                            if move.location_id.usage == 'customer':
-                                stock_return[out_key] = self._update_amounts(stock_return[out_key], {'amount': amount},
-                                                                             move.picking_id.date, force_company_currency=True)
-                            else:
-                                stock_output[out_key] = self._update_amounts(stock_output[out_key], {'amount': amount},
-                                                                         move.picking_id.date, force_company_currency=True)
+                            # if move.location_id.usage == 'customer':
+                            #     stock_return[out_key] = self._update_amounts(stock_return[out_key], {'amount': amount},
+                            #                                                  move.picking_id.date, force_company_currency=True)
+                            # else:
+                            #     stock_output[out_key] = self._update_amounts(stock_output[out_key], {'amount': amount},
+                            #                                              move.picking_id.date, force_company_currency=True)
 
         output_data.update({
             'stock_expense': stock_expense,
-            'stock_return': stock_return,
-            'stock_output': stock_output
+            # 'stock_return': stock_return,
+            # 'stock_output': stock_output
         })
         return output_data
