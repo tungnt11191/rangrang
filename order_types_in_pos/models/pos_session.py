@@ -77,10 +77,10 @@ class PosSession(models.Model):
                             old_out_key = move.product_id.categ_id.property_stock_account_output_categ_id
                             if old_exp_key in stock_expense:
                                 stock_expense.pop(old_exp_key)
-                            if old_out_key in stock_return:
-                                stock_return.pop(old_out_key)
-                            if old_out_key in stock_output:
-                                stock_output.pop(old_out_key)
+                            # if old_out_key in stock_return:
+                            #     stock_return.pop(old_out_key)
+                            # if old_out_key in stock_output:
+                            #     stock_output.pop(old_out_key)
 
                             exp_key = mapping_item.expense_account_id
                             out_key = mapping_item.income_account_id
