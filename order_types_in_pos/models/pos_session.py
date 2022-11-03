@@ -17,6 +17,7 @@ class PosSession(models.Model):
         # region tungnt
         def get_income_account(order_line):
             product = order_line.product_id
+            # deprecate
             mapping_item = product.order_type_map_ids.filtered(lambda mapping_item: mapping_item.delivery_type.id == order_line.order_id.delivery_type.id)
             if mapping_item:
                 income_account = mapping_item.income_account_id
@@ -57,8 +58,6 @@ class PosSession(models.Model):
         output_data = super(PosSession, self)._accumulate_amounts(data)
 
         stock_expense = output_data['stock_expense']
-        stock_return = output_data['stock_return']
-        stock_output = output_data['stock_output']
         for order in self.order_ids:
             order_is_invoiced = order.is_invoiced
             if not order_is_invoiced:
@@ -70,29 +69,20 @@ class PosSession(models.Model):
                         ('product_id.categ_id.property_valuation', '=', 'real_time')
                     ])
                     for move in stock_moves:
+                        # region deprecate
                         mapping_item = move.product_id.order_type_map_ids.filtered(lambda mapping_item: mapping_item.delivery_type.id == order.delivery_type.id)
 
                         if mapping_item:
                             old_exp_key = move.product_id._get_product_accounts()['expense']
-                            old_out_key = move.product_id.categ_id.property_stock_account_output_categ_id
                             if old_exp_key in stock_expense:
                                 stock_expense.pop(old_exp_key)
-                            # if old_out_key in stock_return:
-                            #     stock_return.pop(old_out_key)
-                            # if old_out_key in stock_output:
-                            #     stock_output.pop(old_out_key)
 
                             exp_key = mapping_item.expense_account_id
-                            out_key = mapping_item.income_account_id
                             amount = -sum(move.sudo().stock_valuation_layer_ids.mapped('value'))
                             stock_expense[exp_key] = self._update_amounts(stock_expense[exp_key], {'amount': amount},
                                                                           move.picking_id.date, force_company_currency=True)
-                            # if move.location_id.usage == 'customer':
-                            #     stock_return[out_key] = self._update_amounts(stock_return[out_key], {'amount': amount},
-                            #                                                  move.picking_id.date, force_company_currency=True)
-                            # else:
-                            #     stock_output[out_key] = self._update_amounts(stock_output[out_key], {'amount': amount},
-                            #                                              move.picking_id.date, force_company_currency=True)
+                        # endregion
+
 
         output_data.update({
             'stock_expense': stock_expense,
