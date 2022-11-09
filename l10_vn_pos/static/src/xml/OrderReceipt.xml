@@ -32,7 +32,7 @@
                     </t>
                     <div>Ngày bán:
                         <t t-if="receipt.date.validation_date">
-                            <t t-esc="receipt.date.validation_date"/>
+                            <t t-esc="receipt.date.localestring" />
                         </t>
                     </div>
                     <div>Khách hàng:
@@ -116,30 +116,29 @@
                     </div>
 
 
-                        <!-- Total -->
-                        <div class="pos-receipt-right-align">--------</div><br/>
-                        <div>
+                    <!-- Total -->
+                    <div class="pos-receipt-right-align">--------</div><br/>
+                    <div>
                         <b>Tổng cộng:</b>
-                            <b><span t-esc="env.pos.format_currency(receipt.total_with_tax)" class="pos-receipt-right-align"/></b>
+                        <b><span t-esc="env.pos.format_currency(receipt.total_with_tax)" class="pos-receipt-right-align"/></b>
                     </div>
-                        <t t-if="receipt.total_rounded != receipt.total_with_tax">
-                        <div class="pos-receipt-amount">
-                          Rounding
-                        <span t-esc='env.pos.format_currency(receipt.rounding_applied)' class="pos-receipt-right-align"/>
+                    <t t-if="receipt.total_rounded != receipt.total_with_tax">
+                        <div>
+                            Làm tròn:<span t-esc='env.pos.format_currency(receipt.rounding_applied)' class="pos-receipt-right-align"/>
                         </div>
-                            <div class="pos-receipt-amount">
-                          To Pay
-                         <span t-esc='env.pos.format_currency(receipt.total_rounded)' class="pos-receipt-right-align"/>
-                      </div>
+                        <br/>
+                        <div>
+                            <b>Thành tiền:<span t-esc='env.pos.format_currency(receipt.total_rounded)' class="pos-receipt-right-align"/></b>
+                        </div>
                     </t>
                         <!-- Payment Lines -->
 
-                        <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
+                    <t t-foreach="receipt.paymentlines" t-as="line" t-key="line.cid">
                         <div>
                             Phương thức thanh toán: <span class="pos-receipt-right-align" t-esc="line.name"/>
                         </div>
-                            <div>
-                            Số tiền khách trả: <span t-esc="env.pos.format_currency_no_symbol(line.amount)" class="pos-receipt-right-align"/>
+                        <div>
+                            Số tiền khách trả: <span t-esc="env.pos.format_currency(line.amount)" class="pos-receipt-right-align"/>
                         </div>
                     </t>
                         <div>
@@ -148,14 +147,14 @@
 
                         <!-- Extra Payment Info -->
 
-                        <t t-if="isTaxIncluded">
-                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
-                            <div>
-                                <t t-esc="tax.name" />
-                                <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>
-                            </div>
-                        </t>
-                            <div>
+                    <t t-if="isTaxIncluded">
+<!--                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">-->
+<!--                            <div>-->
+<!--                                <t t-esc="tax.name" />-->
+<!--                                <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>-->
+<!--                            </div>-->
+<!--                        </t>-->
+                        <div>
                             Tổng thuế
                             <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
                         </div>
