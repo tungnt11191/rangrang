@@ -34,8 +34,9 @@ class DeliveryMethods(models.Model):
         })
         return res
 
-    enable_delivery = fields.Boolean(string='Enable Order Types',default=True)
+    enable_delivery = fields.Boolean(string='Enable Order Types', default=True)
     delivery_methods = fields.Many2many('delivery.type', string='Order Types')
+    default_order_type_id = fields.Many2one('delivery.type', string='Default Order Types')
 
 
 class DeliveryTypes(models.Model):

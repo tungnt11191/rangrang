@@ -9,7 +9,7 @@ var round_pr = utils.round_precision;
 
 var _t = core._t;
 
-models.load_fields('delivery.type','delivery_type');
+models.load_fields('delivery.type','default_order_type_id');
 models.load_models([
     {
         model: 'delivery.type',
@@ -28,10 +28,12 @@ models.PosModel = models.PosModel.extend({
         var self = this;
         var rewards = [];
         console.log('this.pos', self);
+        console.log('this.pos.delivery_methods', self.delivery_methods)
         for (var i = 0; i < self.delivery_types.length; i++) {
             var reward = self.delivery_types[i];
             rewards.push(reward);
         }
+        console.log('this.pos.delivery_methods 2', rewards)
         return rewards;
     },
     get_delivery_type_name: function(delivery_type_id){
@@ -70,7 +72,11 @@ models.Order = models.Order.extend({
 
     init_from_JSON: function(json){
         _super.prototype.init_from_JSON.apply(this,arguments);
-        this.delivery_type = json.delivery_type;
+//        this.delivery_type = json.delivery_type;
+//        this.delivery_type = this.pos.config.default_order_type_id[0];
+        this.set_delivery_type(this.pos.config.default_order_type_id[0])
+
+        console.log('pos.order ', this);
     },
 });
 });

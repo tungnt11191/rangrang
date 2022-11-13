@@ -23,7 +23,7 @@ odoo.define("order_types_in_pos.OrderTypeButton", function (require) {
         } = await this.showTempScreen('OrderTypeListScreen', {
                                                                 'delivery_types': delivery_types,
                                                                 'selected_delivery_type_id': selected_delivery_type_id
-                                                                });
+                                                            });
         console.log(confirmed);
         console.log(newClient);
 

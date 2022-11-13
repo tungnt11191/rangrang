@@ -22,6 +22,9 @@
             'order_types_in_pos/static/src/js/pos.js',
             'order_types_in_pos/static/src/js/OrderTypeButton.js',
             'order_types_in_pos/static/src/js/OrderTypeListScreen.js',
+        ],
+        'web.assets_backend': [
+            'order_types_in_pos/static/src/js/group_by_hour.js',
         ]
     },
     'images': ['static/description/banner.png'],

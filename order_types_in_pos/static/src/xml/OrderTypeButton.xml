@@ -5,7 +5,13 @@
         <span class="control-button">
             <i class="fa fa-gift"></i>
             <span> </span>
-            <span id="order_type_id">Order Type</span>
+            <div t-if="env.pos.get_order().get_delivery_type() > 0">
+                <span id="order_type_id"><t t-esc="env.pos.get_delivery_type_name(env.pos.get_order().get_delivery_type())" /></span>
+            </div>
+            <div t-else="" >
+                <span id="order_type_id">Order Type</span>
+            </div>
+
         </span>
     </t>
 
