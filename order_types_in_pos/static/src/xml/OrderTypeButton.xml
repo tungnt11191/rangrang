@@ -3,14 +3,13 @@
 
     <t t-name="OrderTypeButton" owl="1">
         <span class="control-button">
-            <i class="fa fa-gift"></i>
-            <span> </span>
-            <div t-if="env.pos.get_order().get_delivery_type() > 0">
+            <i class="fa fa-tag"></i>
+            <span t-if="env.pos.get_order().get_delivery_type() > 0">
                 <span id="order_type_id"><t t-esc="env.pos.get_delivery_type_name(env.pos.get_order().get_delivery_type())" /></span>
-            </div>
-            <div t-else="" >
+            </span>
+            <span t-else="" >
                 <span id="order_type_id">Order Type</span>
-            </div>
+            </span>
 
         </span>
     </t>

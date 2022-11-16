@@ -74,9 +74,19 @@ models.Order = models.Order.extend({
         _super.prototype.init_from_JSON.apply(this,arguments);
 //        this.delivery_type = json.delivery_type;
 //        this.delivery_type = this.pos.config.default_order_type_id[0];
-        this.set_delivery_type(this.pos.config.default_order_type_id[0])
+//        this.set_delivery_type(this.pos.config.default_order_type_id[0])
+        console.log('pos.order init_from_JSON json ', json);
+        console.log('pos.order init_from_JSON', this);
+    },
 
-        console.log('pos.order ', this);
+    initialize: function(attributes,options){
+        _super.prototype.initialize.call(this,attributes,options);
+        this.delivery_type = this.pos.config.default_order_type_id[0];
+        console.log('pos.order initialize', this);
+
+        if (this.pos.config.default_order_type_id && !this.export_as_JSON().delivery_type) {
+            this.set_delivery_type(this.pos.config.default_order_type_id[0])
+        }
     },
 });
 });
