@@ -5,8 +5,8 @@ odoo.define('pos_set_default_customer.GetCustomer', function(require) {
 
     var _super_order = models.Order.prototype;
     models.Order = models.Order.extend({
-        initialize: function() {
-            _super_order.initialize.apply(this, arguments);
+        initialize: function(attributes,options) {
+            _super_order.initialize.apply(this, arguments, options);
             if (this.pos.config.default_partner_id && !this.export_as_JSON().partner_id) {
             	this.set_client(this.pos.db.get_partner_by_id(this.pos.config.default_partner_id[0]));
             }
