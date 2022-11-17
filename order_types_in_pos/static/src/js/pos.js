@@ -87,6 +87,9 @@ models.Order = models.Order.extend({
         if (this.pos.config.default_order_type_id && !this.export_as_JSON().delivery_type) {
             this.set_delivery_type(this.pos.config.default_order_type_id[0])
         }
+        if (this.pos.config.default_partner_id && !this.export_as_JSON().partner_id) {
+            this.set_client(this.pos.db.get_partner_by_id(this.pos.config.default_partner_id[0]));
+        }
     },
 });
 });
