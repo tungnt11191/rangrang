@@ -6,11 +6,11 @@
                 <t style="pos-receipt-left-align" if="receipt.is_gcc_country">
                     <img t-if="receipt.qr_code" id="qrcode" t-att-src="receipt.qr_code"/>
                 </t>
-                <div>
+                <div with="100%">
                     <t t-if="receipt.company.name">
                         <b><t t-esc="receipt.company.name" /></b>
                     </t>
-                    <div style="font-size:13px">
+                    <div style="font-size:13px" with="100%">
                         <t t-if="receipt.header_html">
                             <t t-raw="receipt.header_html" />
                         </t>
@@ -26,7 +26,7 @@
                 <t>
                     <b>HÓA ĐƠN BÁN HÀNG</b>
                 </t>
-                <div style="font-size:13px">
+                <div style="font-size:13px" with="100%">
                     <t t-if="receipt.name">
                         <t t-esc="receipt.name"/>
                     </t>
@@ -59,18 +59,18 @@
                 <br/>
                 <table>
                     <colgroup>
-                        <col style="border: 1px solid rgb(0, 0, 0);" width='40%'/>
-                        <col style="border: 1px solid rgb(0, 0, 0);" width='15%'/>
-                        <col style="border: 1px solid rgb(0, 0, 0);" width='15%'/>
-                        <col style="border: 1px solid rgb(0, 0, 0);" width='30%'/>
+                        <col style="border: 1px solid" width='40%'/>
+                        <col style="border: 1px solid" width='15%'/>
+                        <col style="border: 1px solid" width='15%'/>
+                        <col style="border: 1px solid" width='30%'/>
                     </colgroup>
-                    <tr style="border: 1px solid rgb(0, 0, 0);">
+                    <tr style="border: 1px solid">
                         <th>Tên món</th>
                         <th>Số lượng</th>
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                     </tr>
-                    <tr style="border: 1px solid rgb(0, 0, 0);" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                    <tr style="border: 1px solid" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
                         <td>
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
@@ -165,7 +165,7 @@
                 <br/>
 
                 <!-- Footer -->
-                <div style="font-size:13px">
+                <div style="font-size:13px" with="100%">
                     <div t-if="receipt.footer_html"  class="pos-receipt-center-align">
                         <t t-raw="receipt.footer_html" />
                     </div>
