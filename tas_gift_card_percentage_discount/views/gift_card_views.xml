@@ -7,6 +7,8 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="percentage"/>
+                <field name="apply_for_pos"/>
+                <field name="pos_config_ids" widget="many2many_tags" attrs="{'invisible': [('apply_for_pos', '=', False)]}" />
             </xpath>
         </field>
     </record>
