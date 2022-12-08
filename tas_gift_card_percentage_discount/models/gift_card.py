@@ -10,4 +10,12 @@ class GiftCard(models.Model):
     percentage = fields.Integer(_("Discount per order (Percentage)"), default=100)
     apply_for_pos = fields.Boolean(_("Apply for specific POS"))
     pos_config_ids = fields.Many2many('pos.config', 'pos_config_gift_card_rel', 'gift_card_id', 'pos_config_id')
+    gift_card_product_id = fields.Many2one('product.product', string='Gift Card Product', compute='_compute_gift_card_product_id', store=True)
 
+    @api.depends('percentage')
+    def _compute_gift_card_product_id(self):
+        for record in self:
+            if record.percentage < 50:
+                record.gift_card_product_id = self.env.ref("gift_card.pay_with_gift_card_product")
+            else:
+                record.gift_card_product_id = self.env.ref("tas_gift_card_percentage_discount.pay_with_gift_card_product_50_percentage")

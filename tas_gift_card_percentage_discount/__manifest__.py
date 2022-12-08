@@ -12,10 +12,12 @@
     'auto_install': True,
     'data': [
         'views/gift_card_views.xml',
+        'data/gift_card_data.xml',
     ],
     'assets': {
         'point_of_sale.assets': [
             # 'pos_gift_card/static/src/css/giftCard.css',
+            'order_types_in_pos/static/src/js/pos.js',
             'tas_gift_card_percentage_discount/static/src/js/GiftCardPopup.js',
             # 'pos_gift_card/static/src/js/GiftCardButton.js',
             # 'pos_gift_card/static/src/js/GiftCardPopup.js',

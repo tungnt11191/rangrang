@@ -9,6 +9,7 @@
                 <field name="percentage"/>
                 <field name="apply_for_pos"/>
                 <field name="pos_config_ids" widget="many2many_tags" attrs="{'invisible': [('apply_for_pos', '=', False)]}" />
+                <field name="gift_card_product_id"/>
             </xpath>
         </field>
     </record>
