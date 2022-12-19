@@ -2,6 +2,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 from odoo import api, fields, models, _
+import base64
 
 
 class GiftCard(models.Model):
@@ -19,3 +20,7 @@ class GiftCard(models.Model):
                 record.gift_card_product_id = self.env.ref("gift_card.pay_with_gift_card_product")
             else:
                 record.gift_card_product_id = self.env.ref("tas_gift_card_percentage_discount.pay_with_gift_card_product_50_percentage")
+
+    def generate_barcode(self, value, type, **kwargs):
+        barcode = self.env['ir.actions.report'].barcode(type, value, **kwargs)
+        return base64.encodestring(barcode)
