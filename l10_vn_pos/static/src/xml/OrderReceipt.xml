@@ -3,9 +3,6 @@
     <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
             <div class="pos-receipt">
-                <t style="pos-receipt-left-align" if="receipt.is_gcc_country">
-                    <img t-if="receipt.qr_code" id="qrcode" t-att-src="receipt.qr_code"/>
-                </t>
                 <div with="100%">
                     <t t-if="receipt.company.name">
                         <b><t t-esc="receipt.company.name" /></b>
@@ -26,7 +23,7 @@
                 <t>
                     <b>HÓA ĐƠN BÁN HÀNG</b>
                 </t>
-                <div style="font-size:13px" with="100%">
+                <div style="font-size:13px;line-height: 1.3;" with="100%">
                     <t t-if="receipt.name">
                         <t t-esc="receipt.name"/>
                     </t>
@@ -57,7 +54,7 @@
                     </div>
                 </div>
                 <br/>
-                <table>
+                <table style="font-size:13px">
                     <colgroup>
                         <col style="border: 1px solid" width='40%'/>
                         <col style="border: 1px solid" width='15%'/>
@@ -70,7 +67,7 @@
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                     </tr>
-                    <tr style="border: 1px solid" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                    <tr style="border: 1px" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
                         <td>
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
@@ -97,31 +94,36 @@
 <!--                </div>-->
 
                 <!-- Subtotal -->
-                <div>
-                    <t t-if="!isTaxIncluded">
-                        <div class="pos-receipt-right-align">--------</div>
-                        <br/>
-                        <div>Tổng tiền hàng<span t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/></div>
-                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
-                            <div class="responsive-price">
-                                <t t-esc="tax.name" />
-                                <span t-esc='env.pos.format_currency_no_symbol(tax.amount)' class="pos-receipt-right-align"/>
-                            </div>
-                        </t>
-                    </t>
-                        <div> Chiết khấu:
+                <div style="font-size:13px;line-height: 1.3;" with="100%">
+<!--                    <t t-if="!isTaxIncluded">-->
+<!--                        <br/>-->
+<!--                        <div>Tổng tiền hàng-->
+<!--                            <t t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/>-->
+<!--                        </div>-->
+<!--                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">-->
+<!--                            <div class="responsive-price">-->
+<!--                                <t t-esc="tax.name" />-->
+<!--                                <span t-esc='env.pos.format_currency_no_symbol(tax.amount)' class="pos-receipt-right-align"/>-->
+<!--                            </div>-->
+<!--                        </t>-->
+<!--                    </t>-->
+
+                    <br/>
+                    <div>Tổng tiền hàng:
+                        <span t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/>
+                    </div>
+
+                    <!-- Total -->
+<!--                    <div class="pos-receipt-right-align">&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</div><br/>-->
+                    <div> Chiết khấu:
                         <t t-if="receipt.total_discount">
                             <span t-esc="env.pos.format_currency(receipt.total_discount)" class="pos-receipt-right-align"/>
                         </t>
+                        <div><b>Tổng cộng:</b>
+                            <b><span t-esc="env.pos.format_currency(receipt.total_with_tax)" class="pos-receipt-right-align"/></b>
+                    </div>
                     </div>
 
-
-                    <!-- Total -->
-                    <div class="pos-receipt-right-align">--------</div><br/>
-                    <div>
-                        <b>Tổng cộng:</b>
-                        <b><span t-esc="env.pos.format_currency(receipt.total_with_tax)" class="pos-receipt-right-align"/></b>
-                    </div>
                     <t t-if="receipt.total_rounded != receipt.total_with_tax">
                         <div>
                             Làm tròn:<span t-esc='env.pos.format_currency(receipt.rounding_applied)' class="pos-receipt-right-align"/>
@@ -138,7 +140,7 @@
                             Phương thức thanh toán: <span class="pos-receipt-right-align" t-esc="line.name"/>
                         </div>
                         <div>
-                            Số tiền khách trả: <span t-esc="env.pos.format_currency(line.amount)" class="pos-receipt-right-align"/>
+                            Tiền khách trả: <span t-esc="env.pos.format_currency(line.amount)" class="pos-receipt-right-align"/>
                         </div>
                     </t>
                         <div>
@@ -147,18 +149,18 @@
 
                         <!-- Extra Payment Info -->
 
-                    <t t-if="isTaxIncluded">
+<!--                    <t t-if="isTaxIncluded">-->
 <!--                        <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">-->
 <!--                            <div>-->
 <!--                                <t t-esc="tax.name" />-->
 <!--                                <span t-esc="env.pos.format_currency_no_symbol(tax.amount)" class="pos-receipt-right-align"/>-->
 <!--                            </div>-->
 <!--                        </t>-->
-                        <div>
-                            Tổng thuế
-                            <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>
-                        </div>
-                    </t>
+<!--                        <div>-->
+<!--                            Tổng thuế-->
+<!--                            <span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/>-->
+<!--                        </div>-->
+<!--                    </t>-->
                 </div>
 
                 <div class="before-footer" />
@@ -176,6 +178,11 @@
                         <br/>
                         <br/>
                     </div>
+                </div>
+                <div class="pos-receipt-center-align">
+                    <t style="pos-receipt-left-align" if="receipt.is_gcc_country">
+                        <img t-if="receipt.qr_code" id="qrcode" t-att-src="receipt.qr_code"/>
+                    </t>
                 </div>
             </div>
         </xpath>
