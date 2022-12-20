@@ -14,7 +14,7 @@
 
 	<t t-name="SelectComboProductPopupWidget" owl="1">
 		<div class="modal-dialog">
-			<div class="popup popup-textinput" style="height: 550px !important;" t-on-click="renderElement">
+			<div class="popup close-pos-popup" style="height: 850px !important;" t-on-click="renderElement">
 				<p class="title" style="background-color: #dbdbdc; color: #4e4c4c;">POS Combo Products</p>
 				<div style="display: grid;">
 					<span class="required-products">Requrired Products</span>
@@ -22,9 +22,9 @@
 						<t t-if="props.required_products">
 							<t t-foreach="req_product" t-as="product">
 								<div class='required-product' t-att-data-product-id="product.id" tabindex="0" t-attf-aria-labelledby="article_product_#{product.id}">
-									<div class="product-img">
-										<img t-att-src='product.product_image_url' alt="Product image"/>
-									</div>
+<!--									<div class="product-img">-->
+<!--										<img t-att-src='product.product_image_url' alt="Product image"/>-->
+<!--									</div>-->
 									<div class="product-name" t-attf-id="article_product_#{product.id}">
 										<t t-esc="product.display_name"/>
 									</div>
@@ -37,12 +37,12 @@
 						<t t-if="props.optional_products">
 							<t t-foreach="optional_product" t-as="product">
 								<div class='optional-product' t-att-data-product-id="product.id" tabindex="0" t-attf-aria-labelledby="article_product_#{product.id}" t-on-click="renderElement">
-									<div class="product-img">
-										<img t-att-src='product.product_image_url' alt="Product image"/>
-										<span class="remove-product" t-att-data-product-id="product.id">
-					                       <i class="fa fa-times"/>
-					                    </span>
-									</div>
+<!--									<div class="product-img">-->
+<!--										<img t-att-src='product.product_image_url' alt="Product image"/>-->
+<!--										<span class="remove-product" t-att-data-product-id="product.id">-->
+<!--					                       <i class="fa fa-times"/>-->
+<!--					                    </span>-->
+<!--									</div>-->
 									<div class="product-name" t-attf-id="article_product_#{product.id}">
 										<t t-esc="product.display_name"/>
 									</div>
