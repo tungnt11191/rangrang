@@ -71,6 +71,12 @@
                         <td>
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
+                            <t t-if="line.customer_note">
+                                <div class="pos-receipt-left-padding pos-receipt-customer-note">
+                                    (<t t-esc="line.customer_note"/>)
+                                </div>
+                            </t>
+
                         </td>
                         <td>
                             <t t-if="isSimple(line)">
