@@ -186,8 +186,8 @@
                     </div>
                 </div>
                 <div class="pos-receipt-center-align">
-                    <t style="pos-receipt-left-align" if="receipt.is_gcc_country">
-                        <img t-if="receipt.qr_code" id="qrcode" t-att-src="receipt.qr_code"/>
+                    <t>
+                        <img src='/l10_vn_pos/static/description/qr_code.jpg' class="pos-receipt-logo"/>
                     </t>
                 </div>
             </div>
