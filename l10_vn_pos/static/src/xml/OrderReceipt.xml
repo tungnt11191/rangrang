@@ -38,13 +38,13 @@
                         </t>
                     </div>
                     <div>Điện thoại:
-                        <t t-if="receipt.client.mobile">
-                            <t t-esc="receipt.client.mobile"/>
+                        <t t-if="receipt.client.phone">
+                            <t t-esc="receipt.client.phone"/>
                         </t>
                     </div>
                     <div>Điểm tích lũy:
-                        <t t-if="receipt.client.property_account_position_id">
-                            <t t-esc="receipt.client.property_account_position_id"/>
+                        <t t-if="receipt.client.loyalty_points">
+                            <t t-esc="receipt.client.loyalty_points"/>
                         </t>
                     </div>
                     <div>Người bán:
