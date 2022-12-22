@@ -37,11 +37,11 @@
                             <t t-esc="receipt.client.name"/>
                         </t>
                     </div>
-                    <div>Điện thoại:
-                        <t t-if="receipt.client.phone">
-                            <t t-esc="receipt.client.phone"/>
-                        </t>
-                    </div>
+<!--                    <div>Điện thoại:-->
+<!--                        <t t-if="receipt.client.phone">-->
+<!--                            <t t-esc="receipt.client.phone"/>-->
+<!--                        </t>-->
+<!--                    </div>-->
                     <div>Điểm tích lũy:
                         <t t-if="receipt.client.loyalty_points">
                             <t t-esc="receipt.client.loyalty_points"/>
