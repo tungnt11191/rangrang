@@ -7,7 +7,7 @@
                     <t t-if="receipt.company.name">
                         <b><t t-esc="receipt.company.name" /></b>
                     </t>
-                    <div style="font-size:13px" with="100%">
+                    <div style="font-size:12px" with="100%">
                         <t t-if="receipt.header_html">
                             <t t-raw="receipt.header_html" />
                         </t>
@@ -23,7 +23,7 @@
                 <t>
                     <b>HÓA ĐƠN BÁN HÀNG</b>
                 </t>
-                <div style="font-size:13px;line-height: 1.3;" with="100%">
+                <div style="font-size:12px;line-height: 1.3;" with="100%">
                     <t t-if="receipt.name">
                         <t t-esc="receipt.name"/>
                     </t>
@@ -54,21 +54,21 @@
                     </div>
                 </div>
                 <br/>
-                <table style="font-size:13px">
+                <table style="padding: 3px;font-size:12px">
                     <colgroup>
-                        <col style="border: 1px solid" width='40%'/>
-                        <col style="border: 1px solid" width='15%'/>
-                        <col style="border: 1px solid" width='15%'/>
-                        <col style="border: 1px solid" width='30%'/>
+                        <col style="padding: 3px;border: 1px solid" width='40%'/>
+                        <col style="padding: 3px;border: 1px solid" width='15%'/>
+                        <col style="padding: 3px;border: 1px solid" width='15%'/>
+                        <col style="padding: 3px;border: 1px solid" width='30%'/>
                     </colgroup>
-                    <tr style="border: 1px solid">
-                        <th>Tên món</th>
-                        <th>Số lượng</th>
-                        <th>Đơn giá</th>
-                        <th>Thành tiền</th>
+                    <tr style="padding: 3px;border: 1px solid">
+                        <th style="padding: 3px;border: 1px solid">Tên món</th>
+                        <th style="padding: 3px;border: 1px solid">Số lượng</th>
+                        <th style="padding: 3px;border: 1px solid">Đơn giá</th>
+                        <th style="padding: 3px;border: 1px solid">Thành tiền</th>
                     </tr>
-                    <tr style="border: 1px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <td style="border: 1px dotted">
+                    <tr style="padding: 3px;border: 1px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                        <td style="padding: 3px;border: 1px dotted">
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
                             <t t-if="line.customer_note">
@@ -78,15 +78,20 @@
                             </t>
 
                         </td>
-                        <td style="text-align:center;border: 1px dotted">
+                        <td style="padding: 3px;text-align:center;border: 1px dotted">
                             <t t-if="isSimple(line)">
                                 <span>1</span>
                             </t>
                             <t t-else="">
-                                <t t-esc="Math.round(line.quantity)" style='text-align:center'/>
+                                <t t-if="Math.round(line.quantity) != 0">
+                                    <t t-esc="Math.round(line.quantity)" style='text-align:center'/>
+                                </t>
+                                <t t-else="">
+                                    <t>-&#160;&#160;&#160;</t>
+                                </t>
                             </t>
                         </td>
-                        <td style="text-align:right;border: 1px dotted">
+                        <td style="padding: 3px;text-align:right;border: 1px dotted">
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
                             </t>
@@ -94,7 +99,7 @@
                                 <t>-&#160;&#160;&#160;</t>
                             </t>
                         </td>
-                        <td style='text-align:right;border: 1px dotted'>
+                        <td style='padding: 3px;text-align:right;border: 1px dotted'>
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
                             </t>
@@ -110,7 +115,7 @@
 <!--                </div>-->
 
                 <!-- Subtotal -->
-                <div style="font-size:13px;line-height: 1.3;" with="100%">
+                <div style="font-size:12px;line-height: 1.3;" with="100%">
 <!--                    <t t-if="!isTaxIncluded">-->
 <!--                        <br/>-->
 <!--                        <div>Tổng tiền hàng-->
@@ -183,7 +188,7 @@
                 <br/>
 
                 <!-- Footer -->
-                <div style="font-size:13px" with="100%">
+                <div style="font-size:12px" with="100%">
                     <div t-if="receipt.footer_html"  class="pos-receipt-center-align">
                         <t t-raw="receipt.footer_html" />
                     </div>
@@ -197,7 +202,7 @@
                 </div>
                 <div class="pos-receipt-center-align">
                     <t>
-                        <img src='/l10_vn_pos/static/description/qr_code.jpg' class="pos-receipt-logo"/>
+                        <img style="width:100px; height:100px" src='/l10_vn_pos/static/description/qr_code.jpg' class="pos-receipt-logo"/>
                     </t>
                 </div>
             </div>
