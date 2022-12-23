@@ -56,10 +56,10 @@
                 <br/>
                 <table style="padding: 3px;font-size:12px">
                     <colgroup>
-                        <col style="padding: 3px;border: 1px solid" width='40%'/>
+                        <col style="padding: 3px;border: 1px solid" width='55%'/>
+                        <col style="padding: 3px;border: 1px solid" width='10%'/>
                         <col style="padding: 3px;border: 1px solid" width='15%'/>
-                        <col style="padding: 3px;border: 1px solid" width='15%'/>
-                        <col style="padding: 3px;border: 1px solid" width='30%'/>
+                        <col style="padding: 3px;border: 1px solid" width='20%'/>
                     </colgroup>
                     <tr style="padding: 3px;border: 1px solid">
                         <th style="padding: 3px;border: 1px solid">Tên món</th>
