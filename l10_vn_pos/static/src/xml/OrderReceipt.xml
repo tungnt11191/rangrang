@@ -67,8 +67,8 @@
                         <th>Đơn giá</th>
                         <th>Thành tiền</th>
                     </tr>
-                    <tr style="border: 1px" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <td>
+                    <tr style="border: 1px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                        <td style="border: 1px dotted">
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
                             <t t-if="line.customer_note">
@@ -78,19 +78,29 @@
                             </t>
 
                         </td>
-                        <td>
+                        <td style="text-align:center;border: 1px dotted">
                             <t t-if="isSimple(line)">
                                 <span>1</span>
                             </t>
                             <t t-else="">
-                                <t t-esc="Math.round(line.quantity)"/>
+                                <t t-esc="Math.round(line.quantity)" style='text-align:center'/>
                             </t>
                         </td>
-                        <td>
-                            <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
+                        <td style="text-align:right;border: 1px dotted">
+                            <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
+                            </t>
+                            <t t-else="">
+                                <t>-&#160;&#160;&#160;</t>
+                            </t>
                         </td>
-                        <td style='text-align:right'>
-                            <t t-esc="env.pos.format_currency_no_symbol(line.price_display)" />
+                        <td style='text-align:right;border: 1px dotted'>
+                            <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
+                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
+                            </t>
+                            <t t-else="">
+                                <t>-&#160;&#160;&#160;</t>
+                            </t>
                         </td>
                     </tr>
                 </table>
