@@ -39,6 +39,8 @@ class GiftCard(models.Model):
 
                 days_in_month = monthrange(first_day_of_month.year, first_day_of_month.month)[1]
                 first_day_of_next_month = (datetime.now().replace(hour=0, minute=0)) + timedelta(days=days_in_month)
+
+                # sale order
                 confirmed_line = record.redeem_line_ids.filtered(
                     lambda l: l.state in ('sale', 'done')
                                 and l.create_date >= first_day_of_month
@@ -52,6 +54,7 @@ class GiftCard(models.Model):
                     ))
                 record.balance = balance
 
+                # pos order
                 confirmed_line = record.redeem_pos_order_line_ids.sudo().filtered(
                     lambda l: l.order_id.state in ('paid', 'done', 'invoiced')
                               and l.create_date >= first_day_of_month
