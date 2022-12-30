@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
-            <div style="width: 256px;font-family:Arial">
+            <div class="pos-receipt" style="width: 256px;font-family:Arial">
                 <div with="100%">
                     <t t-if="receipt.company.name">
                         <b><t t-esc="receipt.company.name" /></b>
