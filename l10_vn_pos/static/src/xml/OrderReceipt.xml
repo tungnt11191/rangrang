@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
-            <div class="pos-receipt" style="width: auto;font-family:Arial">
+            <div class="pos-receipt">
                 <div with="100%">
                     <t t-if="receipt.company.name">
                         <b><t t-esc="receipt.company.name" /></b>
@@ -54,7 +54,7 @@
                     </div>
                 </div>
                 <br/>
-                <table style="border: 1.5px solid;padding: 3px;font-size:12px">
+                <table style="border: 1px solid;padding: 3px;font-size:12px">
                     <colgroup>
                         <col style="padding: 3px;border-right: 1px solid" width='55%'/>
                         <col style="padding: 3px;border-right: 1px solid" width='10%'/>
