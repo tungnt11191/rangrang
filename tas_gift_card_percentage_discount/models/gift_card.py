@@ -16,7 +16,8 @@ class GiftCard(models.Model):
         string='Gift Card Product',
         compute='_compute_gift_card_product_id',
         store=True,
-        inverse='_inverse_gift_card_product_id'
+        inverse='_inverse_gift_card_product_id',
+        domain="[('detailed_type', '=', 'service')]"
     )
 
     def _inverse_revenue_accrual_account(self):
