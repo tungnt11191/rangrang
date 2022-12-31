@@ -32,8 +32,8 @@ class GiftCard(models.Model):
     @api.depends("redeem_pos_order_line_ids", "redeem_line_ids")
     def _compute_balance(self):
         for record in self:
-            if not self.reset_balance:
-                super()._compute_balance()
+            if not record.reset_balance:
+                record._compute_balance()
             else:
                 first_day_of_month = (datetime.now().replace(hour=0, minute=0))
 
