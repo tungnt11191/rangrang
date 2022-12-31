@@ -29,6 +29,10 @@ class GiftCard(models.Model):
     def _onchange_reset_balance(self):
         self._compute_balance()
 
+    def recompute_balance(self):
+        for record in self:
+            record._compute_balance()
+
     @api.depends("redeem_pos_order_line_ids", "redeem_line_ids")
     def _compute_balance(self):
         for record in self:
