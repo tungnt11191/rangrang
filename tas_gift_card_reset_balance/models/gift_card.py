@@ -25,9 +25,9 @@ class GiftCard(models.Model):
             #     if card.reset_balance:
             #         card.balance = card.initial_amount
 
-    # @api.onchange('reset_balance')
-    # def _onchange_reset_balance(self):
-    #     self._compute_balance()
+    @api.onchange('reset_balance')
+    def _onchange_reset_balance(self):
+        self._compute_balance()
 
     def recompute_balance(self):
         for record in self:
@@ -37,7 +37,7 @@ class GiftCard(models.Model):
     def _compute_balance(self):
         for record in self:
             if not record.reset_balance:
-                record._compute_balance()
+                super(GiftCard, self)._compute_balance()
             else:
                 first_day_of_month = (datetime.now().replace(hour=0, minute=0))
 
