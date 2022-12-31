@@ -25,9 +25,9 @@ class GiftCard(models.Model):
             #     if card.reset_balance:
             #         card.balance = card.initial_amount
 
-    @api.onchange('reset_balance')
-    def _onchange_reset_balance(self):
-        self._compute_balance()
+    # @api.onchange('reset_balance')
+    # def _onchange_reset_balance(self):
+    #     self._compute_balance()
 
     def recompute_balance(self):
         for record in self:
