@@ -8,7 +8,6 @@
             <xpath expr="//field[@name='partner_id']" position="after">
                 <field name="reset_balance"/>
             </xpath>
-
             <xpath expr="//header" position="inside">
                 <button string="Recompute balance" name="recompute_balance" type="object"/>
             </xpath>

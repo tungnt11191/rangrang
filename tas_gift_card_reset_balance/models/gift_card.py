@@ -39,10 +39,10 @@ class GiftCard(models.Model):
             if not record.reset_balance:
                 super(GiftCard, self)._compute_balance()
             else:
-                first_day_of_month = (datetime.now().replace(hour=0, minute=0))
+                first_day_of_month = (datetime.now().replace(day=1, hour=0, minute=0, second=0))
 
                 days_in_month = monthrange(first_day_of_month.year, first_day_of_month.month)[1]
-                first_day_of_next_month = (datetime.now().replace(hour=0, minute=0)) + timedelta(days=days_in_month)
+                first_day_of_next_month = (first_day_of_month.replace(hour=0, minute=0)) + timedelta(days=days_in_month)
 
                 # sale order
                 confirmed_line = record.redeem_line_ids.filtered(

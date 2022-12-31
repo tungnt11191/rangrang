@@ -8,7 +8,7 @@
     'category': 'Sales/Sales',
     'version': '1.0',
     'author': 'tungnt',
-    'depends': ['gift_card'],
+    'depends': ['gift_card', 'pos_gift_card', 'sale_gift_card'],
     'auto_install': True,
     'data': [
         'views/gift_card_views.xml',
