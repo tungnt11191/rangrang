@@ -7,16 +7,57 @@ class MassCleanData(models.TransientModel):
     _description = "Mass Clean Data"
 
     clean_modules = {
-        'chk_sales_and_transfers': ['sale_order_line', 'sale.order', 'stock.picking', 'stock.valuation.layer', 'stock.move', 'stock.move.line', 'stock.scrap', 'stock.inventory'],
+        'chk_sales_and_transfers':
+            [
+                'sale_order_line',
+                'sale.order',
+                'stock.picking',
+                'stock.valuation.layer',
+                'stock.move',
+                'stock.move.line',
+                'stock.scrap',
+                # 'stock.inventory',  # is not exist in odoo 15
+            ],
         # 'stock.picking'
-        'chk_purchases_and_transfers': ['purchase_order_line', 'purchase.order', 'stock.picking', 'stock.valuation.layer', 'stock.move', 'stock.move.line', 'stock.scrap', 'stock.inventory'],
-        'chk_only_transfer': ['stock.picking', 'stock.valuation.layer', 'stock.valuation.layer', 'stock.move', 'stock.move.line', 'stock.scrap', 'stock.inventory'],
+        'chk_purchases_and_transfers':
+            [
+                'purchase_order_line',
+                'purchase.order',
+                'stock.picking',
+                'stock.valuation.layer',
+                'stock.move',
+                'stock.move.line',
+                'stock.scrap',
+                # 'stock.inventory',  # is not exist in odoo 15
+            ],
+        'chk_only_transfer':
+            [
+                'stock.picking',
+                'stock.valuation.layer',
+                'stock.valuation.layer',
+                'stock.move',
+                'stock.move.line',
+                'stock.scrap',
+                # 'stock.inventory',  # is not exist in odoo 15
+            ],
         'chk_invoice_payment_journal': ['account.move.line', 'account.move', 'account.payment'],
         'chk_journal_entries': ['account.move.line', 'account.move'],
         'chk_customers_and_vendors': ['res.partner'],
         'chk_accounting_data': ['account.move.line', 'account.move', 'account.journal', 'account.payment' ],
-        'chk_clean_all': ['sale.order', 'purchase.order', 'stock.picking', 'account.move.line', 'account.move',
-                          'account.payment', 'res.partner', 'stock.valuation.layer', 'stock.move', 'stock.move.line', 'stock.scrap', 'stock.inventory']
+        'chk_clean_all': [
+            'sale.order',
+            'purchase.order',
+            'stock.picking',
+            'account.move.line',
+            'account.move',
+            'account.payment',
+            'res.partner',
+            'stock.valuation.layer',
+            'stock.move',
+            'stock.move.line',
+            'stock.scrap',
+            # 'stock.inventory',  # is not exist in odoo 15
+        ]
     }
 
     chk_sales_and_transfers = fields.Boolean(string=_("Sales & All Transfers"), default=False)
