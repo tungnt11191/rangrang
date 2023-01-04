@@ -147,7 +147,7 @@ class AccountMove(models.Model):
 
     # cấm xóa
     def unlink(self):
-        if self.env.user.login == delete_invoice:     # api@nhanlucsieuviet.com
+        if self.env.user.login == 'delete_invoice':     # api@nhanlucsieuviet.com
             return super(AccountMove, self.with_context(force_delete=True)).unlink()
         else:
             return super(AccountMove, self).unlink()
