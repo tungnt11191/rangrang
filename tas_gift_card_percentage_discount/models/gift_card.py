@@ -20,7 +20,7 @@ class GiftCard(models.Model):
         domain="[('detailed_type', '=', 'service')]"
     )
 
-    def _inverse_revenue_accrual_account(self):
+    def _inverse_gift_card_product_id(self):
         for record in self:
             test = True
 
