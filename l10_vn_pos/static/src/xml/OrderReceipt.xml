@@ -29,7 +29,7 @@
                     </t>
                     <div>Ngày bán:
                         <t t-if="receipt.date.validation_date">
-                            <t t-esc="receipt.date.localestring" />
+                            <t t-esc="receipt.date.validation_date" />
                         </t>
                     </div>
                     <div>Khách hàng:
