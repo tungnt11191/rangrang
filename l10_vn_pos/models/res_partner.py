@@ -10,6 +10,13 @@ class ResPartner(models.Model):
 
     barcode = fields.Char(help="Use a barcode to identify this contact.", copy=False, company_dependent=True)
 
+    @api.model
+    def create(self, vals):
+        if vals.get('mobile'):
+            vals['barcode'] = 'RRC' + vals.get("mobile")
+        res = super(ResPartner, self).create(vals)
+        return res
+
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         if vals.get("mobile"):
