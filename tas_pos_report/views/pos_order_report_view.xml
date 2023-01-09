@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_tas_report_pos_order_search_inherit" model="ir.ui.view">
+        <field name="name">tas.report.pos.order.search.inherit</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='User']" position='after'>
+                <filter string="Order Type" name="delivery_type" domain="[]" context="{'group_by':'delivery_type'}"/>
+                <filter string="Payment method" name="payment_method" domain="[]" context="{'group_by':'payment_method'}"/>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record id="view_tas_report_pos_order_pivot_inherit" model="ir.ui.view">
+        <field name="name">tas.report.pos.order.pivot.inherit</field>
+        <field name="model">report.pos.order</field>
+        <field name="inherit_id" ref="point_of_sale.view_report_pos_order_pivot"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='order_id']" position='after'>
+                <field name="guest_number" type="measure"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
+
