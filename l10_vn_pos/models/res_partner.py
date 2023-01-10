@@ -14,13 +14,17 @@ class ResPartner(models.Model):
     def create(self, vals):
         if vals.get('mobile'):
             vals['barcode'] = 'RRC' + vals.get("mobile")
+        elif vals.get('phone'):
+            vals['barcode'] = 'RRC' + vals.get("phone")
         res = super(ResPartner, self).create(vals)
         return res
 
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         if vals.get("mobile"):
-            self.barcode = 'RRC' + vals.get("mobile")
+            vals['barcode'] = 'RRC' + vals.get("mobile")
+        elif vals.get("phone"):
+            vals['barcode'] = 'RRC' + vals.get("phone")
         return res
 
 
