@@ -54,5 +54,15 @@
             <field name="binding_type">report</field>
             <field name="binding_model_id" ref="pos_gift_card.model_gift_card"/>
         </record>
+
+        <record id="sent_mail_gift_card_action" model="ir.actions.server">
+            <field name="name">Sent Mail</field>
+            <field name="model_id" ref="model_gift_card"/>
+            <field name="binding_model_id" ref="model_gift_card"/>
+            <field name="binding_view_types">form,list</field>
+            <field name="state">code</field>
+            <field name="code">action = records.action_sent_gift_card()</field>
+        </record>
+
     </data>
 </odoo>
