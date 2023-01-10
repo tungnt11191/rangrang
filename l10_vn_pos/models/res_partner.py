@@ -22,9 +22,9 @@ class ResPartner(models.Model):
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         if vals.get("mobile"):
-            vals['barcode'] = 'RRC' + vals.get("mobile")
+            self.barcode = 'RRC' + vals.get("mobile")
         elif vals.get("phone"):
-            vals['barcode'] = 'RRC' + vals.get("phone")
+            self.barcode = 'RRC' + vals.get("phone")
         return res
 
 
