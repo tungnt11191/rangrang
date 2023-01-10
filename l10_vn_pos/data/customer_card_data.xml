@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="customer_card_template">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.external_layout">
+                        <t t-if="o.barcode">
+                            <div style="margin:0px; font-size:24px; font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:36px; color:#333333; text-align: center">
+                                Here is customer card!
+                            </div>
+                            <div style="padding:0; margin:0px; padding-top:35px; padding-bottom:35px; background-color:#efefef; text-align:center;">
+                                <p style="margin:0px; font-size:14px;font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:21px; color:#333333">
+                                    <strong>Customer code</strong>
+                                </p>
+                                <p style="margin:0px; font-size:25px;font-family:arial, 'helvetica neue', helvetica, sans-serif; line-height:38px; color:#A9A9A9">
+                                    <span t-field="o.barcode"/>
+                                </p>
+                            </div>
+                            <div style="padding:0; margin:0px; padding-top:10px; padding-bottom:10px; text-align:center;">
+                                <img t-att-src="'/report/barcode/Code128/'+o.barcode" style="width:400px;height:75px" alt="Barcode"/>
+                            </div>
+                        </t>
+                        <t t-else="" >
+                            <div style="text-align:center;">
+                                <span>Please fill customer's phone</span>
+                            </div>
+                        </t>
+                        <div style="text-align:center;">
+                            <strong>Partner: </strong> <span t-field="o.name"/>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <record id="customer_card_report_pdf" model="ir.actions.report">
+            <field name="name">Customer Card</field>
+            <field name="model">res.partner</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">l10_vn_pos.customer_card_template</field>
+            <field name="print_report_name">'Customer card- %s - %s' % (object.name or '', object.phone)</field>
+            <field name="binding_type">report</field>
+            <field name="binding_model_id" ref="model_res_partner"/>
+        </record>
+    </data>
+</odoo>

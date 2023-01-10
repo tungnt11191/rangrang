@@ -12,6 +12,7 @@ TASYS POS Localization
     'depends': ['point_of_sale', 'pos_gift_card'],
     'data': [
         'data/gift_card_data.xml',
+        'data/customer_card_data.xml',
     ],
     'assets': {
         'web.assets_qweb': [
