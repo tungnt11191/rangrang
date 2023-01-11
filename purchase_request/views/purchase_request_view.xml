@@ -154,7 +154,8 @@
                     </group>
                     <notebook>
                         <page string="Products">
-                            <field name="line_ids">
+                            <field name="line_ids"
+                                   context="{'default_date_required': date_start}">
                                 <tree
                                     decoration-muted="cancelled == True"
                                     editable="bottom"

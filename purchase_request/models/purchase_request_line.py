@@ -77,7 +77,6 @@ class PurchaseRequestLine(models.Model):
         string="Request Date",
         required=True,
         tracking=True,
-        default=fields.Date.context_today,
     )
     is_editable = fields.Boolean(compute="_compute_is_editable", readonly=True)
     specifications = fields.Text()
