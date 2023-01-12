@@ -166,6 +166,7 @@
                                     <field
                                         name="product_uom_id"
                                         groups="uom.group_uom"
+                                        readonly="1"
                                     />
                                     <field
                                         name="analytic_account_id"
