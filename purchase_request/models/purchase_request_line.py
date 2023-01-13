@@ -25,6 +25,7 @@ class PurchaseRequestLine(models.Model):
         comodel_name="uom.uom",
         string="UoM",
         tracking=True,
+        related='product_id.uom_po_id'
     )
     product_qty = fields.Float(
         string="Quantity", tracking=True, digits="Product Unit of Measure"
@@ -281,7 +282,7 @@ class PurchaseRequestLine(models.Model):
                 name = "[{}] {}".format(self.product_id.code, name)
             if self.product_id.description_purchase:
                 name += "\n" + self.product_id.description_purchase
-            self.product_uom_id = self.product_id.uom_po_id.id
+            # self.product_uom_id = self.product_id.uom_po_id.id
             self.product_qty = 1
             self.name = name
 
