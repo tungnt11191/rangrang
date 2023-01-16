@@ -47,7 +47,7 @@ class SaleOrderInherit(models.Model):
     @api.depends('partner_invoice_id', 'commitment_date')
     def _compute_type_order(self):
         for rec in self:
-            if rec.partner_invoice_id.province_id.id != self.env.company.province_id.id:
+            if rec.partner_invoice_id.state_id.id != self.env.company.state_id.id:
                 rec.type_order = 'province'
             else:
                 if rec.commitment_date:
