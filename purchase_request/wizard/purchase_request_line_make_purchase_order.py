@@ -300,10 +300,9 @@ class PurchaseRequestLineMakePurchaseOrder(models.TransientModel):
                 all_qty = min(po_line_product_uom_qty, wizard_product_uom_qty)
                 self.create_allocation(po_line, line, all_qty, alloc_uom, purchase_request_origin)
             # TODO: Check propagate_uom compatibility:
-            new_qty = pr_line_obj._calc_new_qty(
-                line, po_line=po_line, new_pr_line=new_pr_line
-            )
-            # 20230131. Tung em yeu cau
+            # new_qty = pr_line_obj._calc_new_qty(
+            #     line, po_line=po_line, new_pr_line=new_pr_line
+            # )
             # po_line.product_qty = new_qty
             # po_line._onchange_quantity()
             # The onchange quantity is altering the scheduled date of the PO

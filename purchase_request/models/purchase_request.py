@@ -301,3 +301,9 @@ class PurchaseRequest(models.Model):
                     )
                     % rec.name
                 )
+
+    @api.onchange('date_start')
+    def onchange_date_start(self):
+        for line in self.line_ids:
+            line.date_required = self.date_start
+
