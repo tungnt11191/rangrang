@@ -21,7 +21,7 @@ class ReportPartnerLedger(models.AbstractModel):
         {'id': 'payable', 'name': _lt('Payable'), 'selected': False},
         {'id': 'other_receivable', 'name': _lt('Other Receivable - 13880001'), 'selected': False},
         {'id': 'other_payable', 'name': _lt('Other Payable - 33880001'), 'selected': False},
-        {'id': 'advance_payment', 'name': _lt('Tạm ứng nhân viên - 14110001'), 'selected': False},
+        {'id': 'advance_payment', 'name': _lt('Tạm ứng nhân viên - 14111000'), 'selected': False},
     ]
 
     def _get_reports_buttons(self, options):
@@ -60,7 +60,7 @@ class ReportPartnerLedger(models.AbstractModel):
                 elif account_type_option['id'] == 'advance_payment':
                     if have_or:
                         domain.insert(0, '|')
-                    domain.append(('account_id.code', '=', '14110001'))
+                    domain.append(('account_id.code', '=', '14111000'))
                     have_or = True
                 else:
                     if have_or:
@@ -133,8 +133,8 @@ class ReportPartnerLedger(models.AbstractModel):
                     journal.name                            AS journal_name,
                     account_move_line.einvoice_number       AS einvoice_number,
                     account_move_line.einvoice_date         AS einvoice_date,
-                    account_move_line__move_id.vsi_series   AS vs_series,
-                    account_move_line.countered_accounts    AS countered_accounts
+                    account_move_line__move_id.vsi_series   AS vs_series
+                    ---,account_move_line.countered_accounts    AS countered_accounts
                 FROM account_move_line
                 LEFT JOIN account_move account_move_line__move_id ON account_move_line__move_id.id = account_move_line.move_id
                 LEFT JOIN %s ON currency_table.company_id = account_move_line.company_id
@@ -168,7 +168,7 @@ class ReportPartnerLedger(models.AbstractModel):
                 {'name': aml['vs_series']},
                 {'name': e_invoice_date or '', 'class': 'date'},
                 {'name': aml['name']},
-                {'name': aml['countered_accounts']},
+                # {'name': aml['countered_accounts']},
                 {'name': self.format_value(aml['debit'], blank_if_zero=True), 'class': 'number'},
                 {'name': self.format_value(aml['credit'], blank_if_zero=True), 'class': 'number'},
                 {'name': self.format_value(cumulated_balance), 'class': 'number'},
@@ -212,7 +212,7 @@ class ReportPartnerLedger(models.AbstractModel):
                 elif account_type_option['id'] == 'advance_payment':
                     if have_or:
                         domain.insert(0, '|')
-                    domain.append(('code', '=', '14110001'))
+                    domain.append(('code', '=', '14111000'))
                     have_or = True
                 else:
                     if have_or:
