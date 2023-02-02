@@ -7,6 +7,19 @@ from odoo import _, api, exceptions, fields, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    def action_approve(self):
+        selected_ids = self.env.context.get('active_ids', [])
+        selected_records = self.env['purchase.order'].browse(selected_ids)
+        for rec in selected_records:
+            if rec.state in ['draft', 'sent']:
+                rec.button_confirm()
+
+    def action_reject(self):
+        selected_ids = self.env.context.get('active_ids', [])
+        selected_records = self.env['purchase.order'].browse(selected_ids)
+        for rec in selected_records:
+            rec.button_cancel()
+
     def _purchase_request_confirm_message_content(self, request, request_dict=None):
         self.ensure_one()
         if not request_dict:

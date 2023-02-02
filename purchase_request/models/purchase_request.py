@@ -307,3 +307,15 @@ class PurchaseRequest(models.Model):
         for line in self.line_ids:
             line.date_required = self.date_start
 
+    def action_approve(self):
+        selected_ids = self.env.context.get('active_ids', [])
+        selected_records = self.env['purchase.request'].browse(selected_ids)
+        for rec in selected_records:
+            if rec.state == 'to_approve':
+                rec.button_approved()
+
+    def action_reject(self):
+        selected_ids = self.env.context.get('active_ids', [])
+        selected_records = self.env['purchase.request'].browse(selected_ids)
+        for rec in selected_records:
+            rec.button_rejected()
