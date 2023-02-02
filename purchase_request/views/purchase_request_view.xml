@@ -381,6 +381,34 @@
             </p>
         </field>
     </record>
+
+    <record id="pr_method_done_action" model="ir.actions.server">
+        <field name="name">Done</field>
+        <field name="model_id" ref="model_purchase_request"/>
+        <field name="binding_model_id" ref="model_purchase_request"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_done()</field>
+    </record>
+
+    <record id="pr_method_approver_action" model="ir.actions.server">
+        <field name="name">Approve</field>
+        <field name="model_id" ref="model_purchase_request"/>
+        <field name="binding_model_id" ref="model_purchase_request"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_approve()</field>
+    </record>
+
+    <record id="pr_method_reject_action" model="ir.actions.server">
+        <field name="name">Reject</field>
+        <field name="model_id" ref="model_purchase_request"/>
+        <field name="binding_model_id" ref="model_purchase_request"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">action = records.action_reject()</field>
+    </record>
+
     <menuitem
         id="menu_purchase_request_pro_mgt"
         parent="purchase.menu_procurement_management"
