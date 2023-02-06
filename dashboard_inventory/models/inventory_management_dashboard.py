@@ -820,96 +820,99 @@ class inventory_management_dashboard(models.Model):
                         print(line.move_id.group_id)
                         print(line.move_id.group_id.name)
                         print("+++")
-                        print(line.move_id.inventory_id)
-                        print(line.move_id.inventory_id.name)
+                        # odoo 15, stock move doesnt have inventory_id
+                        # print(line.move_id.inventory_id)
+                        # odoo 15, stock move doesnt have inventory_id
+                        # print(line.move_id.inventory_id.name)
                         print("+++")
 
                         # check co phai lenh kiem ke khong
-                        if len(line.move_id.inventory_id) > 0:
-                            loaiphieu = "Kiểm kê tăng (N5)"
-                            data_model = "stock.inventory"
-                            data_model_id = line.move_id.inventory_id.id
-                            thuakiemke += line.qty_done
-                            gtthuakiemke += tongdongia
-                        else:
-                            if len(line.move_id.scrap_ids) > 0:
-                                print("huy san xuat --------------")
-                                print(line.move_id.scrap_ids)
-                                loaiphieu = "Hủy trong SX (X5)"
-                                for scrap_id in line.move_id.scrap_ids:
-                                    print(scrap_id)
-                                    print(scrap_id.name)
-                                    xuathuysanxuat += scrap_id.scrap_qty
-                                    gtxuathuysanxuat += tongdongia
-                                    data_model = "stock.scrap"
-                                    data_model_id = scrap_id.id
-                                print("huy san xuat --------------")
-                                # xuathuysanxuat += stock_scrap_id.scrap_qty
+                        # odoo 15, stock move doesnt have inventory_id
+                        # if len(line.move_id.inventory_id) > 0:
+                        #     loaiphieu = "Kiểm kê tăng (N5)"
+                        #     data_model = "stock.inventory"
+                        #     data_model_id = line.move_id.inventory_id.id
+                        #     thuakiemke += line.qty_done
+                        #     gtthuakiemke += tongdongia
+                        # else:
+                        if len(line.move_id.scrap_ids) > 0:
+                            print("huy san xuat --------------")
+                            print(line.move_id.scrap_ids)
+                            loaiphieu = "Hủy trong SX (X5)"
+                            for scrap_id in line.move_id.scrap_ids:
+                                print(scrap_id)
+                                print(scrap_id.name)
+                                xuathuysanxuat += scrap_id.scrap_qty
+                                gtxuathuysanxuat += tongdongia
+                                data_model = "stock.scrap"
+                                data_model_id = scrap_id.id
+                            print("huy san xuat --------------")
+                            # xuathuysanxuat += stock_scrap_id.scrap_qty
 
-                            # check co phai la lenh production hay khong dua theo procurement group
-                            if len(line.move_id.group_id) > 0:
-                                manufacture_order_id = self.env['mrp.production'].search(
-                                    [('procurement_group_id', '=', line.move_id.group_id.id)])
+                        # check co phai la lenh production hay khong dua theo procurement group
+                        if len(line.move_id.group_id) > 0:
+                            manufacture_order_id = self.env['mrp.production'].search(
+                                [('procurement_group_id', '=', line.move_id.group_id.id)])
 
-                                sale_order_ids = self.env['sale.order'].search(
-                                    [('procurement_group_id', '=', line.move_id.group_id.id)])
+                            sale_order_ids = self.env['sale.order'].search(
+                                [('procurement_group_id', '=', line.move_id.group_id.id)])
 
-                                purchase_order_ids = self.env['purchase.order'].search(
-                                    [('group_id', '=', line.move_id.group_id.id)])
+                            purchase_order_ids = self.env['purchase.order'].search(
+                                [('group_id', '=', line.move_id.group_id.id)])
 
-                                if len(manufacture_order_id) > 0:
-                                    print("sx----------------------------")
-                                    print(manufacture_order_id)
-                                    if line.product_id == manufacture_order_id.product_id:
-                                        loaiphieu = "Sản xuất ra (N2)"
-                                        # slsanxuatra += line.qty_done
-
-                                        if line.product_uom_id == line.product_id.uom_id:
-                                            slsanxuatra += line.qty_done
-                                        else:
-                                            uom = line.product_uom_id
-                                            slsanxuatra = uom._compute_quantity(line.qty_done, line.product_id.uom_id)
-
-                                        gtslsanxuatra += tongdongia
-                                    else:
-                                        loaiphieu = "Nhập NVL SX"
-
-                                        # nhapnvlsanxuat += line.qty_done
-
-                                        if line.product_uom_id == line.product_id.uom_id:
-                                            nhapnvlsanxuat += line.qty_done
-                                        else:
-                                            uom = line.product_uom_id
-                                            nhapnvlsanxuat = uom._compute_quantity(
-                                                line.qty_done, line.product_id.uom_id)
-
-                                        gtnhapnvlsanxuat += tongdongia
-                                    print("sx----------------------------")
-
-                                if len(purchase_order_ids) > 0:
-                                    loaiphieu = "Nhập NCC (N1)"
-                                    # tongnhapncc += line.qty_done
+                            if len(manufacture_order_id) > 0:
+                                print("sx----------------------------")
+                                print(manufacture_order_id)
+                                if line.product_id == manufacture_order_id.product_id:
+                                    loaiphieu = "Sản xuất ra (N2)"
+                                    # slsanxuatra += line.qty_done
 
                                     if line.product_uom_id == line.product_id.uom_id:
-                                        tongnhapncc += line.qty_done
+                                        slsanxuatra += line.qty_done
                                     else:
                                         uom = line.product_uom_id
-                                        tongnhapncc = uom._compute_quantity(
-                                            line.qty_done, line.product_id.uom_id)
+                                        slsanxuatra = uom._compute_quantity(line.qty_done, line.product_id.uom_id)
 
-                                    gttongnhapncc += tongdongia
+                                    gtslsanxuatra += tongdongia
+                                else:
+                                    loaiphieu = "Nhập NVL SX"
 
-                                if len(sale_order_ids) > 0:
-                                    loaiphieu = "Xuất khách hàng"
-                                    # xuatkhachhang += line.qty_done
+                                    # nhapnvlsanxuat += line.qty_done
+
                                     if line.product_uom_id == line.product_id.uom_id:
-                                        xuatkhachhang += line.qty_done
+                                        nhapnvlsanxuat += line.qty_done
                                     else:
                                         uom = line.product_uom_id
-                                        xuatkhachhang = uom._compute_quantity(
+                                        nhapnvlsanxuat = uom._compute_quantity(
                                             line.qty_done, line.product_id.uom_id)
 
-                                    gtxuatkhachhang += tongdongia
+                                    gtnhapnvlsanxuat += tongdongia
+                                print("sx----------------------------")
+
+                            if len(purchase_order_ids) > 0:
+                                loaiphieu = "Nhập NCC (N1)"
+                                # tongnhapncc += line.qty_done
+
+                                if line.product_uom_id == line.product_id.uom_id:
+                                    tongnhapncc += line.qty_done
+                                else:
+                                    uom = line.product_uom_id
+                                    tongnhapncc = uom._compute_quantity(
+                                        line.qty_done, line.product_id.uom_id)
+
+                                gttongnhapncc += tongdongia
+
+                            if len(sale_order_ids) > 0:
+                                loaiphieu = "Xuất khách hàng"
+                                # xuatkhachhang += line.qty_done
+                                if line.product_uom_id == line.product_id.uom_id:
+                                    xuatkhachhang += line.qty_done
+                                else:
+                                    uom = line.product_uom_id
+                                    xuatkhachhang = uom._compute_quantity(
+                                        line.qty_done, line.product_id.uom_id)
+
+                                gtxuatkhachhang += tongdongia
 
                         if loaiphieu == "Nhập khác":
                             # nhapkhac += line.qty_done
@@ -956,83 +959,86 @@ class inventory_management_dashboard(models.Model):
                         print(line.move_id.group_id)
                         print(line.move_id.group_id.name)
                         loaiphieu = "Phiếu xuất kho (X4)"
-                        if len(line.move_id.inventory_id) > 0:
-                            loaiphieu = "Kiểm kê thiếu (X7)"
-                            data_model = "stock.inventory"
-                            data_model_id = line.move_id.inventory_id.id
-                            thieukiemke += line.qty_done
-                            gtthieukiemke += tongdongia
-                        else:
-                            if len(line.move_id.scrap_ids) > 0:
-                                print("huy san xuat --------------")
-                                print(line.move_id.scrap_ids)
-                                loaiphieu = "Hủy trong SX (X5)"
-                                for scrap_id in line.move_id.scrap_ids:
-                                    print(scrap_id)
-                                    print(scrap_id.name)
-                                    xuathuysanxuat += scrap_id.scrap_qty
-                                    gtxuathuysanxuat += tongdongia
-                                print("huy san xuat --------------")
 
-                            # check co phai la lenh production hay khong dua theo procurement group
-                            if len(line.move_id.group_id) > 0:
-                                manufacture_order_id = self.env['mrp.production'].search(
-                                    [('procurement_group_id', '=', line.move_id.group_id.id)])
+                        # odoo 15, stock move doesnt have inventory_id
+                        # if len(line.move_id.inventory_id) > 0:
+                        #     loaiphieu = "Kiểm kê thiếu (X7)"
+                        #     data_model = "stock.inventory"
+                        #     data_model_id = line.move_id.inventory_id.id
+                        #     thieukiemke += line.qty_done
+                        #     gtthieukiemke += tongdongia
+                        # else:
+                        if len(line.move_id.scrap_ids) > 0:
+                            print("huy san xuat --------------")
+                            print(line.move_id.scrap_ids)
+                            loaiphieu = "Hủy trong SX (X5)"
+                            for scrap_id in line.move_id.scrap_ids:
+                                print(scrap_id)
+                                print(scrap_id.name)
+                                xuathuysanxuat += scrap_id.scrap_qty
+                                gtxuathuysanxuat += tongdongia
+                            print("huy san xuat --------------")
 
-                                sale_order_ids = self.env['sale.order'].search(
-                                    [('procurement_group_id', '=', line.move_id.group_id.id)])
+                        # check co phai la lenh production hay khong dua theo procurement group
+                        if len(line.move_id.group_id) > 0:
+                            manufacture_order_id = self.env['mrp.production'].search(
+                                [('procurement_group_id', '=', line.move_id.group_id.id)])
 
-                                purchase_order_ids = self.env['purchase.order'].search(
-                                    [('group_id', '=', line.move_id.group_id.id)])
+                            sale_order_ids = self.env['sale.order'].search(
+                                [('procurement_group_id', '=', line.move_id.group_id.id)])
 
-                                if len(purchase_order_ids) > 0:
-                                    loaiphieu = "Trả hàng NCC (X1)"
-                                    trahangncc += line.qty_done
-                                    gttrahangncc += tongdongia
+                            purchase_order_ids = self.env['purchase.order'].search(
+                                [('group_id', '=', line.move_id.group_id.id)])
 
-                                if len(manufacture_order_id) > 0:
-                                    print("sxmu----------------------------")
-                                    print(manufacture_order_id)
-                                    if line.product_id == manufacture_order_id.product_id:
-                                        loaiphieu = "Sản xuất ra nhập kho"
-                                        # slsanxuatnhapkho += line.qty_done
-                                        if line.product_uom_id == line.product_id.uom_id:
-                                            slsanxuatnhapkho += line.qty_done
-                                        else:
-                                            uom = line.product_uom_id
-                                            slsanxuatnhapkho = uom._compute_quantity(
-                                                line.qty_done, line.product_id.uom_id)
-                                        gtslsanxuatnhapkho += tongdongia
-                                    else:
-                                        loaiphieu = "Xuất NVL SX (X2)"
-                                        # xuatsanxuat += line.qty_done
-                                        if line.product_uom_id == line.product_id.uom_id:
-                                            xuatsanxuat += line.qty_done
-                                        else:
-                                            uom = line.product_uom_id
-                                            xuatsanxuat = uom._compute_quantity(
-                                                line.qty_done, line.product_id.uom_id)
-                                        gtxuatsanxuat += tongdongia
-                                    print(line.qty_done)
-                                    print("sxmu----------------------------")
+                            if len(purchase_order_ids) > 0:
+                                loaiphieu = "Trả hàng NCC (X1)"
+                                trahangncc += line.qty_done
+                                gttrahangncc += tongdongia
 
-                                if len(sale_order_ids) > 0:
-                                    loaiphieu = "Xuất khách hàng"
-                                    # xuatkhachhang += line.qty_done
+                            if len(manufacture_order_id) > 0:
+                                print("sxmu----------------------------")
+                                print(manufacture_order_id)
+                                if line.product_id == manufacture_order_id.product_id:
+                                    loaiphieu = "Sản xuất ra nhập kho"
+                                    # slsanxuatnhapkho += line.qty_done
                                     if line.product_uom_id == line.product_id.uom_id:
-                                        xuatkhachhang += line.qty_done
+                                        slsanxuatnhapkho += line.qty_done
                                     else:
                                         uom = line.product_uom_id
-                                        xuatkhachhang = uom._compute_quantity(
+                                        slsanxuatnhapkho = uom._compute_quantity(
                                             line.qty_done, line.product_id.uom_id)
-                                    gtxuatkhachhang += tongdongia
-                                    print("xuat khach hang ................")
-                                    print(stock_move_id.picking_id)
-                                    print("xuat khach hang ................")
+                                    gtslsanxuatnhapkho += tongdongia
+                                else:
+                                    loaiphieu = "Xuất NVL SX (X2)"
+                                    # xuatsanxuat += line.qty_done
+                                    if line.product_uom_id == line.product_id.uom_id:
+                                        xuatsanxuat += line.qty_done
+                                    else:
+                                        uom = line.product_uom_id
+                                        xuatsanxuat = uom._compute_quantity(
+                                            line.qty_done, line.product_id.uom_id)
+                                    gtxuatsanxuat += tongdongia
+                                print(line.qty_done)
+                                print("sxmu----------------------------")
+
+                            if len(sale_order_ids) > 0:
+                                loaiphieu = "Xuất khách hàng"
+                                # xuatkhachhang += line.qty_done
+                                if line.product_uom_id == line.product_id.uom_id:
+                                    xuatkhachhang += line.qty_done
+                                else:
+                                    uom = line.product_uom_id
+                                    xuatkhachhang = uom._compute_quantity(
+                                        line.qty_done, line.product_id.uom_id)
+                                gtxuatkhachhang += tongdongia
+                                print("xuat khach hang ................")
+                                print(stock_move_id.picking_id)
+                                print("xuat khach hang ................")
 
                         print("+++")
-                        print(line.move_id.inventory_id)
-                        print(line.move_id.inventory_id.name)
+                        # odoo 15, stock move doesnt have inventory_id
+                        # print(line.move_id.inventory_id)
+                        # print(line.move_id.inventory_id.name)
                         print("+++")
                         print(line.location_id.display_name)
                         print(line.location_dest_id.display_name)
@@ -1234,8 +1240,9 @@ class inventory_management_dashboard(models.Model):
                 # kiem tra xuat khac
                 if (line.picking_type == 'internal' and line.location_type == 'internal'
                         and (
-                                len(line.stock_move_id.inventory_id) > 0
-                             or len(line.stock_move_id.scrap_ids) > 0
+                                # # odoo 15, stock move doesnt have inventory_id
+                                # len(line.stock_move_id.inventory_id) > 0 or
+                             len(line.stock_move_id.scrap_ids) > 0
                              or line.has_sale_order
                              or line.location_dest_type == 'internal'
                         )
