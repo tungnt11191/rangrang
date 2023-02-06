@@ -13,3 +13,25 @@ class POSOrder(models.Model):
         if self.company_id.country_id.code == 'VN':
             vals.update({'l10n_vn_confirmation_datetime': self.date_order})
         return vals
+
+
+class POSOrderLine(models.Model):
+    _inherit = 'pos.order.line'
+
+    # invoice export
+    # price_before_discount = fields.Float('Price before discount', store=True, compute='get_price_before_discount')
+    # price_after_discount = fields.Float('Price after discount')
+    # discount_per = fields.Float('Discount percentage', store=True, compute='get_discount_percentage')
+    # discount_value = fields.Float('Discount')
+    # price_discount = fields.Float('Price discount')
+    # price_discount_tax = fields.Float('Price discount (incl VAT)')
+    # vat_discount_per = fields.Float('VAT discount')
+    # vat_discount_value = fields.Float('VAT discount value')
+    #
+    # @api.depends('price_subtotal')
+    # def get_price_before_discount(self):
+    #     for rec in self:
+    #         rec.price_before_discount = rec.price_subtotal
+
+
+
