@@ -21,20 +21,22 @@
 <!--    </data>-->
     <menuitem id="menu_pos_order_line" parent="point_of_sale.menu_point_of_sale" action="point_of_sale.action_pos_order_line" sequence="3" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
 
-<!--    <record id="view_pos_order_line_new" model="ir.ui.view">-->
-<!--        <field name="name">pos.order.line.tree.inherit</field>-->
-<!--        <field name="model">pos.order.line</field>-->
-<!--        <field name="inherit_id" ref="point_of_sale.view_pos_order_line"/>-->
-<!--        <field name="arch" type="xml">-->
-<!--            <xpath expr="//field[@name='price_subtotal_incl']" position="after">-->
+    <record id="view_pos_order_line_new" model="ir.ui.view">
+        <field name="name">pos.order.line.tree.inherit</field>
+        <field name="model">pos.order.line</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_line"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_subtotal_incl']" position="after">
 <!--                <field name="discount_per"/>-->
 <!--                <field name="discount_value"/>-->
 <!--                <field name="price_discount"/>-->
 <!--                <field name="price_discount_tax"/>-->
 <!--                <field name="vat_discount_per"/>-->
 <!--                <field name="vat_discount_value"/>-->
-<!--            </xpath>-->
-<!--        </field>-->
-<!--    </record>-->
+                <field name="gift_card_apply_id"/>
+                <field name="session_id"/>
+            </xpath>
+        </field>
+    </record>
 
 </odoo>

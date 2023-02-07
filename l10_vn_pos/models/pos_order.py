@@ -34,6 +34,7 @@ class POSOrderLine(models.Model):
     #         rec.price_before_discount = rec.price_subtotal
 
     gift_card_apply_id = fields.Many2one('gift.card', compute='get_gift_card', store=True)
+    session_id = fields.Many2one('pos.session', related='order_id.session_id', store=True)
 
     @api.depends('gift_card_id')
     def get_gift_card(self):
