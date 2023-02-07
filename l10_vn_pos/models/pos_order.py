@@ -33,5 +33,13 @@ class POSOrderLine(models.Model):
     #     for rec in self:
     #         rec.price_before_discount = rec.price_subtotal
 
+    gift_card_apply_id = fields.Many2one('gift.card', compute='get_gift_card', store=True)
+
+    @api.depends('gift_card_id')
+    def get_gift_card(self):
+        for rec in self:
+            if rec.gift_card_id:
+                for line in rec.order_id.lines:
+                    line.gift_card_apply_id = rec.gift_card_id
 
 
