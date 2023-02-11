@@ -14,6 +14,7 @@ TASYS POS Localization
         'data/gift_card_data.xml',
         'data/customer_card_data.xml',
         'security/ir.model.access.csv',
+        'views/pos_order_views.xml',
     ],
     'assets': {
         'web.assets_qweb': [

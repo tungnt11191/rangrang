@@ -162,7 +162,8 @@ class AccountChartOfAccountReport(models.AbstractModel):
             sheet.write(y_offset, 7, cell_value, number_title_bold_style)
 
             y_offset += 1
-            journal_items = account_dict[int(lines[y]['id'])] if int(lines[y]['id']) in account_dict else []
+            account_id = (lines[y]['id']).split('-')[-1]
+            journal_items = account_dict[int(account_id)] if int(account_id) in account_dict else []
             for journal_item in journal_items:
                 sheet.write(y_offset, 0, journal_item.date.strftime('%d/%m/%Y'), date_default_col1_style)
                 sheet.write(y_offset, 1, journal_item.move_name, level_3_style)

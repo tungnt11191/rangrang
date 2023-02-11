@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!--    <data>-->
+<!--        <record id="view_pos_order_line_tree" model="ir.ui.view">-->
+<!--            <field name="name">pos.order.line.tree</field>-->
+<!--            <field name="model">pos.order.line</field>-->
+<!--            <field name="inherit_id" ref="point_of_sale.view_pos_order_pivot"/>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <pivot string="PoS Order Line">-->
+<!--                    <field name="order_id"/>-->
+<!--                    <field name="product_id"/>-->
+<!--                    <field name="qty"/>-->
+<!--                    <field name="discount"/>-->
+<!--                    <field name="price_unit"/>-->
+<!--                    <field name="total_cost"/>-->
+<!--                    <field name="margin"/>-->
+<!--                    <field name="price_subtotal"/>-->
+<!--                </pivot>-->
+<!--            </field>-->
+<!--        </record>-->
+<!--    </data>-->
+
+    <record id="view_pos_order_line_new" model="ir.ui.view">
+        <field name="name">pos.order.line.tree.inherit</field>
+        <field name="model">pos.order.line</field>
+        <field name="inherit_id" ref="point_of_sale.view_pos_order_line"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='price_subtotal_incl']" position="after">
+<!--                <field name="discount_per"/>-->
+<!--                <field name="discount_value"/>-->
+<!--                <field name="price_discount"/>-->
+<!--                <field name="price_discount_tax"/>-->
+<!--                <field name="vat_discount_per"/>-->
+<!--                <field name="vat_discount_value"/>-->
+                <field name="gift_card_apply_id"/>
+                <field name="session_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_pos_order_line_all" model="ir.actions.act_window">
+        <field name="name">Sale line</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">pos.order.line</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[
+            ("program_id","=",False),
+            ("gift_card_id","=",False),
+            ("product_id.name","!=","Giảm giá bên thứ 3")
+        ]</field>
+        <field name="view_id" ref="point_of_sale.view_pos_order_line"/>
+    </record>
+
+    <menuitem id="menu_pos_order_line_all" parent="point_of_sale.menu_point_of_sale" action="l10_vn_pos.action_pos_order_line_all" sequence="4" groups="point_of_sale.group_pos_manager,point_of_sale.group_pos_user"/>
+
+
+</odoo>

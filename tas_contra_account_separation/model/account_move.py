@@ -82,7 +82,10 @@ class AccountMove(models.Model):
                     'separation_ids': line_ids,
                     'is_separated': True
                 })
-                self.env.cr.commit()
+
+                # because it not is automatically separate, it is for action separate multiple journal entry
+                if is_show_error:
+                    self.env.cr.commit()
 
         if hasError and is_show_error:
             raise UserError(message)
