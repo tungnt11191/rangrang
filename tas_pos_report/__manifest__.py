@@ -1,9 +1,9 @@
 {
-    'name': 'Báo cáo giá thành',
-    'summary': """Báo cáo giá thành """,
+    'name': 'Customize POS report',
+    'summary': """Customize POS report """,
 
     'description': """
-        Báo cáo giá thành
+        Customize POS report
     """,
     'author': "TASYS",
     'website': "",
