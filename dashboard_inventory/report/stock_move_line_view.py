@@ -121,6 +121,7 @@ class StockMoveLineView(models.Model):
             left join stock_picking on stock_picking.id = stock_move_line.picking_id
             left join uom_uom on stock_move_line.product_uom_id = uom_uom.id
             where stock_move_line.state = 'done'
+            and product_template.detailed_type not in ('consu', 'gift') 
             order by stock_move_line.date
         )""")
 

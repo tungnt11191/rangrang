@@ -246,7 +246,7 @@ odoo.define("dashboard_inventory.value_xnt_management_dashboard_tung", function(
                 var column_index = this[0][0];
                 if(column_index > 2){
                     $(this.footer()).html(
-                        api.column(column_index).data().sum()
+                        new Intl.NumberFormat('en-US').format(api.column(column_index).data().sum())
                     );
                 }
 
