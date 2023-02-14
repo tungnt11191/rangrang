@@ -568,8 +568,12 @@ class inventory_management_dashboard(models.Model):
                 "GT Nhập":  xnt_data['gttongnhap'] if xnt_data else 0,
                 "SL Xuất": xnt_data['tongxuat'] if xnt_data else 0,
                 "GT Xuất": xnt_data['gttongxuat'] if xnt_data else 0,
-                "SL Tồn Cuối": initial_quantity + dulieu[id]['quantity_in'] - dulieu[id]['quantity_out'],
-                "GT Tồn Cuối": initial_price + dulieu[id]['price_in'] - dulieu[id]['price_out'],
+                "SL Tồn Cuối": initial_quantity
+                               + (this_period_stock_moves[id]['quantity_in'] if id in this_period_stock_moves else 0)
+                               - (this_period_stock_moves[id]['quantity_out'] if id in this_period_stock_moves else 0),
+                "GT Tồn Cuối": initial_price
+                               + (this_period_stock_moves[id]['price_in'] if id in this_period_stock_moves else 0)
+                               - (this_period_stock_moves[id]['price_out'] if id in this_period_stock_moves else 0),
                 "tongnhapncc": xnt_data['tongnhapncc'] if xnt_data else 0,
                 "gttongnhapncc": xnt_data['gttongnhapncc'] if xnt_data else 0,
                 "nhapnoibo": xnt_data['nhapnoibo'] if xnt_data else 0,
