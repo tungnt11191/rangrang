@@ -8,7 +8,7 @@ odoo.define("dashboard_inventory.overview_int_dashboard_tung", function(require)
   var QWeb = core.qweb;
 
   var overview_int_dashboard = AbstractAction.extend({
-    template: 'overview_xnt_dashboard_tung',
+    contentTemplate: 'overview_xnt_dashboard_tung',
     events: {
       'click #quet_du_lieu': 'bms_quet_du_lieu',
       'click .detailmodel': 'bms_click_model_tr',
