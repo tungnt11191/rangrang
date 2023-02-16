@@ -35,6 +35,7 @@ class POSOrderLine(models.Model):
 
     gift_card_apply_id = fields.Many2one('gift.card', compute='get_gift_card', store=True)
     session_id = fields.Many2one('pos.session', related='order_id.session_id', store=True)
+    date_order_ref = fields.Datetime(string='Date order ref', store=True, related='order_id.date_order')
 
     @api.depends('gift_card_id')
     def get_gift_card(self):
