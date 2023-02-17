@@ -25,7 +25,7 @@
             </field>
         </record>
 
-        <menuitem id="gift_card_group_menu" sequence="15" name="Gift Card groups" action="l10_vn_pos.action_gift_card_group_view" parent="point_of_sale.menu_point_config_product"/>
+        <menuitem id="gift_card_group_menu" sequence="11" name="Gift Card Groups" action="l10_vn_pos.action_gift_card_group_view" parent="point_of_sale.menu_point_config_product"/>
 
     </data>
 </odoo>
