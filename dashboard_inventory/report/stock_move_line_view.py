@@ -104,11 +104,12 @@ class StockMoveLineView(models.Model):
                    THEN true
                    ELSE false
                 END as has_sale_order,
-                (
-                SELECT (SUM(ABS(stock_valuation_layer.value)) / SUM(ABS(stock_valuation_layer.quantity)) )
-                    FROM stock_valuation_layer
-                    WHERE stock_valuation_layer.stock_move_id = stock_move.id
-                ) * stock_move_line.qty_done as total_amount,
+                 (
+                    (SELECT (SUM(ABS(stock_valuation_layer.value)) / SUM(ABS(stock_valuation_layer.quantity)))
+                                FROM stock_valuation_layer
+                                WHERE stock_valuation_layer.stock_move_id = stock_move.id
+                        ) * stock_move_line.qty_done)
+                 as total_amount,
             uom_uom.id uom_id
             from stock_move_line
             inner join stock_move on stock_move.id = stock_move_line.move_id

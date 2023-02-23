@@ -508,9 +508,10 @@ class inventory_management_dashboard(models.Model):
                 dulieu[product_id]['quantity_out'] += quantity_out
                 dulieu[product_id]['quantity_in'] += quantity_in
                 dulieu[product_id]['quantity_end'] += quantity_end
+                dulieu[product_id]['quantity'] += quantity
                 dulieu[product_id]['price_out'] += price_out
                 dulieu[product_id]['price_in'] += price_in
-                dulieu[product_id]['quantity'] += quantity
+                dulieu[product_id]['price_end'] += price_end
                 dulieu[product_id]['price'] += price
             else:
                 dulieu[product_id] = {}
