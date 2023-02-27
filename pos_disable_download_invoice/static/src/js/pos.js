@@ -21,7 +21,7 @@ odoo.define('pos_disable_download_invoice.disable_download_invoice', function (r
                     self.flush_mutex.exec(async () => {
                         try {
                             const server_ids = await self._flush_orders([self.db.get_order(order_id)], {
-                                timeout: 30000,
+                                timeout: 15000,
                                 to_invoice: true,
                             });
                             if (server_ids.length) {
