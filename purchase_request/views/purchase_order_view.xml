@@ -26,6 +26,9 @@
                     force_save="1" optional="show"/>
 
             </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="replace">
+                <field name="price_unit" attrs="{'readonly': ['|', ('qty_invoiced', '!=', 0), ('edit_uom', '=', False)]}"/>
+            </xpath>
         </field>
     </record>
     <record id="purchase_order_line_form2" model="ir.ui.view">
