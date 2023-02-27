@@ -16,6 +16,16 @@
                     icon="fa-folder-open-o"
                 />
             </xpath>
+            <xpath expr="//field[@name='order_line']//tree//field[@name='product_uom']" position="replace">
+                <field name="edit_uom" invisible="1"/>
+                <field name="product_uom" string="UoM" groups="uom.group_uom"
+                    attrs="{
+                        'readonly': ['|', ('state', 'in', ('purchase', 'done', 'cancel')), ('edit_uom', '=', False)],
+                        'required': [('display_type', '=', False)]
+                    }"
+                    force_save="1" optional="show"/>
+
+            </xpath>
         </field>
     </record>
     <record id="purchase_order_line_form2" model="ir.ui.view">
