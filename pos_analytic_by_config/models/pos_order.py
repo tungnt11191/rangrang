@@ -20,4 +20,8 @@ class PosOrder(models.Model):
 
     def action_pos_order_invoice(self):
         self_ctx = self.with_context(pos_analytic=True)
-        return super(PosOrder, self_ctx).action_pos_order_invoice()
+        res = super(PosOrder, self_ctx).action_pos_order_invoice()
+
+        # for line in res.move_id.line_ids:
+        #     line.account_analytic_id = res.session_id.config_id.account_analytic_id
+        return res
