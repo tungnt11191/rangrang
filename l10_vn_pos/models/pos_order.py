@@ -5,16 +5,6 @@ import base64
 from odoo import fields, api, models
 
 
-class POSOrder(models.Model):
-    _inherit = 'pos.order'
-
-    def _prepare_invoice_vals(self):
-        vals = super()._prepare_invoice_vals()
-        if self.company_id.country_id.code == 'VN':
-            vals.update({'l10n_vn_confirmation_datetime': self.date_order})
-        return vals
-
-
 class POSOrderLine(models.Model):
     _inherit = 'pos.order.line'
 
@@ -35,6 +25,7 @@ class POSOrderLine(models.Model):
 
     gift_card_apply_id = fields.Many2one('gift.card', compute='get_gift_card', store=True)
     session_id = fields.Many2one('pos.session', related='order_id.session_id', store=True)
+    date_order_ref = fields.Datetime(string='Date order ref', store=True, related='order_id.date_order')
 
     @api.depends('gift_card_id')
     def get_gift_card(self):

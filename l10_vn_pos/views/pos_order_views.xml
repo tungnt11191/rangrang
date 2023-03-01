@@ -34,6 +34,7 @@
 <!--                <field name="vat_discount_value"/>-->
                 <field name="gift_card_apply_id"/>
                 <field name="session_id"/>
+                <field name="date_order_ref"/>
             </xpath>
         </field>
     </record>

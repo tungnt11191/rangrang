@@ -7,6 +7,15 @@ from odoo import _, api, exceptions, fields, models
 class PurchaseOrder(models.Model):
     _inherit = "purchase.order"
 
+    edit_uom = fields.Boolean(compute='_compute_edit_uom')
+
+    def _compute_edit_uom(self):
+        for rec in self:
+            if rec.user_has_groups('purchase.group_purchase_manager') is True:
+                rec.edit_uom = True
+            else:
+                rec.edit_uom = False
+
     def action_approve(self):
         selected_ids = self.env.context.get('active_ids', [])
         selected_records = self.env['purchase.order'].browse(selected_ids)
@@ -245,3 +254,6 @@ class PurchaseOrderLine(models.Model):
             for line in service_lines:
                 line.update_service_allocations(prev_qty_received[line.id])
         return res
+
+    edit_uom = fields.Boolean(related='order_id.edit_uom')
+

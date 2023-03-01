@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
                     <field name="pos_reference"/>
-                    <field name="delivery_type"/>
+                    <field name="delivery_type" widget="selection"/>
                 </field>
             </field>
         </record>

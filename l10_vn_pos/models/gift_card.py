@@ -8,6 +8,8 @@ from odoo import fields, api, models
 class GiftCard(models.Model):
     _inherit = 'gift.card'
 
+    gift_card_group_id = fields.Many2one('gift.card.group', string='Group')
+
     def action_sent_gift_card(self):
         selected_ids = self.env.context.get('active_ids', [])
         selected_records = self.env['gift.card'].browse(selected_ids)

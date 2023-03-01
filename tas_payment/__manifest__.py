@@ -22,6 +22,7 @@
         'report/phieu_thu_chi.xml',
         'report/uy_nhiem_chi_agribank.xml',
         'report/uy_nhiem_chi_eximbank.xml',
+        'report/report_invoice.xml',
         'views/menu.xml',
     ],
     'installable': True,

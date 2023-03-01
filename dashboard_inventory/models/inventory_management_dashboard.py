@@ -496,13 +496,22 @@ class inventory_management_dashboard(models.Model):
         stock_moves = self.env.cr.fetchall()
 
         dulieu = {}
-        for product_id, product_code, product_name, uom_name, quantity, quantity_out, quantity_in, quantity_end, price, price_out, price_in, price_end in stock_moves:
+        for product_id, product_code, product_name, uom_name, uom_id, quantity, quantity_out, quantity_in, quantity_end, price, price_out, price_in, price_end in stock_moves:
+            product = self.env['product.product'].browse(product_id)
+            uom = self.env['uom.uom'].browse(uom_id)
+
+            quantity_out = uom._compute_quantity(quantity_out, product.uom_id)
+            quantity_in = uom._compute_quantity(quantity_in, product.uom_id)
+            quantity_end = uom._compute_quantity(quantity_end, product.uom_id)
+
             if product_id in dulieu:
                 dulieu[product_id]['quantity_out'] += quantity_out
                 dulieu[product_id]['quantity_in'] += quantity_in
+                dulieu[product_id]['quantity_end'] += quantity_end
+                dulieu[product_id]['quantity'] += quantity
                 dulieu[product_id]['price_out'] += price_out
                 dulieu[product_id]['price_in'] += price_in
-                dulieu[product_id]['quantity'] += quantity
+                dulieu[product_id]['price_end'] += price_end
                 dulieu[product_id]['price'] += price
             else:
                 dulieu[product_id] = {}

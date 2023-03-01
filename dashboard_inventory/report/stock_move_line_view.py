@@ -47,8 +47,6 @@ class StockMoveLineView(models.Model):
 
 
     def init(self):
-        self.create_procedure_stock_move_line_by_location_and_date()
-
         tools.drop_view_if_exists(self.env.cr, self._table)
         self.env.cr.execute("""CREATE or REPLACE VIEW stock_move_line_view as (
             select
@@ -106,11 +104,13 @@ class StockMoveLineView(models.Model):
                    THEN true
                    ELSE false
                 END as has_sale_order,
-                (
-                SELECT (SUM(ABS(stock_valuation_layer.value)) / SUM(ABS(stock_valuation_layer.quantity)) )
-                    FROM stock_valuation_layer
-                    WHERE stock_valuation_layer.stock_move_id = stock_move.id
-                ) * stock_move_line.qty_done as total_amount
+                 (
+                    (SELECT (SUM(ABS(stock_valuation_layer.value)) / SUM(ABS(stock_valuation_layer.quantity)))
+                                FROM stock_valuation_layer
+                                WHERE stock_valuation_layer.stock_move_id = stock_move.id
+                        ) * stock_move_line.qty_done)
+                 as total_amount,
+            uom_uom.id uom_id
             from stock_move_line
             inner join stock_move on stock_move.id = stock_move_line.move_id
             inner join product_product on product_product.id = stock_move_line.product_id
@@ -124,6 +124,8 @@ class StockMoveLineView(models.Model):
             and product_template.detailed_type not in ('consu', 'gift') 
             order by stock_move_line.date
         )""")
+
+        self.create_procedure_stock_move_line_by_location_and_date()
 
     def drop_procedure_if_exists(self, procedure_name):
         self.env.cr.execute("DROP FUNCTION IF EXISTS %s" % (procedure_name,))
@@ -141,6 +143,7 @@ class StockMoveLineView(models.Model):
                         product_code character varying,
                         product_name character varying,
                         uom_name character varying,
+                        uom_id integer,
                         quantity double precision,
                         quantity_out double precision,
                         quantity_in double precision,
@@ -148,7 +151,8 @@ class StockMoveLineView(models.Model):
                         price double precision,
                         price_out double precision,
                         price_in double precision,
-                        price_end double precision)
+                        price_end double precision
+                        )
                     AS $$
                         DECLARE
                             ids INTEGER[];
@@ -159,6 +163,7 @@ class StockMoveLineView(models.Model):
                                      stock_move_line_view.product_code,
                                      stock_move_line_view.product_name,
                                      stock_move_line_view.uom_name,
+                                     stock_move_line_view.uom_id,
                                      CAST (SUM (stock_move_line_view.product_qty) AS DOUBLE PRECISION) quantity,
                                      CAST (
                                         SUM (
@@ -228,7 +233,8 @@ class StockMoveLineView(models.Model):
                                      stock_move_line_view.product_id,
                                      stock_move_line_view.product_code,
                                      stock_move_line_view.product_name,
-                                     stock_move_line_view.uom_name
+                                     stock_move_line_view.uom_name,
+                                     stock_move_line_view.uom_id
                                     ;
                         END;
                     $$ LANGUAGE plpgsql;

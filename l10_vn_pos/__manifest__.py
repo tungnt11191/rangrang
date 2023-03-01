@@ -9,12 +9,15 @@ TASYS POS Localization
 =======================================================
     """,
     'license': 'LGPL-3',
-    'depends': ['point_of_sale', 'pos_gift_card'],
+    'depends': ['point_of_sale', 'pos_gift_card', 'sale', 'sale_coupon'],
     'data': [
         'data/gift_card_data.xml',
         'data/customer_card_data.xml',
         'security/ir.model.access.csv',
         'views/pos_order_views.xml',
+        'views/gift_card_views.xml',
+        'views/gift_card_group_views.xml',
+        'views/sale_order_line_views.xml',
     ],
     'assets': {
         'web.assets_qweb': [
