@@ -22,6 +22,7 @@ class ReportPartnerLedger(models.AbstractModel):
         {'id': 'other_receivable', 'name': _lt('Other Receivable - 13880001'), 'selected': False},
         {'id': 'other_payable', 'name': _lt('Other Payable - 33880001'), 'selected': False},
         {'id': 'advance_payment', 'name': _lt('Tạm ứng nhân viên - 14111000'), 'selected': False},
+        {'id': 'advance_payment_other', 'name': _lt('Tạm ứng khác - 14120000'), 'selected': False},
     ]
 
     def _get_reports_buttons(self, options):
@@ -61,6 +62,11 @@ class ReportPartnerLedger(models.AbstractModel):
                     if have_or:
                         domain.insert(0, '|')
                     domain.append(('account_id.code', '=', '14111000'))
+                    have_or = True
+                elif account_type_option['id'] == 'advance_payment_other':
+                    if have_or:
+                        domain.insert(0, '|')
+                    domain.append(('account_id.code', '=', '14120000'))
                     have_or = True
                 else:
                     if have_or:
@@ -213,6 +219,11 @@ class ReportPartnerLedger(models.AbstractModel):
                     if have_or:
                         domain.insert(0, '|')
                     domain.append(('code', '=', '14111000'))
+                    have_or = True
+                elif account_type_option['id'] == 'advance_payment_other':
+                    if have_or:
+                        domain.insert(0, '|')
+                    domain.append(('code', '=', '14120000'))
                     have_or = True
                 else:
                     if have_or:
