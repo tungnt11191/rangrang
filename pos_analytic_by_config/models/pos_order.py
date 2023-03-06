@@ -1,11 +1,18 @@
 # Copyright 2015 ACSONE SA/NV
 # Copyright 2020 Tecnativa - David Vidal
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from odoo import models
+from odoo import fields, models
 
 
 class PosOrder(models.Model):
     _inherit = "pos.order"
+
+    account_analytic_id = fields.Many2one(
+        comodel_name="account.analytic.account",
+        string="Analytic Account",
+        related='config_id.account_analytic_id',
+        store=True
+    )
 
     def _prepare_invoice_line(self, line):
         """The method that allowed to add the analytic account to the invoice lines
@@ -21,7 +28,4 @@ class PosOrder(models.Model):
     def action_pos_order_invoice(self):
         self_ctx = self.with_context(pos_analytic=True)
         res = super(PosOrder, self_ctx).action_pos_order_invoice()
-
-        # for line in res.move_id.line_ids:
-        #     line.account_analytic_id = res.session_id.config_id.account_analytic_id
         return res
