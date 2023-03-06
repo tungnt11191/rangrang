@@ -32,12 +32,26 @@ class PurchaseRequest(models.Model):
     def _get_default_name(self):
         return self.env["ir.sequence"].next_by_code("purchase.request")
 
+    # @api.model
+    # def _default_picking_type(self):
+    #     type_obj = self.env["stock.picking.type"]
+    #     company_id = self.env.context.get("company_id") or self.env.company.id
+    #     types = type_obj.search(
+    #         [("code", "=", "incoming"), ("warehouse_id.company_id", "=", company_id)]
+    #     )
+    #     if not types:
+    #         types = type_obj.search(
+    #             [("code", "=", "incoming"), ("warehouse_id", "=", False)]
+    #         )
+    #     return types[:1]
+
+    # Chọn kho mặc định theo cấu hình từng user
     @api.model
     def _default_picking_type(self):
         type_obj = self.env["stock.picking.type"]
-        company_id = self.env.context.get("company_id") or self.env.company.id
+        warehouse_def = self.env.user.property_warehouse_id.id
         types = type_obj.search(
-            [("code", "=", "incoming"), ("warehouse_id.company_id", "=", company_id)]
+            [("code", "=", "incoming"), ("warehouse_id", "=", warehouse_def)]
         )
         if not types:
             types = type_obj.search(
