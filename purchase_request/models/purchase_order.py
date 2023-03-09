@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 from odoo import _, api, exceptions, fields, models
+from odoo.addons.purchase.models.purchase import PurchaseOrder as Purchase
 
 
 class PurchaseOrder(models.Model):
@@ -115,6 +116,19 @@ class PurchaseOrder(models.Model):
         res = super().unlink()
         alloc_to_unlink.unlink()
         return res
+
+    # Lấy kho mặc định theo kho của user trong thiết lập
+
+    @api.model
+    def _get_picking_type(self, company_id):
+        warehouse_def = self.env.user.property_warehouse_id.id
+        picking_type = self.env['stock.picking.type'].search([('code', '=', 'incoming'),
+                                                              ("warehouse_id", "=", warehouse_def),
+                                                              ('warehouse_id.company_id', '=', company_id)])
+        if not picking_type:
+            picking_type = self.env['stock.picking.type'].search([('code', '=', 'incoming'),
+                                                                  ('warehouse_id', '=', False)])
+        return picking_type[:1]
 
 
 class PurchaseOrderLine(models.Model):
