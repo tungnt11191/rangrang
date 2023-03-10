@@ -138,3 +138,22 @@ class StockMove(models.Model):
                 )
             )
         return super(StockMove, self).copy_data(default)
+
+# region fix performance issue when create stock valuation value
+from odoo.addons.stock_account.models.stock_move import StockMove as SecondStockMove
+from odoo.tools import float_is_zero
+
+class ThirdStockMove:
+    def _action_done(self, cancel_backorder=False):
+        valued_moves = {valued_type: self.env['stock.move'] for valued_type in self._get_valued_types()}
+        for move in self:
+            if float_is_zero(move.quantity_done, precision_rounding=move.product_uom.rounding):
+                continue
+            for valued_type in self._get_valued_types():
+                if getattr(move, '_is_%s' % valued_type)():
+                    valued_moves[valued_type] |= move
+            valued_moves['in'].product_price_update_before_done()
+            res = super(SecondStockMove, self)._action_done(cancel_backorder=cancel_backorder)
+            return res
+SecondStockMove._action_done = ThirdStockMove._action_done
+# endregion
