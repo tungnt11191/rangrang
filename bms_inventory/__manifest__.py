@@ -17,7 +17,8 @@
         'views/inventory_valuation_line.xml',
         'views/cronjob_inventory_valuation.xml',
         'views/inventory_valuation_excel.xml',
-        'views/bms_inventory_cron_check.xml'
+        'views/bms_inventory_cron_check.xml',
+        'views/stock_quant_views.xml'
     ],
     'installable': True,
     'application': True,
