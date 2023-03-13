@@ -30,11 +30,28 @@ class pos_config(models.Model):
 	combo_pack_price = fields.Selection([('all_product', "Total of all combo items "), ('main_product', "Take Price from the Main product")], string='Total Combo Price', default='all_product')
 
 
-class ProductProduct(models.Model):
+class ProductTemplate(models.Model):
 	_inherit = 'product.template'
 
 	is_pack = fields.Boolean(string='Is Combo Product')
 	pack_ids = fields.One2many(comodel_name='product.pack', inverse_name='bi_product_template', string='Product pack')
+
+# region tungnt
+class ProductProduct(models.Model):
+	_inherit = 'product.product'
+
+	def _compute_average_price(self, qty_invoiced, qty_to_invoice, stock_moves):
+		self.ensure_one()
+		if not qty_to_invoice:
+			return 0
+		if stock_moves.product_id == self:
+			return super()._compute_average_price(qty_invoiced, qty_to_invoice, stock_moves)
+
+		if (self.is_pack and len(self.pack_ids) > 0) or (self.route_ids and self.route_ids[0].name == 'Manufacture'):
+			return self.standard_price
+		else:
+			return super()._compute_average_price(qty_invoiced, qty_to_invoice, stock_moves)
+# endregion
 
 
 class pos_order_line(models.Model):
