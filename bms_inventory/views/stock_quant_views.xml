@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="quant_search_view_inherit" model="ir.ui.view">
+        <field name="name">stock.quant.search</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.quant_search_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search" position="inside">
+                <group expand="0" string="Group by...">
+                    <filter string="Product Category" name="category_group" domain="[]" context="{'group_by':'product_categ_id'}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+
+    <record model="ir.actions.server" id="stock.action_view_inventory_tree"> <!-- Menu + python -->
+        <field name="name">Inventory</field>
+        <field name="model_id" ref="model_stock_quant"/>
+        <field name="state">code</field>
+        <field name="groups_id" eval="[(4, ref('stock.group_stock_user'))]"/>
+        <field name="code">
+            action = model.action_view_inventory()
+        </field>
+    </record>
+
+</odoo>
