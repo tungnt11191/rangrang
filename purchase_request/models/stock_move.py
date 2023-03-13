@@ -2,7 +2,8 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0)
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
+from odoo.tools.float_utils import float_compare, float_is_zero
 
 
 class StockMove(models.Model):
@@ -140,20 +141,54 @@ class StockMove(models.Model):
         return super(StockMove, self).copy_data(default)
 
 # region fix performance issue when create stock valuation value
-from odoo.addons.stock_account.models.stock_move import StockMove as SecondStockMove
-from odoo.tools import float_is_zero
+# from odoo.addons.stock_account.models.stock_move import StockMove as SecondStockMove
+# from odoo.tools import float_is_zero
+#
+# class ThirdStockMove:
+#     def _action_done(self, cancel_backorder=False):
+#         valued_moves = {valued_type: self.env['stock.move'] for valued_type in self._get_valued_types()}
+#         for move in self:
+#             if float_is_zero(move.quantity_done, precision_rounding=move.product_uom.rounding):
+#                 continue
+#             for valued_type in self._get_valued_types():
+#                 if getattr(move, '_is_%s' % valued_type)():
+#                     valued_moves[valued_type] |= move
+#             valued_moves['in'].product_price_update_before_done()
+#             res = super(SecondStockMove, self)._action_done(cancel_backorder=cancel_backorder)
+#             return res
+# SecondStockMove._action_done = ThirdStockMove._action_done
 
-class ThirdStockMove:
-    def _action_done(self, cancel_backorder=False):
-        valued_moves = {valued_type: self.env['stock.move'] for valued_type in self._get_valued_types()}
-        for move in self:
-            if float_is_zero(move.quantity_done, precision_rounding=move.product_uom.rounding):
-                continue
-            for valued_type in self._get_valued_types():
-                if getattr(move, '_is_%s' % valued_type)():
-                    valued_moves[valued_type] |= move
-            valued_moves['in'].product_price_update_before_done()
-            res = super(SecondStockMove, self)._action_done(cancel_backorder=cancel_backorder)
-            return res
-SecondStockMove._action_done = ThirdStockMove._action_done
+# from odoo.addons.stock.models.stock_quant import StockQuant as SecondStockQuant
+# class ThirdStockQuant:
+#     def _apply_inventory(self):
+#         move_vals = []
+#         if not self.user_has_groups('stock.group_stock_manager'):
+#             raise UserError(_('Only a stock manager can validate an inventory adjustment.'))
+#         for quant in self:
+#             # Create and validate a move so that the quant matches its `inventory_quantity`.
+#             compare = float_compare(quant.inventory_diff_quantity, 0, precision_rounding=quant.product_uom_id.rounding)
+#             if compare > 0:
+#                 move_vals.append(
+#                     quant._get_inventory_move_values(quant.inventory_diff_quantity,
+#                                                      quant.product_id.with_company(
+#                                                          quant.company_id).property_stock_inventory,
+#                                                      quant.location_id))
+#             elif compare < 0:
+#                 move_vals.append(
+#                     quant._get_inventory_move_values(-quant.inventory_diff_quantity,
+#                                                      quant.location_id,
+#                                                      quant.product_id.with_company(
+#                                                          quant.company_id).property_stock_inventory,
+#                                                      out=True))
+#         moves = self.env['stock.move'].with_context(inventory_mode=False).create(move_vals)
+#         moves._action_done()
+#         self.location_id.write({'last_inventory_date': fields.Date.today()})
+#         date_by_location = {loc: loc._get_next_inventory_date() for loc in self.mapped('location_id')}
+#         for quant in self:
+#             quant.inventory_date = date_by_location[quant.location_id]
+#         self.write({'inventory_quantity': 0, 'user_id': False})
+#         self.write({'inventory_diff_quantity': 0})
+#
+# SecondStockQuant._apply_inventory = ThirdStockQuant._apply_inventory
+
 # endregion
