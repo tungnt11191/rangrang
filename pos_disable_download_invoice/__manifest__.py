@@ -14,7 +14,6 @@
     ],
     'assets': {
         'web.assets_qweb': [
-            'pos_disable_download_invoice/static/src/xml/**/*',
         ],
         'point_of_sale.assets': [
             'pos_disable_download_invoice/static/src/js/pos.js'

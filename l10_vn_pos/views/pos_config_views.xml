@@ -1,0 +1,14 @@
+<odoo>
+    <data>
+        <record id="view_pos_config_sequence_tree" model="ir.ui.view">
+            <field name="name">pos.config.sequence</field>
+            <field name="model">pos.config</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_config_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="sequence" optional="show" widget="handle"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
