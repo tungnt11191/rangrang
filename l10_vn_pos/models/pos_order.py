@@ -5,6 +5,12 @@ import base64
 from odoo import fields, api, models
 
 
+class POSOrder(models.Model):
+    _inherit = 'pos.order'
+
+    config_id = fields.Many2one('pos.config', store=True, related='session_id.config_id', string="Point of Sale", readonly=False)
+
+
 class POSOrderLine(models.Model):
     _inherit = 'pos.order.line'
 
