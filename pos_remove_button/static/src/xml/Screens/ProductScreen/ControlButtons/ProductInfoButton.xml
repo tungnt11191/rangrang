@@ -3,8 +3,14 @@
 
     <t t-name="ProductInfoButton2"  t-inherit="point_of_sale.ProductInfoButton" t-inherit-mode="extension"  owl="1">
         <div class="control-button" position="replace">
-        <diV></diV>
+        <div></div>
         </div>
+    </t>
+
+    <t t-name="CashOpeningPopup"  t-inherit="point_of_sale.CashOpeningPopup" t-inherit-mode="extension"  owl="1">
+        <input class="pos-input" position="replace">
+            <input class="pos-input" type="number" t-model.number="state.openingCash" value="0" readonly="True"/>
+        </input>
     </t>
 
 </templates>
