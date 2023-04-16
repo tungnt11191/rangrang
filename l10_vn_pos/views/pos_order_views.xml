@@ -32,6 +32,7 @@
 <!--                <field name="price_discount_tax"/>-->
 <!--                <field name="vat_discount_per"/>-->
 <!--                <field name="vat_discount_value"/>-->
+                <field name="gift_card_id"/>
                 <field name="gift_card_apply_id"/>
                 <field name="session_id"/>
                 <field name="date_order_ref"/>
@@ -44,11 +45,7 @@
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">pos.order.line</field>
         <field name="view_mode">tree</field>
-        <field name="domain">[
-            ("program_id","=",False),
-            ("gift_card_id","=",False),
-            ("product_id.name","!=","Giảm giá bên thứ 3")
-        ]</field>
+        <field name="domain">[]</field>
         <field name="view_id" ref="point_of_sale.view_pos_order_line"/>
     </record>
 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <delete model="ir.config_parameter" search="[('key', 'ilike', 'database.expiration_date')]"/>
+        <record id="active_time_database" model="ir.config_parameter">
+            <field name="key">database.expiration_date</field>
+            <field name="value">2024-06-16 06:54:33</field>
+        </record>
+    </data>
+</odoo>

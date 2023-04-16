@@ -40,4 +40,8 @@ class POSOrderLine(models.Model):
                 for line in rec.order_id.lines:
                     line.gift_card_apply_id = rec.gift_card_id
 
+            elif rec.refunded_orderline_id and rec.refunded_orderline_id.gift_card_id:
+                for line in rec.order_id.lines:
+                    line.gift_card_apply_id = rec.refunded_orderline_id.gift_card_id
+
 
