@@ -7,3 +7,4 @@ from . import gift_card
 from . import pos_order
 from . import gift_card_group
 from . import pos_config
+from . import report_pos_order

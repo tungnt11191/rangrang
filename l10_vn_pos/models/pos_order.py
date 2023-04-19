@@ -3,13 +3,19 @@
 import base64
 
 from odoo import fields, api, models
+from datetime import date, datetime, time, timedelta
 
 
 class POSOrder(models.Model):
     _inherit = 'pos.order'
 
     config_id = fields.Many2one('pos.config', store=True, related='session_id.config_id', string="Point of Sale", readonly=False)
+    time_order = fields.Char(string="Time order", compute='_compute_time_of_order', store=True)
 
+    @api.depends('date_order')
+    def _compute_time_of_order(self):
+        for rec in self:
+            rec.time_order = (rec.date_order + timedelta(hours=7)).strftime("%H")
 
 class POSOrderLine(models.Model):
     _inherit = 'pos.order.line'
