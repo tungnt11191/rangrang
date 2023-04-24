@@ -171,6 +171,17 @@ class PurchaseRequest(models.Model):
         for rec in self:
             rec.estimated_cost = sum(rec.line_ids.mapped("estimated_cost"))
 
+    total_estimated_cost = fields.Monetary(
+        compute="_compute_total_estimated_cost",
+        string="Total Estimated Cost",
+        store=True,
+    )
+
+    @api.depends("line_ids", "line_ids.total_estimated")
+    def _compute_total_estimated_cost(self):
+        for rec in self:
+            rec.total_estimated_cost = sum(rec.line_ids.mapped("total_estimated"))
+
     @api.depends("line_ids")
     def _compute_purchase_count(self):
         for rec in self:

@@ -180,6 +180,7 @@
                                     />
                                     <field name="date_required" />
                                     <field name="estimated_cost" widget="monetary" />
+                                    <field name="total_estimated" widget="monetary" />
                                     <field name="currency_id" invisible="1" />
                                     <field
                                         name="company_id"
@@ -207,13 +208,26 @@
                                     />
                                 </tree>
                             </field>
+<!--                            <group class="oe_subtotal_footer oe_right">-->
+<!--                                <field name="currency_id" invisible="1" />-->
+<!--                                <div class="oe_subtotal_footer_separator oe_inline">-->
+<!--                                    <label for="estimated_cost" />-->
+<!--                                </div>-->
+<!--                                <field-->
+<!--                                    name="estimated_cost"-->
+<!--                                    nolabel="1"-->
+<!--                                    class="oe_subtotal_footer_separator"-->
+<!--                                    widget="monetary"-->
+<!--                                    options="{'currency_field': 'currency_id'}"-->
+<!--                                />-->
+<!--                            </group>-->
                             <group class="oe_subtotal_footer oe_right">
                                 <field name="currency_id" invisible="1" />
                                 <div class="oe_subtotal_footer_separator oe_inline">
-                                    <label for="estimated_cost" />
+                                    <label for="total_estimated_cost" />
                                 </div>
                                 <field
-                                    name="estimated_cost"
+                                    name="total_estimated_cost"
                                     nolabel="1"
                                     class="oe_subtotal_footer_separator"
                                     widget="monetary"

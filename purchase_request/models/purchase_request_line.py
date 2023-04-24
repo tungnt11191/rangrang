@@ -168,6 +168,13 @@ class PurchaseRequestLine(models.Model):
         default=0.0,
         help="Estimated cost of Purchase Request Line, not propagated to PO.",
     )
+
+    total_estimated = fields.Monetary(
+        currency_field="currency_id",
+        string="Total estimated",
+        store=True,
+        compute="_compute_total_estimated"
+    )
     currency_id = fields.Many2one(related="company_id.currency_id", readonly=True)
     product_id = fields.Many2one(
         comodel_name="product.product",
@@ -419,3 +426,11 @@ class PurchaseRequestLine(models.Model):
                 self.env.context,
             ),
         }
+
+    @api.depends("estimated_cost", "product_qty")
+    def _compute_total_estimated(self):
+        for rec in self:
+            if rec.estimated_cost and rec.product_qty:
+                rec.total_estimated = rec.estimated_cost * rec.product_qty
+            else:
+                rec.total_estimated = 0
