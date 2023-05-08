@@ -9,7 +9,7 @@ TASYS POS Localization
 =======================================================
     """,
     'license': 'LGPL-3',
-    'depends': ['point_of_sale', 'pos_gift_card', 'sale', 'sale_coupon'],
+    'depends': ['point_of_sale', 'pos_gift_card', 'sale', 'sale_coupon', 'pos_hr'],
     'data': [
         'data/gift_card_data.xml',
         # 'data/activate.xml',

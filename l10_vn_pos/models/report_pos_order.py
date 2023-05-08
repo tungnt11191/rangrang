@@ -8,6 +8,9 @@ class ReportPosOrder(models.Model):
 
     time_order = fields.Char(related="order_id.time_order", string="Time order", store=True)
 
+    def _group_by(self):
+        return super(ReportPosOrder, self)._group_by() + ',s.employee_id'
+
     def _select(self):
         return """
             SELECT
@@ -37,6 +40,7 @@ class ReportPosOrder(models.Model):
                 pt.pos_categ_id,
                 s.pricelist_id,
                 s.session_id,
+                s.employee_id,
                 s.account_move IS NOT NULL AS invoiced,
                 SUM(l.price_subtotal - COALESCE(l.total_cost,0) / CASE COALESCE(s.currency_rate, 0) WHEN 0 THEN 1.0 ELSE s.currency_rate END) AS margin
         """
