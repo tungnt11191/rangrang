@@ -3,11 +3,11 @@
     <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
             <div class="pos-receipt">
-                <div width="100%">
+                <div width="100%" >
                     <t t-if="receipt.company.name">
-                        <b><t t-esc="receipt.company.name" /></b>
+                        <b style="font-size:140%"><t t-esc="receipt.company.name" /></b>
                     </t>
-                    <div width="100%">
+                    <div width="100%" style="font-size:80%;">
                         <t t-if="receipt.header_html">
                             <t t-raw="receipt.header_html" />
                         </t>
@@ -20,7 +20,7 @@
                     </div>
                     <br/>
                 </div>
-                <t>
+                <t style="font-size:140%">
                     <b>HÓA ĐƠN BÁN HÀNG</b>
                 </t>
                 <div style="line-height: 1.3;" width="100%">
@@ -54,21 +54,21 @@
                     </div>
                 </div>
                 <br/>
-                <table class="pos-receipt-right-align" style="border: 1px solid;padding: 3px;">
+                <table style="font-size:80%;border: 1.5px solid;padding: 0.5%;">
                     <colgroup>
-                        <col style="padding: 3px;border-right: 1px solid" width='55%'/>
-                        <col style="padding: 3px;border-right: 1px solid" width='10%'/>
-                        <col style="padding: 3px;border-right: 1px solid" width='15%'/>
-                        <col style="padding: 3px;" width='20%'/>
+                        <col style="padding: 0.5%;border-right: 1.5px solid" width='55%'/>
+                        <col style="padding: 0.5%;border-right: 1.5px solid" width='10%'/>
+                        <col style="padding: 0.5%;border-right: 1.5px solid" width='15%'/>
+                        <col style="padding: 0.5%;" width='20%'/>
                     </colgroup>
-                    <tr style="padding: 3px;border: 1px solid">
-                        <th style="padding: 3px;border: 1px solid">Tên món</th>
-                        <th style="padding: 3px;border: 1px solid">Số lượng</th>
-                        <th style="padding: 3px;border: 1px solid">Đơn giá</th>
-                        <th style="padding: 3px;border: 1px solid">Thành tiền</th>
+                    <tr style="padding: 0.5%;border: 1.5px solid">
+                        <th style="padding: 0.5%;border: 1.5px solid">Tên món</th>
+                        <th style="padding: 0.5%;border: 1.5px solid">Số lượng</th>
+                        <th style="padding: 0.5%;border: 1.5px solid">Đơn giá</th>
+                        <th style="padding: 0.5%;border: 1.5px solid">Thành tiền</th>
                     </tr>
-                    <tr style="padding: 3px;border-bottom: 1px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <td style="padding: 3px;border-bottom: 1px dotted">
+                    <tr style="padding: 0.5%;border-bottom: 1.5px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                        <td style="padding: 0.5%;border-bottom: 1.5px dotted">
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
                             <t t-if="line.customer_note">
@@ -78,7 +78,7 @@
                             </t>
 
                         </td>
-                        <td style="padding: 3px;text-align:center;border-bottom: 1px dotted">
+                        <td style="padding: 0.5%;text-align:center;border-bottom: 1.5px dotted">
                             <t t-if="isSimple(line)">
                                 <span>1</span>
                             </t>
@@ -91,7 +91,7 @@
                                 </t>
                             </t>
                         </td>
-                        <td style="padding: 3px;text-align:right;border-bottom: 1px dotted">
+                        <td style="padding: 0.5%;text-align:right;border-bottom: 1.5px dotted">
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
                             </t>
@@ -99,7 +99,7 @@
                                 <t>-&#160;&#160;&#160;</t>
                             </t>
                         </td>
-                        <td style='padding: 3px;text-align:right;border-bottom: 1px dotted'>
+                        <td style='padding: 0.5%;text-align:right;border-bottom: 1.5px dotted'>
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
                             </t>
@@ -188,7 +188,7 @@
                 <br/>
 
                 <!-- Footer -->
-                <div style="text-align: center;" width="100%">
+                <div style="text-align: center;font-size:80%" width="100%">
                     <div t-if="receipt.footer_html"  class="pos-receipt-center-align">
                         <t t-raw="receipt.footer_html" />
                     </div>
@@ -202,7 +202,7 @@
                 </div>
                 <div class="pos-receipt-center-align">
                     <t>
-                        <img style="width:100px; height:100px" src='/l10_vn_pos/static/description/qr_code_3.jpg' class="pos-receipt-logo"/>
+                        <img style="width:50%; height:auto" src='/l10_vn_pos/static/description/qr_code_3.jpg' class="pos-receipt-logo"/>
                     </t>
                 </div>
             </div>
