@@ -54,21 +54,21 @@
                     </div>
                 </div>
                 <br/>
-                <table style="font-size:80%;border: 1.5px solid;padding: 0.5%;">
+                <table style="font-size:80%;border: thin solid;padding: 0.5%;">
                     <colgroup>
-                        <col style="padding: 0.5%;border-right: 1.5px solid" width='55%'/>
-                        <col style="padding: 0.5%;border-right: 1.5px solid" width='10%'/>
-                        <col style="padding: 0.5%;border-right: 1.5px solid" width='15%'/>
+                        <col style="padding: 0.5%;border-right: thin solid" width='55%'/>
+                        <col style="padding: 0.5%;border-right: thin solid" width='10%'/>
+                        <col style="padding: 0.5%;border-right: thin solid" width='15%'/>
                         <col style="padding: 0.5%;" width='20%'/>
                     </colgroup>
-                    <tr style="padding: 0.5%;border: 1.5px solid">
-                        <th style="padding: 0.5%;border: 1.5px solid">Tên món</th>
-                        <th style="padding: 0.5%;border: 1.5px solid">Số lượng</th>
-                        <th style="padding: 0.5%;border: 1.5px solid">Đơn giá</th>
-                        <th style="padding: 0.5%;border: 1.5px solid">Thành tiền</th>
+                    <tr style="padding: 0.5%;border: thin solid">
+                        <th style="padding: 0.5%;border: thin solid">Tên món</th>
+                        <th style="padding: 0.5%;border: thin solid">Số lượng</th>
+                        <th style="padding: 0.5%;border: thin solid">Đơn giá</th>
+                        <th style="padding: 0.5%;border: thin solid">Thành tiền</th>
                     </tr>
-                    <tr style="padding: 0.5%;border-bottom: 1.5px dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <td style="padding: 0.5%;border-bottom: 1.5px dotted">
+                    <tr style="padding: 0.5%;border-bottom: thin dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                        <td style="padding: 0.5%;border-bottom: thin dotted">
                             <t t-esc="line.product_name_wrapped[0]"/>
                             <WrappedProductNameLines line="line" />
                             <t t-if="line.customer_note">
@@ -78,7 +78,7 @@
                             </t>
 
                         </td>
-                        <td style="padding: 0.5%;text-align:center;border-bottom: 1.5px dotted">
+                        <td style="padding: 0.5%;text-align:center;border-bottom: thin dotted">
                             <t t-if="isSimple(line)">
                                 <span>1</span>
                             </t>
@@ -91,7 +91,7 @@
                                 </t>
                             </t>
                         </td>
-                        <td style="padding: 0.5%;text-align:right;border-bottom: 1.5px dotted">
+                        <td style="padding: 0.5%;text-align:right;border-bottom: thin dotted">
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
                             </t>
@@ -99,7 +99,7 @@
                                 <t>-&#160;&#160;&#160;</t>
                             </t>
                         </td>
-                        <td style='padding: 0.5%;text-align:right;border-bottom: 1.5px dotted'>
+                        <td style='padding: 0.5%;text-align:right;border-bottom: thin dotted'>
                             <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
                                 <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
                             </t>
@@ -115,7 +115,7 @@
 <!--                </div>-->
 
                 <!-- Subtotal -->
-                <div style="line-height: 1.3;" width="100%">
+                <div style="font-size:80%;line-height: 1.3;" width="100%">
 <!--                    <t t-if="!isTaxIncluded">-->
 <!--                        <br/>-->
 <!--                        <div>Tổng tiền hàng-->
