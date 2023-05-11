@@ -54,16 +54,16 @@
                     </div>
                 </div>
                 <br/>
-                <table style="font-size:80%;border: thin solid;padding: 0.5%;width:100%">
-                    <tr style="padding: 0.5%;border-bottom: thin solid">
-                        <th style="padding: 0.5%;border-right: thin solid">Tên món</th>
-                        <th style="padding: 0.5%;border-right: thin solid">Số lượng</th>
-                        <th style="padding: 0.5%;border-right: thin solid">Đơn giá</th>
-                        <th style="padding: 0.5%;border-right: thin solid">Thành tiền</th>
+                <table style="font-size:80%;border: 1.5px solid;padding: 0.5%;width:100%">
+                    <tr style="padding: 0.5%;border-bottom: 1.5px solid">
+                        <th style="padding: 0.5%;border-right: 1.5px solid">Tên món</th>
+                        <th style="padding: 0.5%;border-right: 1.5px solid">Số lượng</th>
+                        <th style="padding: 0.5%;border-right: 1.5px solid">Đơn giá</th>
+                        <th style="padding: 0.5%;border-right: 1.5px solid">Thành tiền</th>
                     </tr>
                     <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <tr style="padding: 0.5%;border-bottom: thin dotted">
-                            <td style="padding: 0.5%;border-right: thin solid">
+                        <tr style="padding: 0.5%;border-bottom: 1.5px dotted">
+                            <td style="padding: 0.5%;border-right: 1.5px solid">
                                 <t t-esc="line.product_name_wrapped[0]"/>
                                 <WrappedProductNameLines line="line" />
                                 <t t-if="line.customer_note">
@@ -73,7 +73,7 @@
                                 </t>
     
                             </td>
-                            <td style="padding: 0.5%;text-align:center;border-right: thin solid">
+                            <td style="padding: 0.5%;text-align:center;border-right: 1.5px solid">
                                 <t t-if="isSimple(line)">
                                     <span>1</span>
                                 </t>
@@ -86,7 +86,7 @@
                                     </t>
                                 </t>
                             </td>
-                            <td style="padding: 0.5%;text-align:right;border-right: thin solid">
+                            <td style="padding: 0.5%;text-align:right;border-right: 1.5px solid">
                                 <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
                                     <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
                                 </t>
@@ -94,7 +94,7 @@
                                     <t>-&#160;&#160;&#160;</t>
                                 </t>
                             </td>
-                            <td style='padding: 0.5%;text-align:right;border-right: thin solid'>
+                            <td style='padding: 0.5%;text-align:right;border-right: 1.5px solid'>
                                 <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
                                     <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
                                 </t>
