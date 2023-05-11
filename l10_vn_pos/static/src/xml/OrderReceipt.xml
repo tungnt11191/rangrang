@@ -54,60 +54,56 @@
                     </div>
                 </div>
                 <br/>
-                <table style="font-size:80%;border: medium solid;padding: 0.5%;">
-                    <colgroup>
-                        <col style="padding: 0.5%;border-right: medium solid" width='55%'/>
-                        <col style="padding: 0.5%;border-right: medium solid" width='10%'/>
-                        <col style="padding: 0.5%;border-right: medium solid" width='15%'/>
-                        <col style="padding: 0.5%;" width='20%'/>
-                    </colgroup>
-                    <tr style="padding: 0.5%;border: medium solid">
-                        <th style="padding: 0.5%;border: medium solid">Tên món</th>
-                        <th style="padding: 0.5%;border: medium solid">Số lượng</th>
-                        <th style="padding: 0.5%;border: medium solid">Đơn giá</th>
-                        <th style="padding: 0.5%;border: medium solid">Thành tiền</th>
+                <table style="font-size:80%;border: medium solid;padding: 0.5%;width:100%">
+                    <tr style="padding: 0.5%;border-bottom: medium solid">
+                        <th style="padding: 0.5%;border-right: medium solid">Tên món</th>
+                        <th style="padding: 0.5%;border-right: medium solid">Số lượng</th>
+                        <th style="padding: 0.5%;border-right: medium solid">Đơn giá</th>
+                        <th style="padding: 0.5%;border-right: medium solid">Thành tiền</th>
                     </tr>
-                    <tr style="padding: 0.5%;border-bottom: medium dotted" t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
-                        <td style="padding: 0.5%;border-bottom: medium dotted">
-                            <t t-esc="line.product_name_wrapped[0]"/>
-                            <WrappedProductNameLines line="line" />
-                            <t t-if="line.customer_note">
-                                <div class="pos-receipt-left-padding pos-receipt-customer-note">
-                                    (<t t-esc="line.customer_note"/>)
-                                </div>
-                            </t>
-
-                        </td>
-                        <td style="padding: 0.5%;text-align:center;border-bottom: medium dotted">
-                            <t t-if="isSimple(line)">
-                                <span>1</span>
-                            </t>
-                            <t t-else="">
-                                <t t-if="Math.round(line.quantity) != 0">
-                                    <t t-esc="Math.round(line.quantity)" style='text-align:center'/>
+                    <t t-foreach="receipt.orderlines" t-as="line" t-key="line.id">
+                        <tr style="padding: 0.5%;border-bottom: medium dotted">
+                            <td style="padding: 0.5%;border-right: medium solid">
+                                <t t-esc="line.product_name_wrapped[0]"/>
+                                <WrappedProductNameLines line="line" />
+                                <t t-if="line.customer_note">
+                                    <div class="pos-receipt-left-padding pos-receipt-customer-note">
+                                        (<t t-esc="line.customer_note"/>)
+                                    </div>
+                                </t>
+    
+                            </td>
+                            <td style="padding: 0.5%;text-align:center;border-right: medium solid">
+                                <t t-if="isSimple(line)">
+                                    <span>1</span>
+                                </t>
+                                <t t-else="">
+                                    <t t-if="Math.round(line.quantity) != 0">
+                                        <t t-esc="Math.round(line.quantity)" style='text-align:center'/>
+                                    </t>
+                                    <t t-else="">
+                                        <t>-&#160;&#160;&#160;</t>
+                                    </t>
+                                </t>
+                            </td>
+                            <td style="padding: 0.5%;text-align:right;border-right: medium solid">
+                                <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
+                                    <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
                                 </t>
                                 <t t-else="">
                                     <t>-&#160;&#160;&#160;</t>
                                 </t>
-                            </t>
-                        </td>
-                        <td style="padding: 0.5%;text-align:right;border-bottom: medium dotted">
-                            <t t-if="env.pos.format_currency_no_symbol(line.price_display_one) != 0">
-                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display_one)" />
-                            </t>
-                            <t t-else="">
-                                <t>-&#160;&#160;&#160;</t>
-                            </t>
-                        </td>
-                        <td style='padding: 0.5%;text-align:right;border-bottom: medium dotted'>
-                            <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
-                                <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
-                            </t>
-                            <t t-else="">
-                                <t>-&#160;&#160;&#160;</t>
-                            </t>
-                        </td>
-                    </tr>
+                            </td>
+                            <td style='padding: 0.5%;text-align:right;border-right: medium solid'>
+                                <t t-if="env.pos.format_currency_no_symbol(line.price_display) != 0">
+                                    <t t-esc="env.pos.format_currency_no_symbol(line.price_display)"/>
+                                </t>
+                                <t t-else="">
+                                    <t>-&#160;&#160;&#160;</t>
+                                </t>
+                            </td>
+                        </tr>
+                    </t>
                 </table>
                 <!-- Orderlines -->
 <!--                <div class="orderlines">-->
