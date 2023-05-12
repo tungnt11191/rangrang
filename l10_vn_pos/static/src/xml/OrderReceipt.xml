@@ -43,8 +43,10 @@
 <!--                        </t>-->
 <!--                    </div>-->
                     <div>Điểm tích lũy:
-                        <t t-if="receipt.client.loyalty_points">
-                            <t t-esc="receipt.client.loyalty_points"/>
+                        <t t-if='receipt.loyalty'>
+                            <t t-if="receipt.loyalty.points_total">
+                                <t t-esc="receipt.loyalty.points_total"/>
+                            </t>
                         </t>
                     </div>
                     <div>Người bán:
