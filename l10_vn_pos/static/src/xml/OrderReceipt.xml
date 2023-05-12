@@ -2,7 +2,7 @@
 <templates id="template" xml:space="preserve">
     <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
-            <div class="pos-receipt">
+            <div class="pos-receipt" style="font-family:Times">
                 <div width="100%" >
                     <t t-if="receipt.company.name">
                         <b style="font-size:140%"><t t-esc="receipt.company.name" /></b>
@@ -23,7 +23,7 @@
                 <t style="font-size:140%">
                     <b>HÓA ĐƠN BÁN HÀNG</b>
                 </t>
-                <div style="line-height: 1.3;" width="100%">
+                <div style="line-height: 1.3;font-size:80%" width="100%">
                     <t t-if="receipt.name">
                         <t t-esc="receipt.name"/>
                     </t>
