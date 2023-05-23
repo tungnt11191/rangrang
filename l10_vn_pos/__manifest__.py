@@ -24,6 +24,8 @@ TASYS POS Localization
     'assets': {
         'web.assets_qweb': [
             'l10_vn_pos/static/src/xml/OrderReceipt.xml',
+            'l10_vn_pos/static/src/xml/Chrome.xml',
+            # 'l10_vn_pos/static/src/js/Chrome.js',
             # 'l10_vn_pos/static/src/xml/PaymentScreen.xml',
         ],
         'point_of_sale.assets': [
