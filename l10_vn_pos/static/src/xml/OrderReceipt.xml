@@ -199,8 +199,8 @@
                     </div>
                 </div>
                 <div class="pos-receipt-center-align">
-                    <t>
-                        <img style="width:50%; height:auto" src='/l10_vn_pos/static/description/qr_code_3.jpg' class="pos-receipt-logo"/>
+                    <t t-if="env.pos.config.qr_code">
+                        <img class="pos-receipt-logo" t-attf-src="data:image/*;base64,{{env.pos.config.qr_code}}" alt="Qr"/>
                     </t>
                 </div>
             </div>

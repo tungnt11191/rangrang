@@ -10,4 +10,5 @@ class PosConfig(models.Model):
     _order = 'sequence'
 
     sequence = fields.Integer('Sequence')
+    qr_code = fields.Image('QR Code')
 
