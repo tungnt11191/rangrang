@@ -43,3 +43,4 @@ class DeliveryTypes(models.Model):
     _name = 'delivery.type'
 
     name = fields.Char('Order Type')
+    active = fields.Boolean(string='active', default=True)
