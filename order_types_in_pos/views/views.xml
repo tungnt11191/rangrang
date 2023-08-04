@@ -56,7 +56,19 @@
             <field name="arch" type="xml">
                 <tree string="Order Type" editable="bottom" create="true">
                     <field name="name"/>
+                    <field name="active" invisible="1"/>
                 </tree>
+            </field>
+        </record>
+        
+        <record id="view_delivery_type_search" model="ir.ui.view">
+            <field name="model">delivery.type</field>
+            <field name="arch" type="xml">
+                <search string="delivery_types">
+                    <field name="name" string="Delivery Type"/>
+                    <separator/>
+                    <filter string="Archived" name="inactive" domain="[('active', '=', False)]"/>
+                </search>
             </field>
         </record>
 
