@@ -136,101 +136,101 @@ odoo.define("dashboard_inventory.value_xnt_management_dashboard_tung", function(
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "GT Tồn Đầu",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "GT Tồn Đầu",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "tongnhapncc",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gttongnhapncc",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gttongnhapncc",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "nhapnoibo",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gtnhapnoibo",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gtnhapnoibo",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "xuatdinhluong",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gtxuatdinhluong",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gtxuatdinhluong",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "xuattra",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gtxuattra",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gtxuattra",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "xuathuy",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gtxuathuy",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gtxuathuy",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "xuatkhac",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "gtxuatkhac",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "gtxuatkhac",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "SL Nhập",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "GT Nhập",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "GT Nhập",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "SL Xuất",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "GT Xuất",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "GT Xuất",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
               {
                 "data": "SL Tồn Cuối",
                 className: "text-right",
                 render: $.fn.dataTable.render.number(',', '.', 2, '')
               },
-              {
-                "data": "GT Tồn Cuối",
-                className: "text-right",
-                render: $.fn.dataTable.render.number(',', '.', 0, '')
-              },
+//              {
+//                "data": "GT Tồn Cuối",
+//                className: "text-right",
+//                render: $.fn.dataTable.render.number(',', '.', 0, '')
+//              },
             ],
             buttons: [
               'copy', 'csv', 'excel', 'pdf', 'print'
