@@ -83,25 +83,25 @@
                 <th>Tên vật tư</th>
                 <th>ĐVT</th>
                 <th>SL Tồn Đầu</th>
-                <th>GT Tồn Đầu</th>
+                <th hidden="1">GT Tồn Đầu</th>
                 <th>N1</th>
-                <th>GTN1</th>
+                <th hidden="1">GTN1</th>
                 <th>N2</th>
-                <th>GTN2</th>
+                <th hidden="1">GTN2</th>
                 <th>X1</th>
-                <th>GTX1</th>
+                <th hidden="1">GTX1</th>
                 <th>X2</th>
-                <th>GTX2</th>
+                <th hidden="1">GTX2</th>
                 <th>X3</th>
-                <th>GTX3</th>
+                <th hidden="1">GTX3</th>
                 <th>X4</th>
-                <th>GTX4</th>
+                <th hidden="1">GTX4</th>
                 <th>SL Nhập</th>
-                <th>GT Nhập</th>
+                <th hidden="1">GT Nhập</th>
                 <th>SL Xuất</th>
-                <th>GT Xuất</th>
+                <th hidden="1">GT Xuất</th>
                 <th>SL Tồn Cuối</th>
-                <th>GT Tồn Cuối</th>
+                <th hidden="1">GT Tồn Cuối</th>
               </tr>
             </thead>
             <tfoot align="right">
@@ -110,25 +110,25 @@
                   <th></th>
                   <th></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
+                  <th hidden="1"></th>
                   <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
-                  <th></th>
+                  <th hidden="1"></th>
                 </tr>
             </tfoot>
           </table>
