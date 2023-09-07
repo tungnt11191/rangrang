@@ -20,6 +20,7 @@ TASYS POS Localization
         'views/gift_card_group_views.xml',
         'views/sale_order_line_views.xml',
         'views/pos_config_views.xml',
+        'views/res_partner_views.xml',
     ],
     'assets': {
         'web.assets_qweb': [
