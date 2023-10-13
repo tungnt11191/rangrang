@@ -4,6 +4,11 @@
         <xpath expr="//div[hasclass('pos-receipt')]" position="replace">
             <div class="pos-receipt" style="font-family:Times">
                 <div width="100%" >
+
+                    <t t-if="receipt.company.logo">
+                        <img style="width:10%; height:auto" t-att-src="receipt.company.logo" alt="Logo"/>
+                        <br/>
+                    </t>
                     <t t-if="receipt.company.name">
                         <b style="font-size:140%"><t t-esc="receipt.company.name" /></b>
                     </t>
